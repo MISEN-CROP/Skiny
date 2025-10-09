@@ -77,11 +77,49 @@
       "settings": {
         "featured_text": "Featured in"
       }
+    },
+    "custom_code_text_J3mQTr": {
+      "type": "custom-code-text",
+      "blocks": {
+        "image_ariAKe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Mouth_Tape_Banner_aa6a5b67-d560-4a57-8b11-2928a77367e6.webp",
+            "image_alt": "Image"
+          }
+        },
+        "image_mBpGH3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Ice_Roller_Banner_4d5eba9d-4a1b-4859-9c1b-f31467ec5ed1.webp",
+            "image_alt": "Image"
+          }
+        },
+        "image_fFdbEA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/SPF_Banner.webp",
+            "image_alt": "Image"
+          }
+        }
+      },
+      "block_order": [
+        "image_ariAKe",
+        "image_mBpGH3",
+        "image_fFdbEA"
+      ],
+      "name": "Custom Code Text",
+      "settings": {
+        "text_part1": "Clean beauty and wellness essentials that actually work.",
+        "text_part2": "Upgrade your daily routine with products that are elevated, intentional and gorgeous to look at.",
+        "show_images": true
+      }
     }
   },
   "order": [
     "main",
     "hero_video_NeT4Mb",
-    "marquee_logo_kyHbVM"
+    "marquee_logo_kyHbVM",
+    "custom_code_text_J3mQTr"
   ]
 }

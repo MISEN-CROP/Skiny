@@ -7,8 +7,7 @@
 
 /* Special classes that cannot be converted to Tailwind */
 .hb-banner {
-    padding-block   : 0px;
-    background-color: #fffdf1
+    padding-block: 0px;
 }
 
 .hb-banner__video:after {
@@ -28,7 +27,7 @@
 }
 
 .hb-banner_button {
-    font-family: F37 Blanka
+    font-family: var(--font-primary)
 }
 
 .hb-banner_button.cta-gig-secondary:before {
@@ -43,7 +42,7 @@
     text-align    : center;
     text-transform: uppercase;
     color         : var(--gig-primary);
-    font-family   : F37 Blanka
+    font-family   : var(--font-primary)
 }
 
 .hb-banner__product--Image img {
@@ -52,7 +51,7 @@
 }
 
 .hb-banner_text p {
-    font-family: F37 Blanka
+    font-family: var(--font-primary)
 }
 
 /* Mobile responsive styles */

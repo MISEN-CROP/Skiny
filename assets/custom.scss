@@ -39,3 +39,27 @@
         width: 100%;
     }
 }
+
+.custom-code-text {
+    .custom-paragraph {
+        margin     : 0 auto;
+        text-align : center;
+        line-height: 40px;
+        color      : var(--color-semibold-primary);
+        font-family: var(--font-primary-light);
+
+        img {
+            width     : 40px;
+            height    : 40px;
+            object-fit: cover;
+        }
+
+        .inline-images {
+            display    : inline-flex;
+            gap        : 4px;
+            align-items: center;
+            position   : relative;
+            top        : 8px;
+        }
+    }
+}

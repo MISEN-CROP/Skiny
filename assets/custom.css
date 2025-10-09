@@ -26,4 +26,25 @@
 
 .div-child-full > div {
   width: 100%;
+}
+
+.custom-code-text .custom-paragraph {
+  margin: 0 auto;
+  text-align: center;
+  line-height: 40px;
+  color: var(--color-semibold-primary);
+  font-family: var(--font-primary-light);
+}
+.custom-code-text .custom-paragraph img {
+  width: 40px;
+  height: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.custom-code-text .custom-paragraph .inline-images {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  position: relative;
+  top: 8px;
 }/*# sourceMappingURL=custom.css.map */
