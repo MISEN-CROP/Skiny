@@ -110,7 +110,7 @@ header.sticky,
 .template-collection.shownavbar header.sticky {
     position : fixed;
     top      : 0;
-    z-index  : 10;
+    z-index  : 1000;
     width    : -webkit-fill-available;
     animation: fadeIn .3s ease-in
 }
@@ -129,7 +129,7 @@ header.sticky,
 .template-collection.shownavbar .header-wrapper.sticky {
     position : fixed;
     top      : 0;
-    z-index  : 10;
+    z-index  : 10000;
     width    : -webkit-fill-available;
     animation: fadeIn .3s ease-in
 }

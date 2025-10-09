@@ -44,6 +44,13 @@ body {
     --button-border-radius: 30px
 }
 
+@media (max-width: 575.98px) {
+    .container {
+        width : 96%;
+        margin: 0 auto;
+    }
+}
+
 .background-gig-black {
     background-color: var(--gig-black)
 }
