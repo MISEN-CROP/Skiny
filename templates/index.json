@@ -8,11 +8,43 @@
  * ------------------------------------------------------------
  */
 {
-    "sections": {
-        "main": {
-            "type": "main-home",
-            "settings": {}
-        }
+  "sections": {
+    "main": {
+      "type": "main-home",
+      "disabled": true,
+      "settings": {}
     },
-    "order": ["main"]
+    "hero_video_NeT4Mb": {
+      "type": "hero-video",
+      "name": "Hero Video Section",
+      "settings": {
+        "title": "Limited Edition",
+        "subtitle": "Introducing Mouth Tape in Blanc and Uniform",
+        "button_text": "SHOP NOW",
+        "button_url": "/collections/all",
+        "video_url": "shopify://files/videos/cd5e1790e79342179995cb770b179604.HD-1080p-2.5Mbps-57840749.mp4",
+        "shopify_video_url": "https://shopskinnyconfidential.com/cdn/shop/videos/c/vp/cd5e1790e79342179995cb770b179604/cd5e1790e79342179995cb770b179604.HD-1080p-2.5Mbps-57840749.mp4?v=0",
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "controls": false,
+        "text_alignment": "left",
+        "mobile_stack_order": "content_first",
+        "background_color": "#ffffff",
+        "content_background_color": "",
+        "title_size": 36,
+        "title_color": "#000000",
+        "subtitle_size": 18,
+        "subtitle_color": "#666666",
+        "button_bg_color": "#000000",
+        "button_text_color": "#ffffff",
+        "section_padding_top": 40,
+        "section_padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_video_NeT4Mb"
+  ]
 }

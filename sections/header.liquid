@@ -1,26 +1,63 @@
 {{ 'header.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.header_announcement != blank %}
+  <div
+    class="header-announcement"
+  >
+    {{ section.settings.header_announcement }}
+  </div>
+{% endif %}
+
 <div class="header-wrapper">
   <header class="header header--center background-gig-secondary color-gig-primary header--has-menu ">
     <div class="hamburger-menu">
       <button class="hamburger spin icon-hamburger js-nav-control" type="button" mobile-nav-toggle="">
-        <img
-          src="//shopskinnyconfidential.com/cdn/shop/t/391/assets/hamburger.svg?v=124135088279481330911757416756"
-          alt="open mobile menu"
-          title="icon-hamburger"
-          class="icon-hamburger"
-          height="44"
-          width="23"
-          loading="eager"
-        >
-        <img
-          src="//shopskinnyconfidential.com/cdn/shop/t/391/assets/icon-close-menu.svg?v=75423332802464057751757416759"
-          alt="Close mobile menu"
-          title="Close mobile menu"
-          class="icon-hamburger icon-hamburger-close"
-          height="44"
-          width="44"
-          loading="lazy"
-        >
+        {% if section.settings.hamburger_icon %}
+          {{
+            section.settings.hamburger_icon
+            | image_url: width: 23
+            | image_tag:
+              alt: 'open mobile menu',
+              title: 'icon-hamburger',
+              class: 'icon-hamburger',
+              height: '44',
+              width: '23',
+              loading: 'eager'
+          }}
+        {% else %}
+          <img
+            src="//shopskinnyconfidential.com/cdn/shop/t/391/assets/hamburger.svg?v=124135088279481330911757416756"
+            alt="open mobile menu"
+            title="icon-hamburger"
+            class="icon-hamburger"
+            height="44"
+            width="23"
+            loading="eager"
+          >
+        {% endif %}
+        {% if section.settings.close_menu_icon %}
+          {{
+            section.settings.close_menu_icon
+            | image_url: width: 44
+            | image_tag:
+              alt: 'Close mobile menu',
+              title: 'Close mobile menu',
+              class: 'icon-hamburger icon-hamburger-close',
+              height: '44',
+              width: '44',
+              loading: 'lazy'
+          }}
+        {% else %}
+          <img
+            src="//shopskinnyconfidential.com/cdn/shop/t/391/assets/icon-close-menu.svg?v=75423332802464057751757416759"
+            alt="Close mobile menu"
+            title="Close mobile menu"
+            class="icon-hamburger icon-hamburger-close"
+            height="44"
+            width="44"
+            loading="lazy"
+          >
+        {% endif %}
       </button>
     </div>
 
@@ -30,32 +67,35 @@
       <nav class="nav">
         <ul class="parent d-flex flex-wrap">
           <li class=" li-link">
-            <a class="nav-link" href="/collections/shop-all">
-              Shop All
+            <a class="nav-link" href="{{ section.settings.nav_item_1_url | default: '/collections/shop-all' }}">
+              {{ section.settings.nav_item_1_text | default: 'Shop All' }}
 
               <div class="mega-menu-placeholder" data-menu="shop-all"></div>
             </a>
           </li>
 
           <li class="has-children li-link">
-            <a class="nav-link" href="/collections/subscribe-and-save">
-              Subscribe and Save
+            <a
+              class="nav-link"
+              href="{{ section.settings.nav_item_2_url | default: '/collections/subscribe-and-save' }}"
+            >
+              {{ section.settings.nav_item_2_text | default: 'Subscribe and Save' }}
 
               <div class="mega-menu-placeholder" data-menu="subscribe-and-save"></div>
             </a>
           </li>
 
           <li class=" li-link">
-            <a class="nav-link" href="/collections/tools">
-              Tools
+            <a class="nav-link" href="{{ section.settings.nav_item_3_url | default: '/collections/tools' }}">
+              {{ section.settings.nav_item_3_text | default: 'Tools' }}
 
               <div class="mega-menu-placeholder" data-menu="tools"></div>
             </a>
           </li>
 
           <li class=" li-link">
-            <a class="nav-link" href="/collections/wellness">
-              Wellness
+            <a class="nav-link" href="{{ section.settings.nav_item_4_url | default: '/collections/wellness' }}">
+              {{ section.settings.nav_item_4_text | default: 'Wellness' }}
 
               <div class="mega-menu-placeholder" data-menu="wellness"></div>
             </a>
@@ -458,30 +498,60 @@
         </p>
         <div class="header__heading-logo-wrapper">
           <a href="/" class="header__heading-link link link--text focus-inset logo-mobile">
-            <img
-              src="//shopskinnyconfidential.com/cdn/shop/files/logo_mobile.png?v=1734091221&amp;width=600"
-              alt="The Skinny Confidential"
-              srcset="//shopskinnyconfidential.com/cdn/shop/files/logo_mobile.png?v=1734091221&amp;width=80 80w, //shopskinnyconfidential.com/cdn/shop/files/logo_mobile.png?v=1734091221&amp;width=120 120w, //shopskinnyconfidential.com/cdn/shop/files/logo_mobile.png?v=1734091221&amp;width=160 160w"
-              width="80"
-              loading="eager"
-              class="header-logo motion-reduce"
-              title="The Skinny Confidential"
-              sizes="(max-width: 160px) 50vw, 80px"
-            >
+            {% if section.settings.logo %}
+              {{
+                section.settings.logo
+                | image_url: width: section.settings.logo_width
+                | image_tag:
+                  loading: 'eager',
+                  class: 'header-logo motion-reduce',
+                  alt: shop.name,
+                  title: shop.name,
+                  style: 'width: '
+                | append: section.settings.logo_width
+                | append: 'px;'
+              }}
+            {% else %}
+              <img
+                src="//shopskinnyconfidential.com/cdn/shop/files/logo_mobile.png?v=1734091221&amp;width=600"
+                alt="The Skinny Confidential"
+                srcset="//shopskinnyconfidential.com/cdn/shop/files/logo_mobile.png?v=1734091221&amp;width=80 80w, //shopskinnyconfidential.com/cdn/shop/files/logo_mobile.png?v=1734091221&amp;width=120 120w, //shopskinnyconfidential.com/cdn/shop/files/logo_mobile.png?v=1734091221&amp;width=160 160w"
+                width="80"
+                loading="eager"
+                class="header-logo motion-reduce"
+                title="The Skinny Confidential"
+                sizes="(max-width: 160px) 50vw, 80px"
+              >
+            {% endif %}
           </a>
         </div>
 
         <a href="/" class="header__heading-link link link--text focus-inset logo-desktop">
           <div class="header__heading-logo-wrapper">
-            <img
-              src="//shopskinnyconfidential.com/cdn/shop/files/Logo_Desktop.png?v=1732700450&amp;width=600"
-              alt="The Skinny Confidential Shop"
-              srcset="//shopskinnyconfidential.com/cdn/shop/files/Logo_Desktop.png?v=1732700450&amp;width=220 220w, //shopskinnyconfidential.com/cdn/shop/files/Logo_Desktop.png?v=1732700450&amp;width=330 330w, //shopskinnyconfidential.com/cdn/shop/files/Logo_Desktop.png?v=1732700450&amp;width=440 440w"
-              loading="eager"
-              class="header-logo motion-reduce"
-              title="The Skinny Confidential Shop"
-              sizes="(max-width: 440px) 50vw, 220px"
-            >
+            {% if section.settings.logo %}
+              {{
+                section.settings.logo
+                | image_url: width: section.settings.logo_width
+                | image_tag:
+                  loading: 'eager',
+                  class: 'header-logo motion-reduce',
+                  alt: shop.name,
+                  title: shop.name,
+                  style: 'width: '
+                | append: section.settings.logo_width
+                | append: 'px;'
+              }}
+            {% else %}
+              <img
+                src="//shopskinnyconfidential.com/cdn/shop/files/Logo_Desktop.png?v=1732700450&amp;width=600"
+                alt="The Skinny Confidential Shop"
+                srcset="//shopskinnyconfidential.com/cdn/shop/files/Logo_Desktop.png?v=1732700450&amp;width=220 220w, //shopskinnyconfidential.com/cdn/shop/files/Logo_Desktop.png?v=1732700450&amp;width=330 330w, //shopskinnyconfidential.com/cdn/shop/files/Logo_Desktop.png?v=1732700450&amp;width=440 440w"
+                loading="eager"
+                class="header-logo motion-reduce"
+                title="The Skinny Confidential Shop"
+                sizes="(max-width: 440px) 50vw, 220px"
+              >
+            {% endif %}
           </div>
         </a>
         <p></p>
@@ -1274,3 +1344,169 @@
     </nav>
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image",
+      "info": "Upload your logo image. If not set, will use default logo."
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo Width",
+      "default": 150
+    },
+    {
+      "type": "header",
+      "content": "Navigation Settings"
+    },
+    {
+      "type": "text",
+      "id": "nav_item_1_text",
+      "label": "Navigation Item 1 Text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "nav_item_1_url",
+      "label": "Navigation Item 1 URL",
+      "default": "/collections"
+    },
+    {
+      "type": "text",
+      "id": "nav_item_2_text",
+      "label": "Navigation Item 2 Text",
+      "default": "Subscribe and Save"
+    },
+    {
+      "type": "url",
+      "id": "nav_item_2_url",
+      "label": "Navigation Item 2 URL",
+      "default": "/collections"
+    },
+    {
+      "type": "text",
+      "id": "nav_item_3_text",
+      "label": "Navigation Item 3 Text",
+      "default": "Tools"
+    },
+    {
+      "type": "url",
+      "id": "nav_item_3_url",
+      "label": "Navigation Item 3 URL",
+      "default": "/collections"
+    },
+    {
+      "type": "text",
+      "id": "nav_item_4_text",
+      "label": "Navigation Item 4 Text",
+      "default": "Wellness"
+    },
+    {
+      "type": "url",
+      "id": "nav_item_4_url",
+      "label": "Navigation Item 4 URL",
+      "default": "/collections"
+    },
+    {
+      "type": "text",
+      "id": "nav_item_5_text",
+      "label": "Navigation Item 5 Text",
+      "default": "Routines"
+    },
+    {
+      "type": "url",
+      "id": "nav_item_5_url",
+      "label": "Navigation Item 5 URL",
+      "default": "/collections"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Menu Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "hamburger_icon",
+      "label": "Hamburger Menu Icon",
+      "info": "Custom hamburger menu icon. If not set, will use default icon."
+    },
+    {
+      "type": "image_picker",
+      "id": "close_menu_icon",
+      "label": "Close Menu Icon",
+      "info": "Custom close menu icon. If not set, will use default icon."
+    },
+    {
+      "type": "header",
+      "content": "Header Styling"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Enable Sticky Header",
+      "default": true,
+      "info": "Make header stick to top when scrolling"
+    },
+    {
+      "type": "header",
+      "content": "Header Actions"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show Search Icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show Cart Icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show Account Icon",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Additional Settings"
+    },
+    {
+      "type": "text",
+      "id": "site_name",
+      "label": "Site Name",
+      "default": "The Skinny Confidential",
+      "info": "Used for SEO and accessibility"
+    },
+    {
+      "type": "textarea",
+      "id": "header_announcement",
+      "label": "Header Announcement",
+      "placeholder": "Special promotion or announcement",
+      "info": "Optional announcement text to display above header"
+    }
+  ]
+}
+{% endschema %}

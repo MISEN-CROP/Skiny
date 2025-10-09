@@ -58,7 +58,7 @@
 }
 
 .announcement-bar .splide__arrow svg {
-    fill: #1b365d
+    fill: var(--gig-primary)
 }
 
 .announcement-bar .li-link.active a {
