@@ -33,3 +33,9 @@
     align-items: center;
     gap        : 8px;
 }
+
+.div-child-full {
+    &>div {
+        width: 100%;
+    }
+}

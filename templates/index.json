@@ -18,33 +18,70 @@
       "type": "hero-video",
       "name": "Hero Video Section",
       "settings": {
-        "title": "Limited Edition",
-        "subtitle": "Introducing Mouth Tape in Blanc and Uniform",
+        "heading": "Limited Edition",
+        "subheading": "Introducing Mouth Tape in Blanc and Uniform",
         "button_text": "SHOP NOW",
-        "button_url": "/collections/all",
-        "video_url": "shopify://files/videos/cd5e1790e79342179995cb770b179604.HD-1080p-2.5Mbps-57840749.mp4",
-        "shopify_video_url": "https://shopskinnyconfidential.com/cdn/shop/videos/c/vp/cd5e1790e79342179995cb770b179604/cd5e1790e79342179995cb770b179604.HD-1080p-2.5Mbps-57840749.mp4?v=0",
-        "autoplay": true,
-        "muted": true,
-        "loop": true,
-        "controls": false,
-        "text_alignment": "left",
-        "mobile_stack_order": "content_first",
-        "background_color": "#ffffff",
-        "content_background_color": "",
-        "title_size": 36,
-        "title_color": "#000000",
-        "subtitle_size": 18,
-        "subtitle_color": "#666666",
-        "button_bg_color": "#000000",
-        "button_text_color": "#ffffff",
-        "section_padding_top": 40,
-        "section_padding_bottom": 40
+        "button_link": "",
+        "desktop_image": "shopify://shop_images/Container_1_-min.webp",
+        "desktop_video": "shopify://files/videos/video.mp4",
+        "video_url": "https://shopskinnyconfidential.com/cdn/shop/videos/c/vp/cd5e1790e79342179995cb770b179604/cd5e1790e79342179995cb770b179604.HD-1080p-2.5Mbps-57840749.mp4?v=0",
+        "video_poster": "shopify://shop_images/cd5e1790e79342179995cb770b179604.thumbnail.0000000000_small_45006d63-379e-466e-b834-45f97a9a2a3f.avif",
+        "fallback_image": "shopify://shop_images/cd5e1790e79342179995cb770b179604.thumbnail.0000000000_small_45006d63-379e-466e-b834-45f97a9a2a3f.avif",
+        "mobile_image": "shopify://shop_images/mobile-min.webp",
+        "mobile_video": "shopify://files/videos/video.mp4",
+        "mobile_video_url": "",
+        "mobile_video_poster": "shopify://shop_images/cd5e1790e79342179995cb770b179604.thumbnail.0000000000_small_45006d63-379e-466e-b834-45f97a9a2a3f.avif",
+        "product_link": "",
+        "product_button_text": ""
+      }
+    },
+    "marquee_logo_kyHbVM": {
+      "type": "marquee-logo",
+      "blocks": {
+        "logo_3atfRb": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Vector.svg",
+            "link": "shopify://collections"
+          }
+        },
+        "logo_Lagq6R": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Page-1.svg",
+            "link": ""
+          }
+        },
+        "logo_8X7tzh": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Harper_s_Bazaar_Logo_svg.svg",
+            "link": ""
+          }
+        },
+        "logo_NF8LzB": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/g4174.svg",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_3atfRb",
+        "logo_Lagq6R",
+        "logo_8X7tzh",
+        "logo_NF8LzB"
+      ],
+      "name": "Marquee Logo",
+      "settings": {
+        "featured_text": "Featured in"
       }
     }
   },
   "order": [
     "main",
-    "hero_video_NeT4Mb"
+    "hero_video_NeT4Mb",
+    "marquee_logo_kyHbVM"
   ]
 }
