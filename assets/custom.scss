@@ -63,3 +63,22 @@
         }
     }
 }
+
+.collection-all-section {
+    background-color: var(--bg-second);
+}
+
+.add-to-cart-button-line {
+    border       : 1px solid var(--color-semibold-primary);
+    border-radius: 9999999px;
+    width        : 100%;
+    padding      : 6px 12px;
+    margin-top   : 10px;
+    cursor       : pointer;
+    transition   : all 0.3s ease;
+
+    &:hover {
+        background-color: var(--color-semibold-primary);
+        color           : white;
+    }
+}

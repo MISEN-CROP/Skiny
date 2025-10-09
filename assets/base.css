@@ -10,7 +10,7 @@
 }
 
 html {
-    background-color: #fffdf1
+    background-color: var(--bg-second)
 }
 
 body {

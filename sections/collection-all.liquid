@@ -1,0 +1,251 @@
+<div class="collection-all-section py-12 md:py-16">
+  <div class="container mx-auto px-6">
+    <!-- Header Section -->
+    <div class="mb-6 md:mb-10">
+      <h2 class="text-3xl md:text-4xl lg:text-6xl font-bold uppercase tracking-tight mb-4">
+        {{ section.settings.heading | default: 'MICROMANAGE YOUR ROUTINE' }}
+      </h2>
+      {% if section.settings.subheading != blank %}
+        <p class="text-base md:text-lg mb-6 font-pr-light">
+          {{ section.settings.subheading }}
+        </p>
+      {% endif %}
+
+      <!-- Filter Tabs - Auto generated from Product Categories -->
+      <div class="filter-tabs flex flex-wrap justify-start gap-4 md:gap-6 mb-8">
+        <button
+          class="filter-tab active px-1 py-1 text-sm md:text-base font-medium border-b-2 border-black"
+          data-filter="all"
+        >
+          {{ section.settings.tab_all_text | default: 'Best Sellers' }}
+        </button>
+
+        {% for block in section.blocks %}
+          {% if block.type == 'product_category' and block.settings.products != blank %}
+            <button
+              class="filter-tab px-1 cursor-pointer py-1 text-sm md:text-base font-medium border-b-2 border-transparent hover:border-gray-300 transition-colors"
+              data-filter="{{ block.id }}"
+            >
+              {{ block.settings.category_name }}
+            </button>
+          {% endif %}
+        {% endfor %}
+
+        <!-- Shop All Button -->
+        {% if section.settings.shop_all_url != blank %}
+          <a
+            href="{{ section.settings.shop_all_url }}"
+            class="shop-all-btn ml-auto px-6 py-3 text-sm md:text-base font-medium border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
+          >
+            {{ section.settings.shop_all_text | default: 'SHOP ALL' }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+      {% for block in section.blocks %}
+        {% if block.type == 'product_category' %}
+          {% for product in block.settings.products %}
+            <div class="product-item" data-category="{{ block.id }}">
+              {% render 'product-card', product: product, show_secondary_image: true, show_rating: true %}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Load More Button (Optional) -->
+    {% if section.settings.show_load_more %}
+      <div class="text-center mt-8 md:mt-12">
+        <button class="load-more-btn px-8 py-3 text-base font-medium border border-gray-300 rounded-full hover:bg-gray-50 transition-colors">
+          {{ section.settings.load_more_text | default: 'Load More' }}
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const productItems = document.querySelectorAll('.product-item');
+
+    filterTabs.forEach((tab) => {
+      tab.addEventListener('click', function () {
+        const filter = this.dataset.filter;
+
+        // Update active tab
+        filterTabs.forEach((t) => {
+          t.classList.remove('active');
+          t.classList.remove('border-black');
+          t.classList.add('border-transparent');
+        });
+
+        this.classList.add('active');
+        this.classList.add('border-black');
+        this.classList.remove('border-transparent');
+
+        // Clear DOM first
+        const productsGrid = document.querySelector('.products-grid');
+        productsGrid.style.opacity = '0.5';
+
+        setTimeout(() => {
+          // Filter products
+          productItems.forEach((item) => {
+            const category = item.dataset.category;
+            if (filter === 'all' || category === filter) {
+              item.style.display = 'block';
+              item.classList.add('animate-fadeIn');
+            } else {
+              item.style.display = 'none';
+              item.classList.remove('animate-fadeIn');
+            }
+          });
+
+          productsGrid.style.opacity = '1';
+        }, 100);
+      });
+    });
+  });
+</script>
+
+<style>
+  .filter-tab.active {
+    border-bottom-color: #000;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .product-item {
+    transition: all 0.3s ease;
+  }
+
+  .products-grid {
+    transition: opacity 0.2s ease;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection All Products",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "MICROMANAGE YOUR ROUTINE"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Section Subheading",
+      "default": "Shop our daily self care essentials"
+    },
+    {
+      "type": "text",
+      "id": "tab_all_text",
+      "label": "All Products Tab Text",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "header",
+      "content": "Shop All Button"
+    },
+    {
+      "type": "url",
+      "id": "shop_all_url",
+      "label": "Shop All URL"
+    },
+    {
+      "type": "text",
+      "id": "shop_all_text",
+      "label": "Shop All Button Text",
+      "default": "SHOP ALL"
+    },
+    {
+      "type": "header",
+      "content": "Load More"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_load_more",
+      "label": "Show Load More Button",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "load_more_text",
+      "label": "Load More Button Text",
+      "default": "Load More"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_category",
+      "name": "📦 Product Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Tab Name",
+          "default": "Tools",
+          "info": "This will be displayed as the tab name"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Products in this Category",
+          "limit": 12,
+          "info": "Select multiple products for this category"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection All Products",
+      "blocks": [
+        {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Tools"
+          }
+        },
+        {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Skincare"
+          }
+        },
+        {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Wellness"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

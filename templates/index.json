@@ -114,12 +114,54 @@
         "text_part2": "Upgrade your daily routine with products that are elevated, intentional and gorgeous to look at.",
         "show_images": true
       }
+    },
+    "collection_all_QgzA4D": {
+      "type": "collection-all",
+      "blocks": {
+        "product_category_aTRftR": {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Tools",
+            "products": [
+              "selling-plans-ski-wax",
+              "gift-card",
+              "the-3p-fulfilled-snowboard"
+            ]
+          }
+        },
+        "product_category_fAGY6F": {
+          "type": "product_category",
+          "settings": {
+            "category_name": "SkincarSkincare",
+            "products": [
+              "the-compare-at-price-snowboard",
+              "the-inventory-not-tracked-snowboard",
+              "the-collection-snowboard-oxygen"
+            ]
+          }
+        }
+      },
+      "block_order": [
+        "product_category_aTRftR",
+        "product_category_fAGY6F"
+      ],
+      "name": "Collection All Products",
+      "settings": {
+        "heading": "MICROMANAGE YOUR ROUTINE",
+        "subheading": "Shop our daily self care essentials",
+        "tab_all_text": "Best Sellers",
+        "shop_all_url": "",
+        "shop_all_text": "SHOP ALL",
+        "show_load_more": false,
+        "load_more_text": "Load More"
+      }
     }
   },
   "order": [
     "main",
     "hero_video_NeT4Mb",
     "marquee_logo_kyHbVM",
-    "custom_code_text_J3mQTr"
+    "custom_code_text_J3mQTr",
+    "collection_all_QgzA4D"
   ]
 }
