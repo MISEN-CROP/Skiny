@@ -1,0 +1,122 @@
+.announcement-bar-wrapper {
+    margin   : auto;
+    max-width: 340px;
+    width    : 100%
+}
+
+.announcement_hide_arrow .splide__arrow {
+    display: none !important
+}
+
+.announcement-bar {
+    padding : 3px 18px;
+    position: relative
+}
+
+.announcement-bar .splide__arrow {
+    background-color: unset;
+    color           : var(--foreword-secondary)
+}
+
+.announcement-bar .splide__slide a {
+    color          : var(--foreword-secondary);
+    text-decoration: none
+}
+
+.loop__arrows {
+    display: none
+}
+
+.announcement-bar.slider .announcement-bar__message {
+    width : calc(100% - 62px);
+    margin: auto
+}
+
+.announcement-bar .splide__arrow--prev {
+    left: 0
+}
+
+.announcement-bar .splide__arrow--next {
+    right: 0
+}
+
+.announcement-bar .announcement-bar__message {
+    font-weight: 500
+}
+
+.announcement-bar .nav-wrapper {
+    display: none
+}
+
+.announcement-bar-wrapper .splide__arrow--prev svg {
+    transform: none
+}
+
+.announcement-bar .splide__arrow {
+    width : 16px;
+    height: 16px
+}
+
+.announcement-bar .splide__arrow svg {
+    fill: #1b365d
+}
+
+.announcement-bar .li-link.active a {
+    background: #f0e8da
+}
+
+@media (min-width: 992px) {
+    .announcement-bar {
+        padding                   : 11px 36px;
+        display                   : flex;
+        justify-content           : space-between;
+        border-bottom-left-radius : 20px;
+        border-bottom-right-radius: 20px;
+        margin                    : 0 36px
+    }
+
+    .section-announcement-bar {
+        background-color: #fffdf1
+    }
+
+    .announcement-bar .nav-wrapper {
+        display : flex;
+        gap     : 9px;
+        position: absolute;
+        top     : 9px;
+        left    : 24px
+    }
+
+    .announcement-bar .li-link {
+        list-style-type: none
+    }
+
+    .announcement-bar .nav-link {
+        font-family    : var(--blanka-font);
+        font-size      : 12px;
+        font-weight    : 500;
+        line-height    : 13px;
+        text-align     : center;
+        padding        : 3px 14px;
+        min-width      : 60px;
+        height         : 21px;
+        width          : 100%;
+        display        : block;
+        border         : 1px solid #F2E9DB;
+        color          : var(--color-semibold-primary);
+        text-decoration: none;
+        border-radius  : 100px
+    }
+}
+
+@media (min-width: 1441px) {
+    .announcement-bar {
+        max-width: 1440px;
+        margin   : 0 auto
+    }
+}
+
+#announcement-bar-slider:not(.is-initialized) {
+    max-height: 20px;
+    overflow  : hidden
+}

@@ -1,0 +1,143 @@
+<script src="{{ 'AnnouncementBar.js' | asset_url }}" defer></script>
+{{ 'announcement-bar.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="section-announcement-bar"
+  class="announcement-bar background-gig-primary color-gig-primary"
+  aria-label="announcement-bar"
+  announcement-bar
+>
+  <ul class="nav-wrapper">
+    <li class="li-link active">
+      <a class="nav-link" href="{{ section.settings.link_1_url }}">{{ section.settings.link_1_text }}</a>
+    </li>
+
+    <li class="li-link">
+      <a class="nav-link" href="{{ section.settings.link_2_url }}">{{ section.settings.link_2_text }}</a>
+    </li>
+
+    <li class="li-link">
+      <a class="nav-link" href="{{ section.settings.link_3_url }}">{{ section.settings.link_3_text }}</a>
+    </li>
+  </ul>
+
+  <div
+    id="announcement-bar-slider"
+    class="splide announcement-bar-wrapper splide--fade splide--ltr splide--draggable"
+    announcement-bar-slider
+    role="region"
+    aria-roledescription="carousel"
+  >
+    <div
+      class="splide__track splide__track--fade splide__track--ltr splide__track--draggable"
+      id="announcement-bar-slider-track"
+      style="padding-left: 0px; padding-right: 0px;"
+      aria-live="off"
+    >
+      <ul class="splide__list" role="presentation" id="announcement-bar-slider-list">
+        {% for i in (1..3) %}
+          <li
+            class="splide__slide {% if forloop.first %}is-active is-visible{% elsif forloop.index == 2 %}is-next{% endif %}"
+            role="group"
+            aria-roledescription="slide"
+            aria-label="{{ i }} of 3"
+            style="width: calc(100%); transform: translateX(-{{ forloop.index0 | times: 100 }}%); transition: opacity 1000ms cubic-bezier(0.25, 1, 0.5, 1);"
+          >
+            <p class="announcement-bar__message text-center text-base text-center">
+              {% assign setting_key = 'slide_' | append: i | append: '_text' %}
+              <span>{{ section.settings[setting_key] }}</span>
+            </p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="splide__arrows splide__arrows--ltr">
+      <button
+        class="splide__arrow splide__arrow--prev"
+        aria-label="Go to last slide"
+        aria-controls="announcement-bar-slider-track"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+          <path d="M10.859 3.64103C10.8144 3.59633 10.7614 3.56086 10.7031 3.53666C10.6448 3.51246 10.5822 3.5 10.5191 3.5C10.456 3.5 10.3934 3.51246 10.3351 3.53666C10.2768 3.56086 10.2238 3.59633 10.1792 3.64103L10.1085 3.57033L5.92928 7.75052L10.1085 12.0721C10.2174 12.181 10.3651 12.2422 10.5191 12.2422C10.6731 12.2422 10.8208 12.181 10.9297 12.0721C11.0386 11.9632 11.0997 11.8155 11.0997 11.6615C11.0997 11.5076 11.0386 11.3599 10.9297 11.251L7.49899 7.82122L10.9296 4.39157L10.859 4.32077Z" fill="#1B365D" stroke="#1B365D" stroke-width="0.2"/>
+        </svg>
+      </button>
+      <button
+        class="splide__arrow splide__arrow--next"
+        aria-label="Next slide"
+        aria-controls="announcement-bar-slider-track"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+          <path d="M6.14103 3.64103C6.18562 3.59633 6.2386 3.56086 6.29692 3.53666C6.35524 3.51246 6.41776 3.5 6.4809 3.5C6.54404 3.5 6.60656 3.51246 6.66488 3.53666C6.7232 3.56086 6.77618 3.59633 6.82077 3.64103L6.89149 3.57033L11.0707 7.75052L6.89149 12.0721C6.78259 12.181 6.6349 12.2422 6.4809 12.2422C6.3269 12.2422 6.17921 12.181 6.07032 12.0721C5.96143 11.9632 5.90025 11.8155 5.90025 11.6615C5.90025 11.5076 5.96143 11.3599 6.07032 11.251L9.50101 7.82122L6.14103 4.32077Z" fill="#1B365D" stroke="#1B365D" stroke-width="0.2"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "link_1_text",
+      "label": "Link 1 text",
+      "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Link 1 URL",
+      "default": "/collections"
+    },
+    {
+      "type": "text",
+      "id": "link_2_text",
+      "label": "Link 2 text",
+      "default": "Show"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Link 2 URL",
+      "default": "/collections"
+    },
+    {
+      "type": "text",
+      "id": "link_3_text",
+      "label": "Link 3 text",
+      "default": "Blog"
+    },
+    {
+      "type": "url",
+      "id": "link_3_url",
+      "label": "Link 3 URL",
+      "default": "/collections"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_text",
+      "label": "Slide 1 text",
+      "default": "Free shipping over $50"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_text",
+      "label": "Slide 2 text",
+      "default": "Over 250k+ Ice Rollers sold"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_text",
+      "label": "Slide 3 text",
+      "default": "#1 cold-therapy beauty tool"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

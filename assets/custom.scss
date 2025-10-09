@@ -1,0 +1,35 @@
+.product-grid-image {
+    img:nth-child(2) {
+        display: none;
+    }
+
+    &:hover {
+        img:nth-child(1) {
+            display: none;
+        }
+
+        img:nth-child(2) {
+            display: block;
+        }
+    }
+}
+
+.product-grid-item-content {
+    .product-grid-text-wrapper {
+        padding: 6px 14px;
+
+        .product-title {
+            font-weight: 700 !important;
+        }
+
+        .product-grid-description-text {
+            font-family: var(--font-monospace) !important;
+        }
+    }
+}
+
+.back-btn {
+    display    : inline-flex;
+    align-items: center;
+    gap        : 8px;
+}

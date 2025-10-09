@@ -1,0 +1,203 @@
+.header .main-menu .nav-item {
+    position: relative
+}
+
+.mega-menu {
+    display         : none;
+    position        : absolute;
+    top             : 100%;
+    left            : 0;
+    width           : 100%;
+    background-color: var(--gig-secondary);
+    z-index         : 10;
+    border-top      : 2px solid var(--gig-tertiary);
+    border-bottom   : 2px solid var(--gig-tertiary)
+}
+
+.mega-menu.show {
+    display                  : block;
+    animation                : fadeInAnimation ease .3s;
+    animation-iteration-count: 1;
+    animation-fill-mode      : forwards
+}
+
+.mega-product-container {
+    width          : 100%;
+    display        : flex;
+    padding        : 36px;
+    justify-content: center;
+    max-width      : 1440px;
+    margin         : auto
+}
+
+.mega-menu .splide-pagination {
+    position        : relative;
+    top             : -20px;
+    height          : 3px;
+    background-color: var(--gig-tertiary);
+    border-radius   : 2px;
+    overflow        : hidden;
+    max-width       : 92.22vw;
+    margin          : auto
+}
+
+.mega-menu .product-grid-price-container {
+    display: none
+}
+
+.mega-menu .splide-pagination-line {
+    position        : absolute;
+    height          : 100%;
+    background-color: var(--gig-primary);
+    transition      : width .3s ease, left .3s ease;
+    border-radius   : 2px
+}
+
+.mega-menu .mega-container {
+    width          : 50%;
+    display        : flex;
+    justify-content: space-between;
+    padding        : 31px 36px 26px 46px
+}
+
+.mega-menu .nav-level-1 {
+    display              : grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap           : 45px;
+    row-gap              : 36px
+}
+
+.mega-menu .nav-level-1,
+.mega-menu .nav-level-2,
+.mega-menu .nav-level-3 {
+    list-style: none;
+    padding   : 0;
+    margin    : 0;
+    width     : 100%
+}
+
+.mega-menu .nav-level-1-item,
+.mega-menu .nav-level-2-item,
+.mega-menu .nav-level-3-item {
+    margin-bottom: 10px;
+    max-width    : 186px
+}
+
+.mega-menu .nav-level-2-item {
+    margin-bottom: 0
+}
+
+.mega-menu .nav-level-2-link {
+    padding-bottom: 0 !important
+}
+
+.mega-menu .nav-level-2-link:hover {
+    color: var(--gig-primary) !important
+}
+
+.mega-menu .featured-product .featured-title {
+    margin-top   : 10px;
+    margin-bottom: 15px;
+    font-weight  : 600;
+    color        : #000
+}
+
+.mega-menu .nav-level-1-link {
+    font-weight  : 300;
+    margin-bottom: 26px
+}
+
+.mega-menu .featured-product img {
+    max-height     : 366px;
+    height         : 350px;
+    max-width      : 315px;
+    object-fit     : cover;
+    object-position: top;
+    transition     : opacity .3s ease;
+    border-radius  : 50px
+}
+
+.mega-menu .product-grid-item .product-grid-name {
+    margin-bottom: unset
+}
+
+.mega-menu .splide__track {
+    width: 100%
+}
+
+.mega-menu .splide__list {
+    justify-content: center
+}
+
+.mega-menu .featured-product a {
+    display                 : block;
+    height                  : 100%;
+    font-size               : 20px;
+    font-weight             : 500;
+    line-height             : 28px;
+    letter-spacing          : -.02em;
+    text-align              : left;
+    text-underline-position : from-font;
+    text-decoration-skip-ink: none;
+    color                   : var(--gig-primary)
+}
+
+.mega-menu .nav-level-1-link,
+.mega-menu .nav-level-2-link,
+.mega-menu .nav-level-3-link {
+    text-decoration: none;
+    font-weight    : 300;
+    color          : #000;
+    display        : block;
+    padding        : 5px 0
+}
+
+.mega-menu .nav-level-1-link {
+    font-weight: 700
+}
+
+.mega-menu .nav-level-3 {
+    margin-left: 40px
+}
+
+.mega-menu .featured-page img {
+    width     : 100%;
+    object-fit: cover
+}
+
+.mega-menu .featured-page .page-title {
+    display                 : block;
+    font-family             : var(--blanka-font);
+    font-size               : 20px;
+    font-weight             : 500;
+    line-height             : 28px;
+    letter-spacing          : -.02em;
+    text-align              : left;
+    text-underline-position : from-font;
+    text-decoration-skip-ink: none;
+    color                   : var(--gig-primary);
+    padding-top             : 18px
+}
+
+@media (min-width: 1440px) {
+    .mega-menu .mega-product-container .splide__track .splide__slide {
+        width: calc(25% - 27px) !important
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1600px) {
+    .mega-menu .nav-level-1 {
+        max-height: 500px;
+        overflow  : auto
+    }
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
