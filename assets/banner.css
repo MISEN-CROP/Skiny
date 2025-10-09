@@ -18,7 +18,13 @@
     left      : 0;
     width     : 100%;
     height    : 100%;
-    background: linear-gradient(180deg, #0000 32.29%, #0000006b 81.64%)
+    background: linear-gradient(180deg, #0000 32.29%, #0000006b 81.64%);
+    width     : 100%;
+}
+
+.hb-banner__video {
+    width   : 100%;
+    overflow: hidden;
 }
 
 .hb-banner_button {
@@ -121,4 +127,8 @@
         border-radius: 16px 16px 0 0;
         top          : 0
     }
+}
+
+.hb-banner_image {
+    max-width: 100%;
 }
