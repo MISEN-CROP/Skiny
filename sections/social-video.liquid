@@ -1,0 +1,751 @@
+<section
+  class="social-reviews-section"
+  style="background-color: {{ section.settings.background_color | default: '#f2e9db' }}; padding: {{ section.settings.padding_top_mobile }}px {{ section.settings.padding_horizontal_mobile }}px {{ section.settings.padding_bottom_mobile }}px; overflow: hidden;"
+>
+  <style>
+    @media (min-width: 768px) {
+      .social-reviews-section {
+        padding: {{ section.settings.padding_top_desktop }}px {{ section.settings.padding_horizontal_desktop }}px {{ section.settings.padding_bottom_desktop }}px !important;
+      }
+    }
+
+    .social-reviews-header h2 {
+      font-family: var(--font-primary);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gig-primary);
+      margin-bottom: 3rem;
+      letter-spacing: 0.05em;
+    }
+
+    @media (min-width: 768px) {
+      .social-reviews-header h2 {
+        font-size: 2.5rem;
+        margin-bottom: 4rem;
+      }
+    }
+
+    .social-video-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 0 12px;
+      height: 100%;
+      display: flex;
+      flex-direction: row; /* Horizontal layout */
+      min-height: 400px;
+    }
+
+    @media (max-width: 767px) {
+      .social-video-card {
+        flex-direction: column;
+        margin: 0 8px;
+        min-height: auto;
+      }
+    }
+
+    .social-video-card:hover {
+    }
+
+    .social-video-media {
+      position: relative;
+      width: 50%; /* Half width for horizontal layout */
+      height: auto;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 767px) {
+      .social-video-media {
+        width: 100%;
+        height: 250px;
+      }
+    }
+
+    .social-video-media video,
+    .social-video-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .social-video-card:hover .social-video-media video,
+    .social-video-card:hover .social-video-media img {
+    }
+
+    /* Product image overlay on media */
+    .product-image-overlay {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid white;
+      background: white;
+    }
+
+    .product-image-overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .social-video-content {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @media (max-width: 767px) {
+      .social-video-content {
+        padding: 1.5rem;
+      }
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 1.5rem;
+      justify-content: flex-start;
+    }
+
+    .review-stars .star {
+      font-size: 1.1rem;
+    }
+
+    .review-stars .star.filled {
+      color: #FFD700;
+    }
+
+    .review-stars .star:not(.filled) {
+      color: #E5E5E5;
+    }
+
+    .social-review-text {
+      font-family: var(--font-primary-light);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--gig-primary);
+      text-align: left;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+
+    .social-product-info {
+      margin-top: auto;
+    }
+
+    .social-product-title {
+      font-family: var(--font-primary);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gig-primary);
+      margin: 0 0 1rem 0;
+      line-height: 1.3;
+    }
+
+    .social-product-title a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .social-product-title a:hover {
+      color: var(--gig-primary);
+      opacity: 0.8;
+    }
+
+    .social-add-to-cart {
+      background: var(--gig-primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 25px;
+      font-family: var(--font-primary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      position: relative;
+      overflow: hidden;
+      width: fit-content;
+    }
+
+    .social-add-to-cart:hover {
+      background: #003366;
+      transform: translateY(-2px);
+    }
+
+    .social-add-to-cart .loading__spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+    }
+
+    .social-add-to-cart .loading__spinner.hidden {
+      display: none;
+    }
+
+    .slider-progress {
+      margin-top: 2rem;
+      height: 2px;
+      background: rgba(0, 66, 136, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      width: 90%;
+        margin: 0 auto;
+        margin-top: 50px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .slider-progress-bar {
+      height: 100%;
+      background: var(--gig-primary);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    /* Splide customization */
+    .splide__slide {
+      display: flex;
+      align-items: stretch;
+    }
+
+    /* Mobile specific adjustments */
+    @media (max-width: 767px) {
+      .social-reviews-header h2 {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .review-stars {
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+
+      .social-review-text {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .social-product-title {
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      .social-add-to-cart {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+      }
+
+      .product-image-overlay {
+        bottom: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
+
+  <div class="page-container md:!px-0">
+    <div class="">
+      <h2 role="heading" class="text-left text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-bold mb-10" aria-level="2">
+        {{ section.settings.heading | default: 'ROUTINES YOU LOVE' }}
+      </h2>
+    </div>
+
+    <div
+      class="social-videos-container splide"
+      social-reviews-slider=""
+      id="splide-{{ section.id }}"
+      role="region"
+      aria-roledescription="carousel"
+    >
+      <div class="splide__track" id="splide-{{ section.id }}-track">
+        <ul class="splide__list" id="splide-{{ section.id }}-list">
+          {% for block in section.blocks %}
+            {% if block.type == 'social_review' %}
+              <li class="splide__slide" id="splide-{{ section.id }}-slide{{ forloop.index }}">
+                <div class="social-video-card">
+                  <div class="social-video-media">
+                    {% if block.settings.media_type == 'video' and block.settings.video_url != blank %}
+                      <video
+                        playsinline
+                        muted
+                        loop
+                        data-src="{{ block.settings.video_url }}"
+                        class="lazy-video"
+                      >
+                        <source
+                          data-src="{{ block.settings.video_url }}"
+                          type="video/mp4"
+                        >
+                      </video>
+                    {% elsif block.settings.media_type == 'image' and block.settings.image != blank %}
+                      <img
+                        src="{{ block.settings.image | image_url: width: 600 }}"
+                        alt="{{ block.settings.image.alt | escape }}"
+                        width="600"
+                        height="400"
+                      >
+                    {% endif %}
+
+                    {% if block.settings.product != blank %}
+                      {% assign product = all_products[block.settings.product] %}
+                      <div class="product-image-overlay">
+                        <a href="{{ product.url }}" aria-label="{{ product.title }}">
+                          <img
+                            src="{{ product.featured_media | image_url: width: 120, height: 120 }}"
+                            loading="lazy"
+                            alt="{{ product.title }}"
+                            width="60"
+                            height="60"
+                          >
+                        </a>
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="social-video-content">
+                    {% if block.settings.show_rating %}
+                      <div class="review-stars">
+                        <span class="acsb-sr-only">{{ block.settings.rating | default: 5 }}/5 Rating</span>
+                        {% for i in (1..5) %}
+                          {% if i <= block.settings.rating %}
+                            <span class="star filled">★</span>
+                          {% else %}
+                            <span class="star">★</span>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+
+                    {% if block.settings.review_text != blank %}
+                      <p class="social-review-text">
+                        {{ block.settings.review_text }}
+                      </p>
+                    {% endif %}
+
+                    {% if block.settings.product != blank %}
+                      {% assign product = all_products[block.settings.product] %}
+                      <div class="social-product-info">
+                        <h3 class="social-product-title">
+                          <a href="{{ product.url }}" aria-label="{{ product.title }}">
+                            {{ block.settings.product_title | default: product.title }}
+                          </a>
+                        </h3>
+                        <product-form>
+                          <form
+                            method="post"
+                            action="{{ routes.cart_add_url }}"
+                            id="product_form_{{ product.id }}_{{ block.id }}"
+                            accept-charset="UTF-8"
+                            class="form"
+                            enctype="multipart/form-data"
+                            data-type="add-to-cart-form"
+                          >
+                            <input type="hidden" name="form_type" value="product">
+                            <input type="hidden" name="utf8" value="✓">
+                            <input
+                              type="hidden"
+                              name="id"
+                              value="{{ product.selected_or_first_available_variant.id }}"
+                              class="product-variant-id"
+                            >
+                            <button
+                              type="submit"
+                              class="social-add-to-cart"
+                              aria-haspopup="dialog"
+                              {% unless product.available %}
+                                disabled
+                              {% endunless %}
+                            >
+                              <span>
+                                {% if product.available %}
+                                  {{ block.settings.button_text | default: 'Add To Cart' }}
+                                {% else %}
+                                  Sold Out
+                                {% endif %}
+                              </span>
+                              <div class="loading__spinner hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
+                                  <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
+                                </svg>
+                              </div>
+                            </button>
+                            <input type="hidden" name="product-id" value="{{ product.id }}">
+                            <input type="hidden" name="section-id" value="{{ section.id }}">
+                          </form>
+                        </product-form>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% if section.settings.show_progress_bar %}
+        <div class="slider-progress" aria-hidden="true">
+          <div class="slider-progress-bar"></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof Splide !== 'undefined') {
+      const splide = new Splide('#splide-{{ section.id }}', {
+        type: 'loop',
+        perPage: 2,
+        gap: '24px',
+        pagination: false,
+        arrows: false,
+        autoplay: {{ section.settings.autoplay }},
+        interval: {{ section.settings.autoplay_speed | default: 3000 }},
+        breakpoints: {
+          768: {
+            perPage: 1,
+            gap: '16px'
+          }
+        }
+      });
+
+      // Progress bar update
+      {% if section.settings.show_progress_bar %}
+      splide.on('mounted move', function () {
+        const progressBar = document.querySelector('#splide-{{ section.id }} .slider-progress-bar');
+        if (progressBar) {
+          const progress = ((splide.index + 1) / splide.length) * 100;
+          progressBar.style.width = progress + '%';
+        }
+      });
+      {% endif %}
+
+      splide.mount();
+    }
+
+    // Lazy load videos with improved intersection observer
+    const lazyVideos = document.querySelectorAll('#shopify-section-{{ section.id }} .lazy-video');
+
+    if ('IntersectionObserver' in window) {
+      const videoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const video = entry.target;
+            if (video.dataset.src) {
+              video.src = video.dataset.src;
+              const source = video.querySelector('source');
+              if (source && source.dataset.src) {
+                source.src = source.dataset.src;
+              }
+              video.load();
+
+              // Play video when it's ready
+              video.addEventListener('loadeddata', () => {
+                video.play().catch(e => console.log('Video autoplay failed:', e));
+              });
+
+              videoObserver.unobserve(video);
+            }
+          }
+        });
+      }, {
+        rootMargin: '50px'
+      });
+
+      lazyVideos.forEach((video) => {
+        videoObserver.observe(video);
+      });
+    }
+
+    // Add to cart functionality
+    const forms = document.querySelectorAll('#shopify-section-{{ section.id }} form[data-type="add-to-cart-form"]');
+    forms.forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const button = form.querySelector('.social-add-to-cart');
+        const spinner = button.querySelector('.loading__spinner');
+        const buttonText = button.querySelector('span');
+
+        // Show loading state
+        spinner.classList.remove('hidden');
+        buttonText.style.opacity = '0';
+        button.disabled = true;
+
+        // Submit form
+        fetch(this.action, {
+          method: 'POST',
+          body: new FormData(this)
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Hide loading state
+          spinner.classList.add('hidden');
+          buttonText.style.opacity = '1';
+          button.disabled = false;
+
+          // You can add cart drawer trigger here
+          if (window.cartDrawer) {
+            window.cartDrawer.open();
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          // Hide loading state
+          spinner.classList.add('hidden');
+          buttonText.style.opacity = '1';
+          button.disabled = false;
+        });
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Social Video Reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "ROUTINES YOU LOVE"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f2e9db"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto Play Slider",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Auto Play Speed (ms)",
+      "min": 1000,
+      "max": 8000,
+      "step": 1000,
+      "default": 3000,
+      "info": "Time between slides in milliseconds"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress_bar",
+      "label": "Show Progress Bar",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mobile Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top Padding (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom Padding (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "label": "Horizontal Padding (Mobile)",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Desktop Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Top Padding (Desktop)",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Bottom Padding (Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_desktop",
+      "label": "Horizontal Padding (Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 35
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social_review",
+      "name": "🎬 Social Review",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Media"
+        },
+        {
+          "type": "select",
+          "id": "media_type",
+          "label": "Media Type",
+          "default": "video",
+          "options": [
+            {
+              "value": "video",
+              "label": "Video"
+            },
+            {
+              "value": "image",
+              "label": "Image"
+            }
+          ]
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL",
+          "info": "Upload video to Files and paste URL here"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "header",
+          "content": "Review Content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "label": "Show Star Rating",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "Amazing product! Love using it every day."
+        },
+        {
+          "type": "header",
+          "content": "Product"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Featured Product"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Custom Product Title",
+          "info": "Leave blank to use product title"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Add To Cart"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Video Reviews",
+      "blocks": [
+        {
+          "type": "social_review",
+          "settings": {
+            "media_type": "video",
+            "show_rating": true,
+            "rating": 5,
+            "review_text": "A game-changer for nasal breathing! Helps reduce snoring, improve sleep quality, and even prevents morning dry mouth. The adhesive is gentle yet secure, making it comfortable for all-night wear."
+          }
+        },
+        {
+          "type": "social_review",
+          "settings": {
+            "media_type": "image",
+            "show_rating": true,
+            "rating": 5,
+            "review_text": "This sunscreen is BRILLIANT! The light tint is perfect and the caffeine truly tightens and brightens. I recommend getting it on subscription so you never run out!!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

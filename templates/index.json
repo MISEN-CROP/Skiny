@@ -155,6 +155,79 @@
         "show_load_more": false,
         "load_more_text": "Load More"
       }
+    },
+    "custom_code_text_FJC8rx": {
+      "type": "custom-code-text",
+      "name": "Custom Code Text",
+      "settings": {
+        "text_part1": "The #1 best selling cold-therapy beauty tool, over 250,000 Ice Rollers sold.",
+        "text_part2": "",
+        "show_images": false
+      }
+    },
+    "social_video_yPYAam": {
+      "type": "social-video",
+      "blocks": {
+        "social_review_mCRXUk": {
+          "type": "social_review",
+          "settings": {
+            "media_type": "video",
+            "video_url": "",
+            "image": "shopify://shop_images/cd5e1790e79342179995cb770b179604.thumbnail.0000000000_small_45006d63-379e-466e-b834-45f97a9a2a3f.avif",
+            "show_rating": true,
+            "rating": 5,
+            "review_text": "Obsessed with this! Use it everyday before bed, sometimes in the morning, but I notice a difference right away with how my skin looks after I use this.",
+            "product": "",
+            "product_title": "",
+            "button_text": "Add To Cart"
+          }
+        },
+        "social_review_3a6RnP": {
+          "type": "social_review",
+          "settings": {
+            "media_type": "image",
+            "video_url": "",
+            "show_rating": true,
+            "rating": 5,
+            "review_text": "A game-changer for nasal breathing! Helps reduce snoring, improve sleep quality, and even prevents morning dry mouth.",
+            "product": "",
+            "product_title": "",
+            "button_text": "Add To Cart"
+          }
+        },
+        "social_review_E4KhzN": {
+          "type": "social_review",
+          "settings": {
+            "media_type": "video",
+            "video_url": "",
+            "show_rating": true,
+            "rating": 5,
+            "review_text": "This sunscreen is BRILLIANT! The light tint is perfect and the caffeine truly tightens and brightens.",
+            "product": "",
+            "product_title": "",
+            "button_text": "Add To Cart"
+          }
+        }
+      },
+      "block_order": [
+        "social_review_mCRXUk",
+        "social_review_3a6RnP",
+        "social_review_E4KhzN"
+      ],
+      "name": "Social Video Reviews",
+      "settings": {
+        "heading": "ROUTINES YOU LOVE",
+        "background_color": "#f2e9db",
+        "autoplay": false,
+        "autoplay_speed": 3000,
+        "show_progress_bar": true,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 35,
+        "padding_horizontal_mobile": 20,
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 35,
+        "padding_horizontal_desktop": 35
+      }
     }
   },
   "order": [
@@ -162,6 +235,8 @@
     "hero_video_NeT4Mb",
     "marquee_logo_kyHbVM",
     "custom_code_text_J3mQTr",
-    "collection_all_QgzA4D"
+    "collection_all_QgzA4D",
+    "custom_code_text_FJC8rx",
+    "social_video_yPYAam"
   ]
 }
