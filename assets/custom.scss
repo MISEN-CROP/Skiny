@@ -1,20 +1,57 @@
+@import "announcement-bar.css";
+
 .product-grid-image {
-    img:nth-child(2) {
-        display: none;
+    position: relative;
+
+    img {
+        transition: opacity 0.3s ease;
     }
 
+    img:first-child {
+        opacity: 1;
+    }
+
+    img:nth-child(2) {
+        position: absolute;
+        top     : 0;
+        left    : 0;
+        opacity : 0;
+    }
+
+    // Hover đổi ảnh
     &:hover {
-        img:nth-child(1) {
-            display: none;
+        img:first-child {
+            opacity: 0;
         }
 
         img:nth-child(2) {
-            display: block;
+            opacity: 1;
+        }
+    }
+
+    &:has(img:only-child) {
+        &:hover {
+            img {
+                opacity: 1 !important;
+            }
         }
     }
 }
 
+
 .product-grid-item-content {
+    position: relative;
+
+    .product-grid-image-wrapper {
+        height: 350px;
+
+        img {
+            height    : 100%;
+            width     : 100%;
+            object-fit: cover;
+        }
+    }
+
     .product-grid-text-wrapper {
         padding: 6px 14px;
 
@@ -69,16 +106,35 @@
 }
 
 .add-to-cart-button-line {
-    border       : 1px solid var(--color-semibold-primary);
-    border-radius: 9999999px;
-    width        : 100%;
-    padding      : 6px 12px;
-    margin-top   : 10px;
-    cursor       : pointer;
-    transition   : all 0.3s ease;
+    border          : 1px solid var(--color-semibold-primary);
+    border-radius   : 9999999px;
+    width           : 100%;
+    padding         : 6px 12px;
+    margin-top      : 10px;
+    cursor          : pointer;
+    background-color: var(--gig-tertiary);
+    transition      : all 0.3s ease;
 
     &:hover {
         background-color: var(--color-semibold-primary);
         color           : white;
+    }
+}
+
+.page-container {
+    padding: 0 10px;
+}
+
+@media (min-width: 992px) {
+    .page-container {
+        padding: 11px 36px;
+        margin : 0 36px
+    }
+}
+
+@media (min-width: 1441px) {
+    .page-container {
+        max-width: 1440px;
+        margin   : 0 auto
     }
 }

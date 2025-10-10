@@ -1,69 +1,71 @@
 <div class="collection-all-section py-12 md:py-16">
-  <div class="container mx-auto px-6">
-    <!-- Header Section -->
-    <div class="mb-6 md:mb-10">
-      <h2 class="text-3xl md:text-4xl lg:text-6xl font-bold uppercase tracking-tight mb-4">
-        {{ section.settings.heading | default: 'MICROMANAGE YOUR ROUTINE' }}
-      </h2>
-      {% if section.settings.subheading != blank %}
-        <p class="text-base md:text-lg mb-6 font-pr-light">
-          {{ section.settings.subheading }}
-        </p>
-      {% endif %}
+  <div class="page-container md:!p-0">
+    <div>
+      <!-- Header Section -->
+      <div class="mb-6 md:mb-10">
+        <h2 class="text-3xl md:text-4xl lg:text-6xl font-bold uppercase tracking-tight mb-4">
+          {{ section.settings.heading | default: 'MICROMANAGE YOUR ROUTINE' }}
+        </h2>
+        {% if section.settings.subheading != blank %}
+          <p class="text-base md:text-lg mb-6 font-pr-light">
+            {{ section.settings.subheading }}
+          </p>
+        {% endif %}
 
-      <!-- Filter Tabs - Auto generated from Product Categories -->
-      <div class="filter-tabs flex flex-wrap justify-start gap-4 md:gap-6 mb-8">
-        <button
-          class="filter-tab active px-1 py-1 text-sm md:text-base font-medium border-b-2 border-black"
-          data-filter="all"
-        >
-          {{ section.settings.tab_all_text | default: 'Best Sellers' }}
-        </button>
+        <!-- Filter Tabs - Auto generated from Product Categories -->
+        <div class="filter-tabs flex flex-wrap justify-start gap-4 md:gap-6 mb-8">
+          <button
+            class="filter-tab active px-1 py-1 text-sm md:text-base font-medium border-b-2 border-black"
+            data-filter="all"
+          >
+            {{ section.settings.tab_all_text | default: 'Best Sellers' }}
+          </button>
 
-        {% for block in section.blocks %}
-          {% if block.type == 'product_category' and block.settings.products != blank %}
-            <button
-              class="filter-tab px-1 cursor-pointer py-1 text-sm md:text-base font-medium border-b-2 border-transparent hover:border-gray-300 transition-colors"
-              data-filter="{{ block.id }}"
+          {% for block in section.blocks %}
+            {% if block.type == 'product_category' and block.settings.products != blank %}
+              <button
+                class="filter-tab px-1 cursor-pointer py-1 text-sm md:text-base font-medium border-b-2 border-transparent hover:border-gray-300 transition-colors"
+                data-filter="{{ block.id }}"
+              >
+                {{ block.settings.category_name }}
+              </button>
+            {% endif %}
+          {% endfor %}
+
+          <!-- Shop All Button -->
+          {% if section.settings.shop_all_url != blank %}
+            <a
+              href="{{ section.settings.shop_all_url }}"
+              class="shop-all-btn ml-auto px-6 py-3 text-sm md:text-base font-medium border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
             >
-              {{ block.settings.category_name }}
-            </button>
+              {{ section.settings.shop_all_text | default: 'SHOP ALL' }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+        {% for block in section.blocks %}
+          {% if block.type == 'product_category' %}
+            {% for product in block.settings.products %}
+              <div class="product-item" data-category="{{ block.id }}">
+                {% render 'product-card', product: product, show_secondary_image: true, show_rating: true %}
+              </div>
+            {% endfor %}
           {% endif %}
         {% endfor %}
-
-        <!-- Shop All Button -->
-        {% if section.settings.shop_all_url != blank %}
-          <a
-            href="{{ section.settings.shop_all_url }}"
-            class="shop-all-btn ml-auto px-6 py-3 text-sm md:text-base font-medium border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
-          >
-            {{ section.settings.shop_all_text | default: 'SHOP ALL' }}
-          </a>
-        {% endif %}
       </div>
-    </div>
 
-    <!-- Products Grid -->
-    <div class="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-      {% for block in section.blocks %}
-        {% if block.type == 'product_category' %}
-          {% for product in block.settings.products %}
-            <div class="product-item" data-category="{{ block.id }}">
-              {% render 'product-card', product: product, show_secondary_image: true, show_rating: true %}
-            </div>
-          {% endfor %}
-        {% endif %}
-      {% endfor %}
+      <!-- Load More Button (Optional) -->
+      {% if section.settings.show_load_more %}
+        <div class="text-center mt-8 md:mt-12">
+          <button class="load-more-btn px-8 py-3 text-base font-medium border border-gray-300 rounded-full hover:bg-gray-50 transition-colors">
+            {{ section.settings.load_more_text | default: 'Load More' }}
+          </button>
+        </div>
+      {% endif %}
     </div>
-
-    <!-- Load More Button (Optional) -->
-    {% if section.settings.show_load_more %}
-      <div class="text-center mt-8 md:mt-12">
-        <button class="load-more-btn px-8 py-3 text-base font-medium border border-gray-300 rounded-full hover:bg-gray-50 transition-colors">
-          {{ section.settings.load_more_text | default: 'Load More' }}
-        </button>
-      </div>
-    {% endif %}
   </div>
 </div>
 

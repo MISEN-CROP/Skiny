@@ -1,80 +1,186 @@
-<style>
-  .product-grid-image {
-    img {
-      border-radius: 30px;
+{% comment %}
+  Renders a product card
+
+  Accepts:
+  - product: {Object} Product Liquid object (required)
+  - show_secondary_image: {Boolean} Show secondary image on hover (optional)
+  - show_vendor: {Boolean} Show product vendor (optional)
+  - show_rating: {Boolean} Show product rating (optional)
+  - lazy_load: {Boolean} Image should be lazy loaded (optional)
+
+  Usage:
+  {% render 'product-card', product: product, show_secondary_image: true %}
+{% endcomment %}
+
+{%- unless product == blank -%}
+  {%- liquid
+    assign ratio = 1
+    if product.featured_media
+      assign ratio = product.featured_media.aspect_ratio
+    endif
+    assign fetch_priority = 'auto'
+    if lazy_load == false
+      assign fetch_priority = 'high'
+    endif
+  -%}
+
+  <style>
+    .product-grid-image {
+      img {
+        border-radius: 30px;
+      }
     }
-  }
-</style>
+  </style>
 
-<div
-  class="product-grid-item"
-  id="product-grid-item-7262542626909"
-  data-productid="7262542626909"
-  data-testid="7262542626909"
->
-  <div class="product-grid-item-content">
-    <div class="product-grid-image-wrapper">
-      <a href="/products/mouth-tape" class="product-grid-image relative">
-        <img
-          id="product-image-7262542626909"
-          src="//shopskinnyconfidential.com/cdn/shop/files/Classic_-_1.jpg?crop=center&amp;format=webp&amp;height=350&amp;v=1758259864&amp;width=350"
-          srcset="
-            //shopskinnyconfidential.com/cdn/shop/files/Classic_-_1.jpg?crop=center&amp;format=webp&amp;height=350&amp;v=1758259864&amp;width=350 350w,
-            //shopskinnyconfidential.com/cdn/shop/files/Classic_-_1.jpg?crop=center&amp;format=webp&amp;height=768&amp;v=1758259864&amp;width=768 768w,
-            //shopskinnyconfidential.com/cdn/shop/files/Classic_-_1.jpg?crop=center&amp;format=webp&amp;height=1024&amp;v=1758259864&amp;width=1024 1024w
-          "
-          sizes="(max-width: 768px) 350px, 1024px"
-          alt="Mouth Tape"
-          title="Mouth Tape"
-          width="auto"
-          height="auto"
-          loading="eager"
-          class="product-grid-first-image"
-        >
-        <img
-          class="lazy product-grid-secondary-image"
-          src="//shopskinnyconfidential.com/cdn/shop/files/Classic_-_2.jpg?crop=center&amp;format=webp&amp;height=350&amp;v=1758259937&amp;width=350"
-          srcset="
-            //shopskinnyconfidential.com/cdn/shop/files/Classic_-_2.jpg?crop=center&amp;format=webp&amp;height=350&amp;v=1758259937&amp;width=350 350w,
-            //shopskinnyconfidential.com/cdn/shop/files/Classic_-_2.jpg?crop=center&amp;format=webp&amp;height=768&amp;v=1758259937&amp;width=768 768w,
-            //shopskinnyconfidential.com/cdn/shop/files/Classic_-_2.jpg?crop=center&amp;format=webp&amp;height=1024&amp;v=1758259937&amp;width=1024 1024w
-          "
-          sizes="(max-width: 768px) 350px, 1024px"
-          alt="Mouth Tape"
-          title="Mouth Tape"
-          width="auto"
-          height="auto"
-          loading="lazy"
-        >
-      </a>
+  <div
+    class="product-grid-item"
+    id="product-grid-item-{{ product.id }}"
+    data-productid="{{ product.id }}"
+    data-testid="{{ product.id }}"
+  >
+    <div class="product-grid-item-content">
+      <div class="product-grid-image-wrapper">
+        <a href="{{ product.url }}" class="product-grid-image relative">
+          {%- if product.featured_media -%}
+            <img
+              id="product-image-{{ product.id }}"
+              src="{{ product.featured_media | image_url: width: 350 }}"
+              srcset="
+                {{ product.featured_media | image_url: width: 350 }} 350w,
+                {{ product.featured_media | image_url: width: 768 }} 768w,
+                {{ product.featured_media | image_url: width: 1024 }} 1024w
+              "
+              sizes="(max-width: 768px) 350px, 1024px"
+              alt="{{ product.featured_media.alt | escape }}"
+              title="{{ product.title | escape }}"
+              width="auto"
+              height="auto"
+              loading="{%- if lazy_load -%}lazy{%- else -%}eager{%- endif -%}"
+              class="product-grid-first-image"
+            >
 
-      <div class="product-badges absolute top-4 left-4">
-        <div class="badge-text rounded-full px-4 py-2" style="background: #1B365D;color:#FFFDF1;">Best Seller</div>
-      </div>
-    </div>
-
-    <div class="product-grid-text-wrapper">
-      <div class="bottom-section-wrapper">
-        <div>
-          <div class="product-grid-reviews "></div>
-          <div>
-            <p class="product-grid-name tex-base font-bold md:text-xl ">
-              <a href="/products/mouth-tape" class="h4 product-grid-link product-title"> Mouth Tape </a>
-            </p>
-          </div>
-          <div class="product-grid-description-text">
-            Strengthen your jaw line while getting the deepest sleep of your life.
-          </div>
-        </div>
-
-        <div class="product-grid-bottom-section mobile">
-          <product-form>
-            <div class="atc-icon">
-              <button class="add-to-cart-button-line text-sm md:text-base">Add to cart</button>
+            {%- if show_secondary_image and product.media[1] -%}
+              <img
+                class="lazy product-grid-secondary-image"
+                src="{{ product.media[1] | image_url: width: 350 }}"
+                srcset="
+                  {{ product.media[1] | image_url: width: 350 }} 350w,
+                  {{ product.media[1] | image_url: width: 768 }} 768w,
+                  {{ product.media[1] | image_url: width: 1024 }} 1024w
+                "
+                sizes="(max-width: 768px) 350px, 1024px"
+                alt="{{ product.media[1].alt | escape }}"
+                title="{{ product.title | escape }}"
+                width="auto"
+                height="auto"
+                loading="lazy"
+              >
+            {%- endif -%}
+          {%- else -%}
+            <div class="w-full h-full flex items-center justify-center bg-gray-200 rounded-[30px]">
+              <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
             </div>
-          </product-form>
+          {%- endif -%}
+        </a>
+
+        <!-- Product Badges -->
+        {%- if product.tags contains 'best-seller' or product.tags contains 'bestseller' -%}
+          <div class="product-badges absolute top-4 left-4">
+            <div class="badge-text rounded-full px-4 py-2" style="background: #1B365D;color:#FFFDF1;">Best Seller</div>
+          </div>
+        {%- elsif product.tags contains 'limited-edition' -%}
+          <div class="product-badges absolute top-4 left-4">
+            <div class="badge-text rounded-full px-4 py-2" style="background: #1B365D;color:#FFFDF1;">
+              Limited Edition
+            </div>
+          </div>
+        {%- elsif product.tags contains 'new' -%}
+          <div class="product-badges absolute top-4 left-4">
+            <div class="badge-text rounded-full px-4 py-2" style="background: #1B365D;color:#FFFDF1;">New</div>
+          </div>
+        {%- endif -%}
+
+        <!-- Sale Badge -->
+        {%- if product.compare_at_price > product.price -%}
+          <div class="product-badges absolute top-4 right-4">
+            <div class="badge-text rounded-full px-4 py-2" style="background: #dc2626;color:#FFFDF1;">Sale</div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="product-grid-text-wrapper">
+        <div class="bottom-section-wrapper">
+          <div>
+            <!-- Product Rating -->
+            {%- if show_rating and product.metafields.reviews.rating.value != blank -%}
+              <div class="product-grid-reviews">
+                <div class="flex items-center gap-1">
+                  <div class="flex text-yellow-400">
+                    {%- assign rating = product.metafields.reviews.rating.value.rating -%}
+                    {%- for i in (1..5) -%}
+                      {%- if i <= rating -%}
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                      {%- else -%}
+                        <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                  <span class="text-sm text-gray-600">({{ product.metafields.reviews.rating.value.count }})</span>
+                </div>
+              </div>
+            {%- else -%}
+              <div class="product-grid-reviews "></div>
+            {%- endif -%}
+
+            <div>
+              <p class="product-grid-name tex-base font-bold md:text-xl ">
+                <a href="{{ product.url }}" class="h4 product-grid-link product-title">{{ product.title }}</a>
+              </p>
+            </div>
+
+            <!-- Product Description -->
+            <div class="product-grid-description-text">
+              {%- if product.description != blank -%}
+                {{ product.description | strip_html | truncate: 100 }}
+              {%- else -%}
+                Strengthen your jaw line while getting the deepest sleep of your life.
+              {%- endif -%}
+            </div>
+
+            <!-- Product Price -->
+            {%- if product.price -%}
+              <div class="product-price flex items-center gap-2 mt-2">
+                <span class="price text-lg font-semibold">
+                  {{ product.price | money }}
+                </span>
+                {%- if product.compare_at_price > product.price -%}
+                  <span class="compare-at-price text-sm text-gray-500 line-through">
+                    {{ product.compare_at_price | money }}
+                  </span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="product-grid-bottom-section mobile">
+            <product-form>
+              <div class="atc-icon">
+                {%- if product.available -%}
+                  <button class="add-to-cart-button-line text-sm md:text-base">Add to cart</button>
+                {%- else -%}
+                  <button class="add-to-cart-button-line text-sm md:text-base" disabled>Sold out</button>
+                {%- endif -%}
+              </div>
+            </product-form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+{%- endunless -%}

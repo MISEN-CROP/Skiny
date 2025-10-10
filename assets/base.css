@@ -7,7 +7,19 @@
     --font-primary                  : F37Blanka-Medium;
     --font-primary-light            : F37Blanka-Light;
     --font-sohne                    : SohneMono;
+    --gig-black                     : #000;
+    --gig-white                     : #fff;
+    --gig-primary                   : #004288;
+    --gig-secondary                 : #FFFDF1;
+    --gig-tertiary                  : #f2e9db;
+    --gig-pop                       : ;
+    --gig-accent                    : ;
+    --gig-bg-1                      : #f0e8da;
+    --gig-bg-2                      : ;
+    --gig-bg-3                      : ;
+    --button-border-radius          : 30px
 }
+
 
 html {
     background-color: var(--bg-second)
@@ -30,19 +42,7 @@ body {
     font-family: var(--font-sohne)
 }
 
-:root {
-    --gig-black           : #000;
-    --gig-white           : #fff;
-    --gig-primary         : #004288;
-    --gig-secondary       : #FFFDF1;
-    --gig-tertiary        : #f2e9db;
-    --gig-pop             : ;
-    --gig-accent          : ;
-    --gig-bg-1            : #f0e8da;
-    --gig-bg-2            : ;
-    --gig-bg-3            : ;
-    --button-border-radius: 30px
-}
+
 
 @media (max-width: 575.98px) {
     .container {
