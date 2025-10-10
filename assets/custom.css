@@ -97,11 +97,13 @@
 }
 
 .page-container {
+  margin: 0 10px;
   padding: 0 10px;
 }
 
 @media (min-width: 992px) {
   .page-container {
+    margin: unset;
     padding: 11px 36px;
     margin: 0 36px;
   }

@@ -168,65 +168,41 @@
     "social_video_yPYAam": {
       "type": "social-video",
       "blocks": {
-        "social_review_mCRXUk": {
-          "type": "social_review",
-          "settings": {
-            "media_type": "video",
-            "video_url": "",
-            "image": "shopify://shop_images/cd5e1790e79342179995cb770b179604.thumbnail.0000000000_small_45006d63-379e-466e-b834-45f97a9a2a3f.avif",
-            "show_rating": true,
-            "rating": 5,
-            "review_text": "Obsessed with this! Use it everyday before bed, sometimes in the morning, but I notice a difference right away with how my skin looks after I use this.",
-            "product": "",
-            "product_title": "",
-            "button_text": "Add To Cart"
-          }
-        },
-        "social_review_3a6RnP": {
+        "social_review_9Jxz4e": {
           "type": "social_review",
           "settings": {
             "media_type": "image",
             "video_url": "",
+            "image": "shopify://shop_images/mouth_tape_hp.webp",
             "show_rating": true,
             "rating": 5,
-            "review_text": "A game-changer for nasal breathing! Helps reduce snoring, improve sleep quality, and even prevents morning dry mouth.",
-            "product": "",
+            "review_text": "A game-changer for nasal breathing! Helps reduce snoring, improve sleep quality, and even prevents morning dry mouth. The adhesive is gentle yet secure, making it comfortable for all-night wear.",
+            "product": "the-collection-snowboard-hydrogen",
             "product_title": "",
             "button_text": "Add To Cart"
           }
         },
-        "social_review_E4KhzN": {
+        "social_review_WeQxQH": {
           "type": "social_review",
           "settings": {
             "media_type": "video",
-            "video_url": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/12ed44fc08884a45a748d0513fdc2120.mp4",
             "show_rating": true,
             "rating": 5,
-            "review_text": "This sunscreen is BRILLIANT! The light tint is perfect and the caffeine truly tightens and brightens.",
-            "product": "",
+            "review_text": "This sunscreen is BRILLIANT! The light tint is perfect and the caffeine truly tightens and brightens. I recommend getting it on subscription so you never run out!!",
+            "product": "gift-card",
             "product_title": "",
             "button_text": "Add To Cart"
           }
         }
       },
       "block_order": [
-        "social_review_mCRXUk",
-        "social_review_3a6RnP",
-        "social_review_E4KhzN"
+        "social_review_9Jxz4e",
+        "social_review_WeQxQH"
       ],
       "name": "Social Video Reviews",
       "settings": {
-        "heading": "ROUTINES YOU LOVE",
-        "background_color": "#f2e9db",
-        "autoplay": false,
-        "autoplay_speed": 3000,
-        "show_progress_bar": true,
-        "padding_top_mobile": 30,
-        "padding_bottom_mobile": 35,
-        "padding_horizontal_mobile": 20,
-        "padding_top_desktop": 70,
-        "padding_bottom_desktop": 35,
-        "padding_horizontal_desktop": 35
+        "heading": "ROUTINES YOU LOVE"
       }
     }
   },
