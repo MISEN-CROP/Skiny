@@ -204,6 +204,19 @@
       "settings": {
         "heading": "ROUTINES YOU LOVE"
       }
+    },
+    "blog_single_iXkMKm": {
+      "type": "blog-single",
+      "name": "About Section",
+      "settings": {
+        "image": "shopify://shop_images/BROWPEPTIDE_about_62fdb305-cbbf-4b9a-85fa-27f5289fa803.webp",
+        "image_alt": "",
+        "heading": "The Skinny Confidential",
+        "description": "<p>The Skinny Confidential was built by Lauryn Bosstick to upgrade and romanticize your daily wellness and beauty routine. We are committed to sourcing high-quality ingredients and developing effective, innovative products that are beautiful to look at. The foundation of your life starts with a commitment to small habits that lead to big results. Whether it's an energizing morning ritual or a relaxing evening routine, we help you habit-stack wellness to elevate your day.</p>",
+        "button_text": "OUR STORY",
+        "button_link": "",
+        "logo_alt": ""
+      }
     }
   },
   "order": [
@@ -213,6 +226,7 @@
     "custom_code_text_J3mQTr",
     "collection_all_QgzA4D",
     "custom_code_text_FJC8rx",
-    "social_video_yPYAam"
+    "social_video_yPYAam",
+    "blog_single_iXkMKm"
   ]
 }
