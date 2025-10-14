@@ -305,160 +305,167 @@
         </div>
       {% endif %}
 
-      <div style="flex: 1; width: 100%;">
-        <product-form class="product-form" data-hide-errors="false" data-section-id="{{ section.id }}">
-          <div class="product-form__error-message-wrapper" role="alert" hidden data-acsb-hidden="true">
-            <span class="svg-wrapper">
-              <svg class="icon icon-error" viewBox="0 0 13 13">
-                <circle cx="6.5" cy="6.5" r="5.5" stroke="#fff" stroke-width="2"></circle>
-                <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width=".7"></circle>
-                <path fill="#fff" d="m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656"></path>
-                <path fill="#fff" stroke="#EB001B" stroke-width=".7" d="M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031 1.006.47 1.006 1.03 1.006Z"></path>
-              </svg>
-            </span>
-            <span class="product-form__error-message"></span>
-          </div>
-
-          <form
-            method="post"
-            action="/cart/add"
-            id="product-form-{{ section.id }}"
-            accept-charset="UTF-8"
-            class="form"
-            enctype="multipart/form-data"
-            data-type="add-to-cart-form"
-          >
-            <input
-              name="selling_plan"
-              type="hidden"
-              value="{% if product.selected_or_first_available_selling_plan_allocation %}{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}{% endif %}"
-              data-acsb-hidden="true"
-              tabindex="-1"
-              data-acsb-now-navigable="false"
-            >
-            <input
-              type="hidden"
-              name="form_type"
-              value="product"
-              data-acsb-hidden="true"
-              tabindex="-1"
-              data-acsb-now-navigable="false"
-            >
-            <input
-              type="hidden"
-              name="utf8"
-              value="✓"
-              data-acsb-hidden="true"
-              tabindex="-1"
-              data-acsb-now-navigable="false"
-            >
-            <input
-              type="hidden"
-              name="id"
-              value="{{ product.selected_or_first_available_variant.id }}"
-              class="product-variant-id"
-              data-acsb-hidden="true"
-              tabindex="-1"
-              data-acsb-now-navigable="false"
-            >
-            <input
-              type="hidden"
-              name="type"
-              value=""
-              data-acsb-hidden="true"
-              tabindex="-1"
-              data-acsb-now-navigable="false"
-            >
-
-            <div class="product-form__buttons">
-              <button
-                type="submit"
-                name="add"
-                class="h5 cta-gig-primary add-to-cart button cta product-grid-button ProductSubmitButton ProductSubmitButton-{{ section.id }}"
-                aria-haspopup="dialog"
-                data-acsb-overflower="true"
-                data-acsb-clickable="true"
-                data-acsb-navigable="true"
-                data-acsb-now-navigable="true"
-                data-custom-button-processed="true"
-                {% unless product.available %}
-                  disabled
-                {% endunless %}
-              >
-                <span>
-                  {%- if product.metafields.custom.button_text -%}
-                    {{- product.metafields.custom.button_text -}}
-                  {%- else -%}
-                    ADD TO CART
-                  {%- endif -%}
-                </span>
-                <span class="dash">-</span>
-                <span
-                  id="atc-price"
-                  js-atc-price
-                  data-variant-without-discount-price="{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}"
-                  data-variant-price="{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}"
-                  data-variant-compare-price="{% if product.selected_or_first_available_variant.compare_at_price %}{{ product.selected_or_first_available_variant.compare_at_price | money_without_trailing_zeros }}{% endif %}"
-                >
-                  <span class="product-grid-item-atc-price texts" js-normal-price>
-                    {{- product.selected_or_first_available_variant.price | money_without_trailing_zeros -}}
+      {%- comment -%} Dynamic Blocks Section {%- endcomment -%}
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when '@app' %}
+            <div class="app-block" {{ block.shopify_attributes }}>
+              {% render block %}
+            </div>
+          {% when 'product_form' %}
+            <div class="product-form-block" {{ block.shopify_attributes }}>
+              <product-form class="product-form" data-hide-errors="false" data-section-id="{{ section.id }}">
+                <div class="product-form__error-message-wrapper" role="alert" hidden data-acsb-hidden="true">
+                  <span class="svg-wrapper">
+                    <svg class="icon icon-error" viewBox="0 0 13 13">
+                      <circle cx="6.5" cy="6.5" r="5.5" stroke="#fff" stroke-width="2"></circle>
+                      <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width=".7"></circle>
+                      <path fill="#fff" d="m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656"></path>
+                      <path fill="#fff" stroke="#EB001B" stroke-width=".7" d="M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031.006.47 1.006 1.03 1.006Z"></path>
+                    </svg>
                   </span>
-                  {% if product.selected_or_first_available_variant.compare_at_price %}
-                    <span class="regular-price" js-compare-price>
-                      {{-
-                        product.selected_or_first_available_variant.compare_at_price
-                        | money_without_trailing_zeros
-                      -}}
-                    </span>
-                  {% endif %}
-                </span>
-                <div class="loading__spinner hidden" data-acsb-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
-                    <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
-                  </svg>
+                  <span class="product-form__error-message"></span>
                 </div>
-              </button>
+
+                <form
+                  method="post"
+                  action="/cart/add"
+                  id="product-form-{{ section.id }}"
+                  accept-charset="UTF-8"
+                  class="form"
+                  enctype="multipart/form-data"
+                  data-type="add-to-cart-form"
+                >
+                  <input
+                    name="selling_plan"
+                    type="hidden"
+                    value="{% if product.selected_or_first_available_selling_plan_allocation %}{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}{% endif %}"
+                    data-acsb-hidden="true"
+                    tabindex="-1"
+                    data-acsb-now-navigable="false"
+                  >
+                  <input
+                    type="hidden"
+                    name="form_type"
+                    value="product"
+                    data-acsb-hidden="true"
+                    tabindex="-1"
+                    data-acsb-now-navigable="false"
+                  >
+                  <input
+                    type="hidden"
+                    name="utf8"
+                    value="✓"
+                    data-acsb-hidden="true"
+                    tabindex="-1"
+                    data-acsb-now-navigable="false"
+                  >
+                  <input
+                    type="hidden"
+                    name="id"
+                    value="{{ product.selected_or_first_available_variant.id }}"
+                    class="product-variant-id"
+                    data-acsb-hidden="true"
+                    tabindex="-1"
+                    data-acsb-now-navigable="false"
+                  >
+                  <input
+                    type="hidden"
+                    name="type"
+                    value=""
+                    data-acsb-hidden="true"
+                    tabindex="-1"
+                    data-acsb-now-navigable="false"
+                  >
+
+                  <div class="product-form__buttons">
+                    <button
+                      type="submit"
+                      name="add"
+                      class="h5 cta-gig-primary add-to-cart button cta product-grid-button ProductSubmitButton ProductSubmitButton-{{ section.id }}"
+                      aria-haspopup="dialog"
+                      data-acsb-overflower="true"
+                      data-acsb-clickable="true"
+                      data-acsb-navigable="true"
+                      data-acsb-now-navigable="true"
+                      data-custom-button-processed="true"
+                      {% unless product.available %}
+                        disabled
+                      {% endunless %}
+                    >
+                      <span>
+                        {%- if block.settings.button_text != blank -%}
+                          {{ block.settings.button_text }}
+                        {%- elsif product.metafields.custom.button_text -%}
+                          {{- product.metafields.custom.button_text -}}
+                        {%- else -%}
+                          ADD TO CART
+                        {%- endif -%}
+                      </span>
+                      <span class="dash">-</span>
+                      <span
+                        id="atc-price"
+                        js-atc-price
+                        data-variant-without-discount-price="{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}"
+                        data-variant-price="{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}"
+                        data-variant-compare-price="{% if product.selected_or_first_available_variant.compare_at_price %}{{ product.selected_or_first_available_variant.compare_at_price | money_without_trailing_zeros }}{% endif %}"
+                      >
+                        <span class="product-grid-item-atc-price texts" js-normal-price>
+                          {{- product.selected_or_first_available_variant.price | money_without_trailing_zeros -}}
+                        </span>
+                        {% if product.selected_or_first_available_variant.compare_at_price %}
+                          <span class="regular-price" js-compare-price>
+                            {{-
+                              product.selected_or_first_available_variant.compare_at_price
+                              | money_without_trailing_zeros
+                            -}}
+                          </span>
+                        {% endif %}
+                      </span>
+                      <div class="loading__spinner hidden" data-acsb-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
+                          <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
+                        </svg>
+                      </div>
+                    </button>
+                  </div>
+
+                  {% if product.metafields.custom.ship_date %}
+                    <div style="display: flex; justify-content: center; padding-top: 10px;" class="meta__shipdate">
+                      {{ product.metafields.custom.ship_date }}
+                    </div>
+                    <input
+                      type="hidden"
+                      name="properties[Estimated Ship Date]"
+                      value="{{ product.metafields.custom.ship_date }}"
+                      data-acsb-hidden="true"
+                      tabindex="-1"
+                      data-acsb-now-navigable="false"
+                    >
+                  {% endif %}
+
+                  <input
+                    type="hidden"
+                    name="product-id"
+                    value="{{ product.id }}"
+                    data-acsb-hidden="true"
+                    tabindex="-1"
+                    data-acsb-now-navigable="false"
+                  >
+                  <input
+                    type="hidden"
+                    name="section-id"
+                    value="{{ section.id }}"
+                    data-acsb-hidden="true"
+                    tabindex="-1"
+                    data-acsb-now-navigable="false"
+                  >
+                </form>
+              </product-form>
             </div>
 
-            {% if product.metafields.custom.ship_date %}
-              <div style="display: flex; justify-content: center; padding-top: 10px;" class="meta__shipdate">
-                {{ product.metafields.custom.ship_date }}
-              </div>
-              <input
-                type="hidden"
-                name="properties[Estimated Ship Date]"
-                value="{{ product.metafields.custom.ship_date }}"
-                data-acsb-hidden="true"
-                tabindex="-1"
-                data-acsb-now-navigable="false"
-              >
-            {% endif %}
-
-            <input
-              type="hidden"
-              name="product-id"
-              value="{{ product.id }}"
-              data-acsb-hidden="true"
-              tabindex="-1"
-              data-acsb-now-navigable="false"
-            >
-            <input
-              type="hidden"
-              name="section-id"
-              value="{{ section.id }}"
-              data-acsb-hidden="true"
-              tabindex="-1"
-              data-acsb-now-navigable="false"
-            >
-          </form>
-        </product-form>
-      </div>
-
-      {%- comment -%} Product Accordion {%- endcomment -%}
-      <div class="product-accordion">
-        {% for block in section.blocks %}
-          {% case block.type %}
-            {% when 'accordion' %}
+          {% when 'accordion' %}
+            <div class="product-accordion">
               <div class="details-wrapper">
                 <details id="block-summary_{{ block.id }}" class="details" {{ block.shopify_attributes }}>
                   <summary
@@ -474,11 +481,10 @@
                   </div>
                 </details>
               </div>
-          {% endcase %}
-        {% endfor %}
-      </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
 
-      {%- comment -%} Pro Tip Upsell {%- endcomment -%}
       {% if section.settings.upsell_product != blank %}
         {% assign upsell_product = all_products[section.settings.upsell_product] %}
         {% if upsell_product != blank %}
@@ -616,6 +622,18 @@
   ],
   "blocks": [
     {
+      "type": "product_form",
+      "name": "Add to Cart Form",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Custom Button Text",
+          "info": "Leave blank to use product metafield or default text"
+        }
+      ]
+    },
+    {
       "type": "accordion",
       "name": "Accordion",
       "settings": [
@@ -632,12 +650,18 @@
           "default": "<ul><li>List item 1</li><li>List item 2</li></ul>"
         }
       ]
+    },
+    {
+      "type": "@app"
     }
   ],
   "presets": [
     {
       "name": "Product Information",
       "blocks": [
+        {
+          "type": "product_form"
+        },
         {
           "type": "accordion",
           "settings": {

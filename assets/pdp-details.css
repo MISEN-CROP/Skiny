@@ -523,6 +523,14 @@ body #placement-afterpay_on_site_messaging_payments_messaging_tintUg {
 
 }
 
+.app-block {
+    width: 100%;
+}
+
+.product-form-block {
+    width: 100%;
+}
+
 .product-accordion {
     width         : 100%;
     display       : flex;

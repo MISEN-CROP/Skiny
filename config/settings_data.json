@@ -9,6 +9,13 @@
  */
 {
   "current": {
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "12496620199502360302": {
+        "type": "shopify://apps/ai-bundles-quantity-breaks/blocks/fs_ft_ai/019999bc-3553-75f2-a751-5be39d9372b9",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   }
 }
