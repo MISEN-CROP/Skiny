@@ -140,3 +140,20 @@
         margin   : 0 auto
     }
 }
+
+.buy-it-now-block {
+    width: 100%;
+
+    .buy-it-now-buttons {
+        margin-top: 10px;
+
+        button {
+            width: 100%;
+        }
+    }
+}
+
+.loading__spinner {
+    max-height: 30px;
+    display   : none;
+}

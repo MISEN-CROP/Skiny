@@ -8,54 +8,52 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "main": {
-      "type": "main-product",
-      "blocks": {
-        "ai_bundles_quantity_breaks_frequently_bought_UfTkjf": {
-          "type": "shopify://apps/ai-bundles-quantity-breaks/blocks/frequently_bought/019999bc-3553-75f2-a751-5be39d9372b9",
-          "settings": {}
-        },
-        "ai_bundles_quantity_breaks_volume_discount_JAA6BY": {
-          "type": "shopify://apps/ai-bundles-quantity-breaks/blocks/volume_discount/019999bc-3553-75f2-a751-5be39d9372b9",
-          "settings": {}
-        },
-        "product_form_8Mk8Hm": {
-          "type": "product_form",
-          "settings": {
-            "button_text": ""
-          }
-        },
-        "accordion_zAnjWM": {
-          "type": "accordion",
-          "settings": {
-            "title": "FEATURES",
-            "content": "<ul><li>30 Mouth Tapes in a compact tin to keep on your nightstand.</li><li>97% Rayon, 3% Spandex</li><li>tape made in the USA</li></ul>"
-          }
-        },
-        "accordion_kmWybd": {
-          "type": "accordion",
-          "settings": {
-            "title": "Accordion Title",
-            "content": "<ul><li>List item 1</li><li>List item 2</li></ul>"
-          }
+    "sections": {
+        "main": {
+            "type": "main-product",
+            "blocks": {
+                "ai_bundles_quantity_breaks_frequently_bought_UfTkjf": {
+                    "type": "shopify://apps/ai-bundles-quantity-breaks/blocks/frequently_bought/019999bc-3553-75f2-a751-5be39d9372b9",
+                    "settings": {}
+                },
+                "ai_bundles_quantity_breaks_volume_discount_JAA6BY": {
+                    "type": "shopify://apps/ai-bundles-quantity-breaks/blocks/volume_discount/019999bc-3553-75f2-a751-5be39d9372b9",
+                    "settings": {}
+                },
+                "buy_it_now_gXRmAT": {
+                    "type": "buy_it_now",
+                    "settings": {
+                        "button_text": ""
+                    }
+                },
+                "accordion_zAnjWM": {
+                    "type": "accordion",
+                    "settings": {
+                        "title": "FEATURES",
+                        "content": "<ul><li>30 Mouth Tapes in a compact tin to keep on your nightstand.</li><li>97% Rayon, 3% Spandex</li><li>tape made in the USA</li></ul>"
+                    }
+                },
+                "accordion_kmWybd": {
+                    "type": "accordion",
+                    "settings": {
+                        "title": "Accordion Title",
+                        "content": "<ul><li>List item 1</li><li>List item 2</li></ul>"
+                    }
+                }
+            },
+            "block_order": [
+                "ai_bundles_quantity_breaks_frequently_bought_UfTkjf",
+                "ai_bundles_quantity_breaks_volume_discount_JAA6BY",
+                "buy_it_now_gXRmAT",
+                "accordion_zAnjWM",
+                "accordion_kmWybd"
+            ],
+            "settings": {
+                "title_color": "#1b365d",
+                "upsell_product": "",
+                "upsell_heading": "Pro Tip: Tap into the power of cold therapy"
+            }
         }
-      },
-      "block_order": [
-        "ai_bundles_quantity_breaks_frequently_bought_UfTkjf",
-        "ai_bundles_quantity_breaks_volume_discount_JAA6BY",
-        "product_form_8Mk8Hm",
-        "accordion_zAnjWM",
-        "accordion_kmWybd"
-      ],
-      "settings": {
-        "title_color": "#1b365d",
-        "upsell_product": "",
-        "upsell_heading": "Pro Tip: Tap into the power of cold therapy"
-      }
-    }
-  },
-  "order": [
-    "main"
-  ]
+    },
+    "order": ["main"]
 }
