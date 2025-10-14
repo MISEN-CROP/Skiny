@@ -1,25 +1,25 @@
 :root {
-    --body-background-semibold-color: #dac0a7;
-    --color-semibold-primary        : #004288;
-    --bg-gis-second-primary         : #f1e8da;
-    --bg-second                     : #fffdf1;
+    --body-background-semibold-color: {{ settings.body_background_semibold_color | default: '#dac0a7' }};
+    --color-semibold-primary        : {{ settings.color_semibold_primary | default: '#004288' }};
+    --bg-gis-second-primary         : {{ settings.bg_gis_second_primary | default: '#f1e8da' }};
+    --bg-second                     : {{ settings.bg_second | default: '#fffdf1' }};
     --font-monospace                : monospace;
-    --font-primary                  : F37Blanka-Medium;
-    --font-primary-light            : F37Blanka-Light;
-    --font-sohne                    : SohneMono;
-    --gig-black                     : #000;
-    --gig-white                     : #fff;
-    --gig-primary                   : #004288;
-    --gig-secondary                 : #FFFDF1;
-    --gig-tertiary                  : #f2e9db;
-    --gig-pop                       : ;
-    --gig-accent                    : ;
-    --gig-bg-1                      : #f0e8da;
-    --gig-bg-2                      : ;
-    --gig-bg-3                      : ;
-    --button-border-radius          : 30px;
-    --footer-bg                     : #f8bed6;
-    --font-monospace-mix            : "SohneMono", monospace;
+    --font-primary                  : {{ settings.font_primary.family | default: 'F37Blanka-Medium' }}, {{ settings.font_primary.fallback_families }};
+    --font-primary-light            : {{ settings.font_primary_light.family | default: 'F37Blanka-Light' }}, {{ settings.font_primary_light.fallback_families }};
+    --font-sohne                    : {{ settings.font_sohne.family | default: 'SohneMono' }}, {{ settings.font_sohne.fallback_families }};
+    --gig-black                     : {{ settings.gig_black | default: '#000' }};
+    --gig-white                     : {{ settings.gig_white | default: '#fff' }};
+    --gig-primary                   : {{ settings.gig_primary | default: '#004288' }};
+    --gig-secondary                 : {{ settings.gig_secondary | default: '#FFFDF1' }};
+    --gig-tertiary                  : {{ settings.gig_tertiary | default: '#f2e9db' }};
+    --gig-pop                       : {{ settings.gig_pop | default: '#ff6b9d' }};
+    --gig-accent                    : {{ settings.gig_accent | default: '#00d4aa' }};
+    --gig-bg-1                      : {{ settings.gig_bg_1 | default: '#f0e8da' }};
+    --gig-bg-2                      : {{ settings.gig_bg_2 | default: '#e8f4f8' }};
+    --gig-bg-3                      : {{ settings.gig_bg_3 | default: '#f0f8ff' }};
+    --button-border-radius          : {{ settings.button_border_radius | default: 30 }}px;
+    --footer-bg                     : {{ settings.footer_bg | default: '#f8bed6' }};
+    --font-monospace-mix            : {{ settings.font_sohne.family | default: 'SohneMono' }}, monospace;
 }
 
 .font-monospace-mix-all * {
