@@ -156,15 +156,6 @@
         "load_more_text": "Load More"
       }
     },
-    "custom_code_text_FJC8rx": {
-      "type": "custom-code-text",
-      "name": "Custom Code Text",
-      "settings": {
-        "text_part1": "The #1 best selling cold-therapy beauty tool, over 250,000 Ice Rollers sold.",
-        "text_part2": "",
-        "show_images": false
-      }
-    },
     "social_video_yPYAam": {
       "type": "social-video",
       "blocks": {
@@ -211,11 +202,61 @@
       "settings": {
         "image": "shopify://shop_images/BROWPEPTIDE_about_62fdb305-cbbf-4b9a-85fa-27f5289fa803.webp",
         "image_alt": "",
-        "heading": "The Skinny Confidential",
         "description": "<p>The Skinny Confidential was built by Lauryn Bosstick to upgrade and romanticize your daily wellness and beauty routine. We are committed to sourcing high-quality ingredients and developing effective, innovative products that are beautiful to look at. The foundation of your life starts with a commitment to small habits that lead to big results. Whether it's an energizing morning ritual or a relaxing evening routine, we help you habit-stack wellness to elevate your day.</p>",
         "button_text": "OUR STORY",
-        "button_link": "",
+        "button_link": "shopify://blogs/news",
+        "logo": "shopify://shop_images/Screenshot_2025-10-13_092841-Photoroom.png",
         "logo_alt": ""
+      }
+    },
+    "custom_code_text_FJC8rx": {
+      "type": "custom-code-text",
+      "custom_css": [
+        "p {font-size: 16px;}"
+      ],
+      "name": "Custom Code Text",
+      "settings": {
+        "text_part1": "The #1 best selling cold-therapy beauty tool, over 250,000 Ice Rollers sold.",
+        "text_part2": "",
+        "show_images": false
+      }
+    },
+    "media_layout_BLqgqV": {
+      "type": "media-layout",
+      "custom_css": [
+        ".page-container{padding-bottom: 50px;}"
+      ],
+      "name": "Media Layout",
+      "settings": {
+        "image_1": "shopify://shop_images/1024-TSC2241-Edit-gt.webp",
+        "image_1_alt": "",
+        "image_2": "shopify://shop_images/SPF-BANNER-NEWArtboard-3_11884ef7-1b3c-429d-a466-0b74763425f5_3.webp",
+        "image_2_alt": "",
+        "image_3": "shopify://shop_images/SPF-BANNER-NEWArtboard-3_11884ef7-1b3c-429d-a466-0b74763425f5_2.avif",
+        "image_3_alt": "",
+        "heading": "Don't Put Your Routine on Hold.",
+        "description": "Subscribe and save 15% and your refills will be delivered right to your door.",
+        "button_text": "SHOP NOW",
+        "button_link": "shopify://collections/all",
+        "main_image": "shopify://shop_images/SPF-BANNER-NEWArtboard-3_1_75412f0c-9e99-4d60-86fa-c6f01802e651.webp",
+        "main_image_alt": ""
+      }
+    },
+    "blog_list_W8wKE3": {
+      "type": "blog-list",
+      "name": "Blog List",
+      "settings": {
+        "heading": "SHOP LAURYN'S ROUTINE",
+        "posts_limit": 4,
+        "columns_desktop": "2",
+        "show_blog_name": true,
+        "show_excerpt": false,
+        "show_date": false,
+        "show_author": false,
+        "button_text": "Read More",
+        "show_view_all": false,
+        "view_all_text": "View All Posts",
+        "view_all_link": ""
       }
     }
   },
@@ -225,8 +266,10 @@
     "marquee_logo_kyHbVM",
     "custom_code_text_J3mQTr",
     "collection_all_QgzA4D",
-    "custom_code_text_FJC8rx",
     "social_video_yPYAam",
-    "blog_single_iXkMKm"
+    "blog_single_iXkMKm",
+    "custom_code_text_FJC8rx",
+    "media_layout_BLqgqV",
+    "blog_list_W8wKE3"
   ]
 }
