@@ -1,6 +1,7 @@
 {{ 'pdp-media-gallery.css' | asset_url | stylesheet_tag }}
 {{ 'pdp-details.css' | asset_url | stylesheet_tag }}
 {{ 'pdp-media-gallery.js' | asset_url | script_tag }}
+
 <div class="bg-[var(--bg-gis-second-primary)]">
   <div class="pdp-details-media-gallery-container  py-10">
     <div>
@@ -255,6 +256,7 @@
       {% if product.options.size > 0 and product.variants.size > 1 %}
         <div class="Meta_stitch_product_list_main_new">
           <div class="Meta_stitch_product_list_inner_new">
+            <h3>LIMITED EDITION:</h3>
             <div class="Meta_stitch_product_list_title_new">{{ product.options.first.name }}</div>
             <div class="Meta_stitch_product_list_mainloops_new">
               <div class="Meta_stitch_product_list_innerloops_new">
@@ -467,7 +469,7 @@
                   >
                     <span>{{ block.settings.title }}</span>
                   </summary>
-                  <div class="body1 summary-content">
+                  <div class="body1 summary-content font-monospace-mix-all">
                     {{ block.settings.content }}
                   </div>
                 </details>

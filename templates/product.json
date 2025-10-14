@@ -1,10 +1,53 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "sections": {
-        "main": {
-            "type": "main-product",
-            "disabled": false,
-            "settings": {}
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "accordion_dyFY3q": {
+          "type": "accordion",
+          "settings": {
+            "title": "Benefits",
+            "content": "<ul><li>May help strengthen/define jawline</li><li>May create a stronger chin profile</li><li>Deep rest may help your eyes appear brighter</li><li>May help you wake up more energized</li><li>May help reduce snoring and bad breath</li></ul>"
+          }
+        },
+        "accordion_4a4nJU": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "title": "How To Use",
+            "content": "<ul><li>When you’ve finished your nighttime routine apply mouth tape over the lips and prepare for a deep sleep. When removing the tape the next morning, pull skin taut and gently remove.</li><li>You’ll never go to sleep without your Mouth Tape again…especially with that new chiseled jawline.</li><li>For best results, use every night.</li></ul>"
+          }
+        },
+        "accordion_zAnjWM": {
+          "type": "accordion",
+          "settings": {
+            "title": "FEATURES",
+            "content": "<ul><li>30 Mouth Tapes in a compact tin to keep on your nightstand.</li><li>97% Rayon, 3% Spandex</li><li>tape made in the USA</li></ul>"
+          }
         }
-    },
-    "order": ["main"]
+      },
+      "block_order": [
+        "accordion_dyFY3q",
+        "accordion_4a4nJU",
+        "accordion_zAnjWM"
+      ],
+      "settings": {
+        "title_color": "#1b365d",
+        "upsell_product": "",
+        "upsell_heading": "Pro Tip: Tap into the power of cold therapy"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
 }

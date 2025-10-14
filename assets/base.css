@@ -19,8 +19,12 @@
     --gig-bg-3                      : ;
     --button-border-radius          : 30px;
     --footer-bg                     : #f8bed6;
+    --font-monospace-mix            : "SohneMono", monospace;
 }
 
+.font-monospace-mix-all * {
+    font-family: var(--font-monospace-mix);
+}
 
 html {
     background-color: var(--bg-second)

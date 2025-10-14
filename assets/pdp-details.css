@@ -503,7 +503,7 @@ body #placement-afterpay_on_site_messaging_payments_messaging_tintUg {
 }
 
 .pdp-details-description-text {
-    font-family: "SohneMono", monospace;
+    font-family: var(--font-monospace-mix);
 }
 
 .pdp-details-description-text ul {
@@ -523,6 +523,17 @@ body #placement-afterpay_on_site_messaging_payments_messaging_tintUg {
 
 }
 
+.product-accordion ul {
+    list-style  : disc;
+    padding-left: 40px;
+}
+
+.product-accordion summary span {
+    padding       : 10px;
+    font-size     : 20px;
+    text-transform: uppercase;
+    cursor        : pointer;
+}
 
 @media screen and (min-width: 992px) {
     .pdp-details-okendo-reviews-container {
