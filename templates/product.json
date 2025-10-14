@@ -54,16 +54,53 @@
         "upsell_heading": "Pro Tip: Tap into the power of cold therapy"
       }
     },
-    "custom_code_text_etQxw8": {
-      "type": "custom-code-text",
-      "custom_css": [
-        "p {text-align: left !important; font-size: 50px; font-weight: 800; font-family: var(--font-primary);}"
+    "faq_KATqcU": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_EhXj3i": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can anyone use these?",
+            "answer": "<p>Mouth tape is for anyone who wants brighter eyes, a stronger jaw, and a more sculpted chin. Men and women can use mouth tape every single night. (We wouldn’t recommend these for children.)</p>"
+          }
+        },
+        "faq_item_6Xahid": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Should I wear mouth tape if I have a cold?",
+            "answer": "<p>We recommend avoiding mouth tape use when you have a cold, congested nasal passages, or any respiratory illness. Only use when you can breathe comfortably through your nose.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_EhXj3i",
+        "faq_item_6Xahid"
       ],
-      "name": "Custom Code Text",
+      "name": "FAQ Section",
       "settings": {
-        "text_part1": "Reviews",
-        "text_part2": "",
-        "show_images": true
+        "faq_image": "shopify://shop_images/TSC_FALL_08082025_cydneycosetteholm_0013_9.webp",
+        "faq_title": "FAQS",
+        "title_color": "#1b365d",
+        "faq_description": "",
+        "contact_text": "",
+        "contact_button_text": "",
+        "contact_button_url": ""
+      }
+    },
+    "video_single_eqPWUE": {
+      "type": "video-single",
+      "name": "Video Single",
+      "settings": {
+        "section_title": "",
+        "title_color": "#1b365d",
+        "section_description": "",
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/2ae8bc0517654c7b9be1a7e619b4b6e4.mp4",
+        "youtube_id": "",
+        "vimeo_id": "",
+        "video_autoplay": false,
+        "video_loop": true,
+        "video_muted": true,
+        "video_caption": ""
       }
     },
     "1760430110c273bc39": {
@@ -85,7 +122,8 @@
   },
   "order": [
     "main",
-    "custom_code_text_etQxw8",
+    "faq_KATqcU",
+    "video_single_eqPWUE",
     "1760430110c273bc39"
   ]
 }

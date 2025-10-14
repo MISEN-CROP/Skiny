@@ -1,0 +1,489 @@
+<div class="video-single-section bg-[var(--bg-gis-second-primary)]">
+  <div class="py-10">
+    {% if section.settings.section_title != blank %}
+      <div class="video-single-heading">
+        <h2
+          class="h1 section-title"
+          style="color: {{ section.settings.title_color }};"
+          data-acsb-fake-title="true"
+          role="heading"
+          aria-level="2"
+        >
+          {{ section.settings.section_title }}
+        </h2>
+      </div>
+    {% endif %}
+
+    {% if section.settings.section_description != blank %}
+      <div class="video-single-description">
+        <div class="description-content" data-acsb-overflower="true">
+          {{ section.settings.section_description }}
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="page-container md:!p-0">
+      {% if section.settings.video_file != blank %}
+        {%- comment -%} Video from uploaded file {%- endcomment -%}
+        <div
+          class="video_with_icon_new video-single-player play_icon_new"
+          data-acsb-clickable="true"
+          data-acsb-navigable="true"
+          data-acsb-now-navigable="true"
+          tabindex="0"
+        >
+          <div class="video_with_icon_inner_new">
+            <svg
+              class="play_icon"
+              width="70"
+              height="36"
+              viewBox="0 0 70 36"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M51.5 0.5H18.5C8.83502 0.5 1 8.83502 1 18C1 27.665 8.83502 35.5 18.5 35.5H51.5C61.165 35.5 69 27.665 69 18C69 8.33502 61.165 0.5 51.5 0.5Z" stroke="#FFFDF1"></path>
+              <path d="M44.8957 17.5338C45.3229 17.6982 45.3229 18.3026 44.8957 18.467L28.4296 24.8048C28.1021 24.9309 27.75 24.6892 27.75 24.3382V11.6626C27.75 11.3116 28.1021 11.0699 28.4296 11.196L44.8957 17.5338Z" stroke="#FFFDF1" stroke-linejoin="round"></path>
+            </svg>
+            <video
+              playsinline
+              {% if section.settings.video_loop %}
+                loop
+              {% endif %}
+              {% if section.settings.video_muted %}
+                muted
+              {% endif %}
+              {% if section.settings.video_autoplay %}
+                autoplay
+              {% endif %}
+              preload="metadata"
+              {% if section.settings.video_poster != blank %}
+                poster="{{ section.settings.video_poster | image_url: width: 1200 }}"
+              {% endif %}
+              src="{{ section.settings.video_file }}"
+              data-video-url="{{ section.settings.video_file }}"
+            ></video>
+          </div>
+        </div>
+
+      {% elsif section.settings.video_url != blank %}
+        {%- comment -%} Video from URL {%- endcomment -%}
+        <div
+          class="video_with_icon_new video-single-player play_icon_new"
+          data-acsb-clickable="true"
+          data-acsb-navigable="true"
+          data-acsb-now-navigable="true"
+          tabindex="0"
+        >
+          <div class="video_with_icon_inner_new">
+            <svg
+              class="play_icon"
+              width="70"
+              height="36"
+              viewBox="0 0 70 36"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M51.5 0.5H18.5C8.83502 0.5 1 8.83502 1 18C1 27.665 8.83502 35.5 18.5 35.5H51.5C61.165 35.5 69 27.665 69 18C69 8.33502 61.165 0.5 51.5 0.5Z" stroke="#FFFDF1"></path>
+              <path d="M44.8957 17.5338C45.3229 17.6982 45.3229 18.3026 44.8957 18.467L28.4296 24.8048C28.1021 24.9309 27.75 24.6892 27.75 24.3382V11.6626C27.75 11.3116 28.1021 11.0699 28.4296 11.196L44.8957 17.5338Z" stroke="#FFFDF1" stroke-linejoin="round"></path>
+            </svg>
+            <video
+              playsinline
+              {% if section.settings.video_loop %}
+                loop
+              {% endif %}
+              {% if section.settings.video_muted %}
+                muted
+              {% endif %}
+              {% if section.settings.video_autoplay %}
+                autoplay
+              {% endif %}
+              preload="metadata"
+              {% if section.settings.video_poster != blank %}
+                poster="{{ section.settings.video_poster | image_url: width: 1200 }}"
+              {% endif %}
+              src="{{ section.settings.video_url }}"
+              data-video-url="{{ section.settings.video_url }}"
+            ></video>
+          </div>
+        </div>
+
+      {% elsif section.settings.youtube_id != blank %}
+        {%- comment -%} YouTube embed {%- endcomment -%}
+        <div class="video-single-youtube">
+          <iframe
+            src="https://www.youtube.com/embed/{{ section.settings.youtube_id }}?rel=0&showinfo=0&modestbranding=1"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            style="width: 100%; height: 100%; aspect-ratio: 16/9;"
+          ></iframe>
+        </div>
+
+      {% elsif section.settings.vimeo_id != blank %}
+        {%- comment -%} Vimeo embed {%- endcomment -%}
+        <div class="video-single-vimeo">
+          <iframe
+            src="https://player.vimeo.com/video/{{ section.settings.vimeo_id }}?title=0&byline=0&portrait=0"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            style="width: 100%; height: 100%; aspect-ratio: 16/9;"
+          ></iframe>
+        </div>
+
+      {% else %}
+        {%- comment -%} Fallback content {%- endcomment -%}
+        <div class="video-single-placeholder">
+          <div class="placeholder-content">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
+              <path d="M8 5v14l11-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p>Please add a video to display</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if section.settings.video_caption != blank %}
+      <div class="video-single-caption">
+        <p class="caption-text">{{ section.settings.video_caption }}</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  // Video handling for single video section
+  function initVideoSingleHandlers() {
+    const videoContainers = document.querySelectorAll('.video-single-section .video_with_icon_new');
+
+    videoContainers.forEach((videoContainer, index) => {
+      const video = videoContainer.querySelector('video');
+      const playIcon = videoContainer.querySelector('.play_icon');
+
+      console.log(`Video ${index}:`, {
+        video: !!video,
+        playIcon: !!playIcon,
+        videoSrc: video?.src,
+        videoDataUrl: video?.getAttribute('data-video-url'),
+      });
+
+      if (video && playIcon) {
+        // Set up video source if data-video-url attribute exists
+        const videoUrl = video.getAttribute('data-video-url');
+        if (videoUrl && !video.src) {
+          video.src = videoUrl;
+          console.log('Set video src:', videoUrl);
+        }
+
+        // Ensure video is loaded
+        video.load();
+
+        // Click handler for the entire container
+        videoContainer.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          console.log('Video container clicked, video paused:', video.paused);
+
+          if (video.paused) {
+            // Pause all other videos on the page first
+            document.querySelectorAll('video').forEach((otherVideo) => {
+              if (otherVideo !== video && !otherVideo.paused) {
+                otherVideo.pause();
+                // Show play icon for other videos
+                const otherContainer = otherVideo.closest('.video_with_icon_new');
+                if (otherContainer) {
+                  const otherIcon = otherContainer.querySelector('.play_icon');
+                  if (otherIcon) {
+                    otherIcon.style.display = 'block';
+                    otherContainer.classList.remove('playing');
+                  }
+                }
+              }
+            });
+
+            // Play current video
+            const playPromise = video.play();
+
+            if (playPromise !== undefined) {
+              playPromise
+                .then(() => {
+                  console.log('Video playing successfully');
+                  playIcon.style.display = 'none';
+                  videoContainer.classList.add('playing');
+                })
+                .catch((error) => {
+                  console.error('Error playing video:', error);
+
+                  // Try to handle common issues
+                  if (error.name === 'NotAllowedError') {
+                    alert('Please interact with the page first to enable video playback');
+                  } else if (error.name === 'NotSupportedError') {
+                    alert('Video format not supported');
+                  } else {
+                    alert('Error playing video: ' + error.message);
+                  }
+                });
+            }
+          } else {
+            // Pause current video
+            video.pause();
+            playIcon.style.display = 'block';
+            videoContainer.classList.remove('playing');
+            console.log('Video paused');
+          }
+        });
+
+        // Video event listeners
+        video.addEventListener('ended', function () {
+          console.log('Video ended');
+          playIcon.style.display = 'block';
+          videoContainer.classList.remove('playing');
+        });
+
+        video.addEventListener('pause', function () {
+          console.log('Video paused');
+          playIcon.style.display = 'block';
+          videoContainer.classList.remove('playing');
+        });
+
+        video.addEventListener('play', function () {
+          console.log('Video started playing');
+          playIcon.style.display = 'none';
+          videoContainer.classList.add('playing');
+        });
+
+        video.addEventListener('loadstart', function () {
+          console.log('Video load started');
+        });
+
+        video.addEventListener('canplay', function () {
+          console.log('Video can play');
+        });
+
+        video.addEventListener('error', function (e) {
+          console.error('Video error:', e);
+          console.error('Video error details:', {
+            error: video.error,
+            networkState: video.networkState,
+            readyState: video.readyState,
+            src: video.src,
+          });
+        });
+      }
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVideoSingleHandlers);
+  } else {
+    initVideoSingleHandlers();
+  }
+</script>
+
+<style>
+  .video-single-section {
+    padding: 2rem 0;
+  }
+
+  .video-single-heading {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .video-single-description {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .video-single-player {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .video_with_icon_inner_new {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video_with_icon_inner_new video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .play_icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    cursor: pointer;
+    z-index: 10;
+    pointer-events: none; /* Let click pass through to container */
+  }
+
+  .play_icon:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .video-single-player.playing .play_icon {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .video-single-youtube,
+  .video-single-vimeo {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .video-single-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    color: #666;
+    border-radius: 12px;
+  }
+
+  .placeholder-content {
+    text-align: center;
+  }
+
+  .video-single-caption {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .caption-text {
+    font-style: italic;
+    color: #666;
+  }
+
+  @media (max-width: 768px) {
+    .page-container {
+      aspect-ratio: 1/1;
+    }
+
+    .play_icon {
+      width: 50px;
+      height: 26px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Video Single",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Featured Video"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1b365d"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Watch our featured video content</p>"
+    },
+    {
+      "type": "header",
+      "content": "Video Source (Choose one)"
+    },
+    {
+      "type": "video",
+      "id": "video_file",
+      "label": "Upload Video File",
+      "info": "Upload MP4, MOV, or other video files"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "Direct link to video file (MP4, etc.)"
+    },
+    {
+      "type": "text",
+      "id": "youtube_id",
+      "label": "YouTube Video ID",
+      "info": "Example: dQw4w9WgXcQ (from youtube.com/watch?v=dQw4w9WgXcQ)"
+    },
+    {
+      "type": "text",
+      "id": "vimeo_id",
+      "label": "Vimeo Video ID",
+      "info": "Example: 123456789 (from vimeo.com/123456789)"
+    },
+    {
+      "type": "header",
+      "content": "Video Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Video Poster Image",
+      "info": "Thumbnail image shown before video plays"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_autoplay",
+      "label": "Autoplay Video",
+      "default": false,
+      "info": "Note: Most browsers block autoplay with sound"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_loop",
+      "label": "Loop Video",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "video_muted",
+      "label": "Mute Video",
+      "default": true,
+      "info": "Required for autoplay in most browsers"
+    },
+    {
+      "type": "text",
+      "id": "video_caption",
+      "label": "Video Caption",
+      "info": "Optional caption text below video"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Single",
+      "settings": {
+        "section_title": "Featured Video",
+        "video_loop": true,
+        "video_muted": true
+      }
+    }
+  ]
+}
+{% endschema %}

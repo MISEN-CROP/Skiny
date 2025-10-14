@@ -1,0 +1,450 @@
+<div class="faq-section bg-[var(--bg-second)] py-10 lg:py-20">
+  <div class="page-container">
+    <div class="faq-container">
+      <!-- Left side - Image -->
+      <div class="faq-image-container">
+        {% if section.settings.faq_image != blank %}
+          <img
+            src="{{ section.settings.faq_image | image_url: width: 800 }}"
+            srcset="{{ section.settings.faq_image | image_url: width: 400 }} 400w, {{ section.settings.faq_image | image_url: width: 600 }} 600w, {{ section.settings.faq_image | image_url: width: 800 }} 800w"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt="{{ section.settings.faq_image.alt | default: 'FAQ Image' | escape }}"
+            loading="lazy"
+            class="faq-image"
+          >
+        {% else %}
+          <div class="faq-image-placeholder">
+            <svg
+              width="100"
+              height="100"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21,15 16,10 5,21"/>
+            </svg>
+            <p>Add FAQ Image</p>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right side - FAQ Content -->
+      <div class="faq-content-container">
+        {% if section.settings.faq_title != blank %}
+          <h2
+            class="faq-title h1"
+            style="color: {{ section.settings.title_color }};"
+            data-acsb-fake-title="true"
+            role="heading"
+            aria-level="2"
+          >
+            {{ section.settings.faq_title }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.faq_description != blank %}
+          <div class="faq-description">
+            {{ section.settings.faq_description }}
+          </div>
+        {% endif %}
+
+        <!-- FAQ Accordion Items -->
+        <div class="faq-accordion-wrapper">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'faq_item' %}
+                <div class="faq-accordion-item" {{ block.shopify_attributes }}>
+                  <div class="faq-details-wrapper">
+                    <details id="faq-summary_{{ block.id }}" class="faq-details">
+                      <summary
+                        class="faq-summary"
+                        data-acsb-clickable="true"
+                        data-acsb-navigable="true"
+                        tabindex="0"
+                        data-acsb-now-navigable="true"
+                      >
+                        <span class="faq-question">{{ block.settings.question }}</span>
+                        <span class="faq-icon">
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line class="horizontal-line" x1="5" y1="12" x2="19" y2="12"></line>
+                          </svg>
+                        </span>
+                      </summary>
+                      <div class="faq-answer body1 font-monospace-mix-all">
+                        {{ block.settings.answer }}
+                      </div>
+                    </details>
+                  </div>
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+
+        {% if section.settings.contact_text != blank %}
+          <div class="faq-contact-info">
+            <p class="contact-text">{{ section.settings.contact_text }}</p>
+            {% if section.settings.contact_button_text != blank and section.settings.contact_button_url != blank %}
+              <a
+                href="{{ section.settings.contact_button_url }}"
+                class="contact-button cta cta-gig-primary"
+                data-acsb-clickable="true"
+                data-acsb-navigable="true"
+                data-acsb-now-navigable="true"
+              >
+                {{ section.settings.contact_button_text }}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .faq-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .faq-image-container {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .faq-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-image-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #f5f5f5;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    text-align: center;
+  }
+
+  .faq-content-container {
+    padding-left: 1rem;
+  }
+
+  .faq-title {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--text-primary, #1b365d);
+  }
+
+  .faq-description {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary, #666);
+  }
+
+  .faq-accordion-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .faq-accordion-item {
+    margin-bottom: 1rem;
+  }
+
+  .faq-details-wrapper {
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .faq-details-wrapper:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-details {
+    margin: 0;
+  }
+
+  .faq-summary {
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--text-primary, #1b365d);
+    transition: all 0.3s ease;
+    list-style: none;
+    border-bottom: 2px solid var(--bg-gis-second-primary);
+  }
+
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-summary::marker {
+    display: none;
+  }
+
+  .faq-question {
+    flex: 1;
+    text-align: left;
+    margin-right: 1rem;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    color: var(--text-primary, #1b365d);
+  }
+
+  .faq-details[open] .faq-summary .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-details[open] .faq-summary .horizontal-line {
+    opacity: 0;
+  }
+
+  .faq-answer {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    color: var(--text-secondary, #666);
+    line-height: 1.6;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .faq-contact-info {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .contact-text {
+    margin-bottom: 1rem;
+    color: var(--text-secondary, #666);
+    font-style: italic;
+  }
+
+  .contact-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--button-bg, #1b365d);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .contact-button:hover {
+    background: var(--button-hover-bg, #0f1f35);
+    transform: translateY(-2px);
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .faq-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .faq-image-container {
+      position: static;
+      order: -1;
+    }
+
+    .faq-content-container {
+      padding-left: 0;
+    }
+
+    .faq-title {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .faq-description {
+      text-align: center;
+    }
+
+    .faq-summary {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+
+    .faq-answer {
+      padding: 0 1rem 1rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .faq-title {
+      font-size: 1.75rem;
+    }
+
+    .faq-summary {
+      padding: 0.875rem;
+    }
+
+    .faq-question {
+      margin-right: 0.5rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "FAQ Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "FAQ Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "faq_image",
+      "label": "FAQ Image",
+      "info": "Image displayed on the left side"
+    },
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "Section Title",
+      "default": "FAQS"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1b365d"
+    },
+    {
+      "type": "richtext",
+      "id": "faq_description",
+      "label": "Section Description",
+      "info": "Optional description text below title"
+    },
+    {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Contact Text",
+      "default": "Still have questions? Get in touch with our support team.",
+      "info": "Text displayed at the bottom of FAQ section"
+    },
+    {
+      "type": "text",
+      "id": "contact_button_text",
+      "label": "Contact Button Text",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "contact_button_url",
+      "label": "Contact Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Can anyone use these?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Yes, our products are suitable for everyone. Please consult with your healthcare provider if you have specific concerns.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Section",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can anyone use these?",
+            "answer": "<p>Yes, our products are designed to be safe and effective for most people. However, if you have any specific health concerns or conditions, we recommend consulting with your healthcare provider before use.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does mouth tape work exactly?",
+            "answer": "<p>Mouth tape gently encourages nasal breathing during sleep by providing a light seal over the lips. This promotes better sleep quality, reduces snoring, and supports overall respiratory health.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are the beauty benefits?",
+            "answer": "<p>Regular use may help improve jawline definition, reduce morning dry mouth, promote better sleep quality which can lead to healthier-looking skin, and support overall facial muscle tone.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I feel like I can't breathe?",
+            "answer": "<p>If you experience any discomfort or breathing difficulties, remove the tape immediately. Start with shorter periods to allow your body to adjust, and ensure your nasal passages are clear before use.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Should I wear mouth tape if I have a cold?",
+            "answer": "<p>We recommend avoiding mouth tape use when you have a cold, congested nasal passages, or any respiratory illness. Only use when you can breathe comfortably through your nose.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
