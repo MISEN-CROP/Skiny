@@ -26,6 +26,10 @@ html {
     background-color: var(--bg-second)
 }
 
+.header-bg-second {
+    background-color: var(--bg-second) !important;
+}
+
 body {
     font-family: var(--font-primary);
     color      : var(--color-semibold-primary);

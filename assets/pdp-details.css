@@ -502,6 +502,28 @@ body #placement-afterpay_on_site_messaging_payments_messaging_tintUg {
     }
 }
 
+.pdp-details-description-text {
+    font-family: "SohneMono", monospace;
+}
+
+.pdp-details-description-text ul {
+    display     : flex;
+    align-items : center;
+    flex-wrap   : wrap;
+    row-gap     : 10px;
+    margin-top  : 10px;
+    border-top  : 2px solid var(--bg-gis-second-primary);
+    padding-top : 10px;
+    list-style  : disc;
+    padding-left: 40px;
+}
+
+.pdp-details-description-text ul li {
+    width: 46%;
+
+}
+
+
 @media screen and (min-width: 992px) {
     .pdp-details-okendo-reviews-container {
         padding: 72px 0 0

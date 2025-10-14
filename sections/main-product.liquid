@@ -1,132 +1,133 @@
 {{ 'pdp-media-gallery.css' | asset_url | stylesheet_tag }}
 {{ 'pdp-details.css' | asset_url | stylesheet_tag }}
 {{ 'pdp-media-gallery.js' | asset_url | script_tag }}
-<div class="pdp-details-media-gallery-container">
-  <div>
-    <div class="pdp-media-gallery video_play_list">
-      <div
-        class="splide mobile-slider splide--slide splide--ltr splide--draggable is-active is-initialized"
-        id="splide-slider"
-        data-testid="pdp-mobile-slider"
-        role="region"
-        aria-roledescription="carousel"
-        data-acsb-carousel="true"
-        data-acsb-force-visible="true"
-        aria-label="Carousel"
-      >
+<div class="bg-[var(--bg-gis-second-primary)]">
+  <div class="pdp-details-media-gallery-container  py-10">
+    <div>
+      <div class="pdp-media-gallery video_play_list">
+        {%- comment -%} Mobile Slider {%- endcomment -%}
         <div
-          class="splide__track splide__track--slide splide__track--ltr splide__track--draggable"
-          id="splide-slider-track"
-          style="padding-left: 0px; padding-right: 0px;"
-          aria-atomic="true"
-          data-acsb-overflower="true"
-          data-acsb-hidden="true"
+          class="splide mobile-slider splide--slide splide--ltr splide--draggable is-active is-initialized"
+          id="splide-slider"
+          data-testid="pdp-mobile-slider"
+          role="region"
+          aria-roledescription="carousel"
+          data-acsb-carousel="true"
+          data-acsb-force-visible="true"
+          aria-label="Carousel"
         >
-          <ul class="splide__list" id="splide-slider-list" style="transform: translateX(0px);">
-            <li
-              class="splide__slide is-active is-visible"
-              data-index="0"
-              id="splide-slider-slide01"
-              aria-roledescription="slide"
-              aria-label="1 of 6"
-              style="width: calc(100%);"
-            >
-              <div class="product-badges mobile"><div class="badge-text">Limited Edition</div></div>
-              <video
-                class="product-mobile-video"
-                autoplay=""
-                muted=""
-                loop=""
-                playsinline=""
-                preload="metadata"
-                src="https://cdn.shopify.com/videos/c/o/v/4610fde8f17a44d28cb168cd1f61bf79.mp4"
-              ></video>
-              <div class="slider-item" data-acsb-overflower="true">
-                <img
-                  src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_1.jpg?format=webp&amp;v=1757501310&amp;width=600"
-                  srcset="
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_1.jpg?format=webp&amp;v=1757501310&amp;width=300 300w,
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_1.jpg?format=webp&amp;v=1757501310&amp;width=600 600w,
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_1.jpg?format=webp&amp;v=1757501310&amp;width=900 900w
-                  "
-                  sizes="(max-width: 600px) 100vw, 600px"
-                  width="600"
-                  height="600"
-                  alt="Mouth Tape"
-                  loading="eager"
-                  class="media-thumbnail main-image-media-gallery modal-trigger"
+          <div
+            class="splide__track splide__track--slide splide__track--ltr splide__track--draggable"
+            id="splide-slider-track"
+            style="padding-left: 0px; padding-right: 0px;"
+            aria-atomic="true"
+            data-acsb-overflower="true"
+            data-acsb-hidden="true"
+          >
+            <ul class="splide__list" id="splide-slider-list" style="transform: translateX(0px);">
+              {% for media in product.media %}
+                <li
+                  class="splide__slide {% if forloop.first %}is-active is-visible{% elsif forloop.index == 2 %}is-next is-visible{% else %}is-visible{% endif %}"
+                  data-index="{{ forloop.index0 }}"
+                  id="splide-slider-slide0{{ forloop.index }}"
+                  aria-roledescription="slide"
+                  aria-label="{{ forloop.index }} of {{ product.media.size }}"
+                  style="width: calc(100%);"
+                  {% unless forloop.index <= 2 %}
+                    data-acsb-hidden="true"
+                  {% endunless %}
                 >
-              </div>
-            </li>
+                  {% if forloop.first and product.metafields.custom.limited_edition %}
+                    <div class="product-badges mobile">
+                      <div class="badge-text">{{ product.metafields.custom.limited_edition }}</div>
+                    </div>
+                  {% endif %}
 
-            <li
-              class="splide__slide is-next is-visible"
-              data-index="1"
-              id="splide-slider-slide02"
-              aria-roledescription="slide"
-              aria-label="2 of 6"
-              style="width: calc(100%);"
-            >
-              <div class="slider-item" data-acsb-overflower="true">
+                  {% if forloop.first and product.metafields.custom.mobile_video %}
+                    <video
+                      class="product-mobile-video"
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                      src="{{ product.metafields.custom.mobile_video }}"
+                    ></video>
+                  {% endif %}
+
+                  <div
+                    class="slider-item"
+                    {% unless forloop.index <= 2 %}
+                      data-acsb-overflower="true"
+                    {% endunless %}
+                  >
+                    {% if media.media_type == 'image' %}
+                      <img
+                        src="{{ media | image_url: width: 600 }}"
+                        srcset="{{ media | image_url: width: 300 }} 300w, {{ media | image_url: width: 600 }} 600w, {{ media | image_url: width: 900 }} 900w"
+                        sizes="(max-width: 600px) 100vw, 600px"
+                        width="600"
+                        height="600"
+                        alt="{{ media.alt | default: product.title | escape }}"
+                        loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                        class="media-thumbnail main-image-media-gallery modal-trigger"
+                      >
+                    {% elsif media.media_type == 'video' %}
+                      <div
+                        class="video_with_icon_new grid-item-4 play_icon_new"
+                        data-acsb-clickable="true"
+                        data-acsb-navigable="true"
+                        data-acsb-now-navigable="false"
+                      >
+                        <div class="video_with_icon_inner_new">
+                          <svg
+                            class="play_icon"
+                            width="70"
+                            height="36"
+                            viewBox="0 0 70 36"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M51.5 0.5H18.5C8.83502 0.5 1 8.33502 1 18C1 27.665 8.83502 35.5 18.5 35.5H51.5C61.165 35.5 69 27.665 69 18C69 8.33502 61.165 0.5 51.5 0.5Z" stroke="#FFFDF1"></path>
+                            <path d="M44.8957 17.5338C45.3229 17.6982 45.3229 18.3026 44.8957 18.467L28.4296 24.8048C28.1021 24.9309 27.75 24.6892 27.75 24.3382V11.6626C27.75 11.3116 28.1021 11.0699 28.4296 11.196L44.8957 17.5338Z" stroke="#FFFDF1" stroke-linejoin="round"></path>
+                          </svg>
+                          <video
+                            playsinline
+                            loop
+                            preload="metadata"
+                            poster="{{ media.preview_image | image_url }}"
+                            video_url="{{ media.sources[1].url }}"
+                          ></video>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <div class="desktop-slider" data-testid="pdp-desktop-slider" data-acsb-hidden="false">
+          <div class="images-grid extra-height">
+            {% for media in product.media limit: 4 %}
+              {% if media.media_type == 'image' %}
                 <img
-                  src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_2.jpg?format=webp&amp;v=1757501311&amp;width=600"
-                  srcset="
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_2.jpg?format=webp&amp;v=1757501311&amp;width=300 300w,
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_2.jpg?format=webp&amp;v=1757501311&amp;width=600 600w,
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_2.jpg?format=webp&amp;v=1757501311&amp;width=900 900w
-                  "
-                  sizes="(max-width: 600px) 100vw, 600px"
-                  width="600"
-                  height="600"
-                  alt="Mouth Tape"
+                  width="{% if forloop.first %}448{% else %}200{% endif %}"
+                  height="{% if forloop.first %}448{% else %}200{% endif %}"
+                  class="grid-item-{{ forloop.index }} modal-trigger"
+                  src="{{ media | image_url: width: 768 }}"
+                  srcset="{{ media | image_url: width: 375 }} 375w, {{ media | image_url: width: 550 }} 550w, {{ media | image_url: width: 768 }} 768w"
+                  sizes="(max-width: 1024px) 100vw, {% if forloop.first %}448{% else %}200{% endif %}px"
+                  alt="{{ media.alt | default: product.title | escape }}"
                   loading="eager"
-                  class="media-thumbnail main-image-media-gallery modal-trigger"
                 >
-              </div>
-            </li>
-
-            <li
-              class="splide__slide is-visible"
-              data-index="2"
-              id="splide-slider-slide03"
-              aria-roledescription="slide"
-              aria-label="3 of 6"
-              style="width: calc(100%);"
-              data-acsb-hidden="true"
-            >
-              <div class="slider-item">
-                <img
-                  src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_4.jpg?format=webp&amp;v=1757936117&amp;width=600"
-                  srcset="
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_4.jpg?format=webp&amp;v=1757936117&amp;width=300 300w,
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_4.jpg?format=webp&amp;v=1757936117&amp;width=600 600w,
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_4.jpg?format=webp&amp;v=1757936117&amp;width=900 900w
-                  "
-                  sizes="(max-width: 600px) 100vw, 600px"
-                  width="600"
-                  height="600"
-                  alt="Mouth Tape"
-                  loading="eager"
-                  class="media-thumbnail main-image-media-gallery modal-trigger"
-                >
-              </div>
-            </li>
-
-            <li
-              class="splide__slide is-visible"
-              data-index="3"
-              id="splide-slider-slide04"
-              aria-roledescription="slide"
-              aria-label="4 of 6"
-              style="width: calc(100%);"
-              data-acsb-hidden="true"
-            >
-              <div class="slider-item">
+              {% elsif media.media_type == 'video' %}
                 <div
-                  class="video_with_icon_new grid-item-4 play_icon_new"
+                  class="video_with_icon_new grid-item-{{ forloop.index }} play_icon_new"
                   data-acsb-clickable="true"
                   data-acsb-navigable="true"
-                  data-acsb-now-navigable="false"
+                  data-acsb-now-navigable="true"
+                  tabindex="0"
                 >
                   <div class="video_with_icon_inner_new">
                     <svg
@@ -136,1290 +137,521 @@
                       viewBox="0 0 70 36"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
+                      data-acsb-hidden="true"
                     >
                       <path d="M51.5 0.5H18.5C8.83502 0.5 1 8.33502 1 18C1 27.665 8.83502 35.5 18.5 35.5H51.5C61.165 35.5 69 27.665 69 18C69 8.33502 61.165 0.5 51.5 0.5Z" stroke="#FFFDF1"></path>
                       <path d="M44.8957 17.5338C45.3229 17.6982 45.3229 18.3026 44.8957 18.467L28.4296 24.8048C28.1021 24.9309 27.75 24.6892 27.75 24.3382V11.6626C27.75 11.3116 28.1021 11.0699 28.4296 11.196L44.8957 17.5338Z" stroke="#FFFDF1" stroke-linejoin="round"></path>
                     </svg>
-
                     <video
-                      playsinline="playsinline"
-                      loop="loop"
+                      playsinline
+                      loop
                       preload="metadata"
-                      poster="//shopskinnyconfidential.com/cdn/shop/files/preview_images/IMG_6034.jpg?v=1755886877"
-                      video_url="//shopskinnyconfidential.com/cdn/shop/videos/c/vp/36d4bd280d90464e8e08853509ec26b5/36d4bd280d90464e8e08853509ec26b5.HD-1080p-3.3Mbps-55686231.mp4?v=0"
+                      poster="{{ media.preview_image | image_url }}"
+                      video_url="{{ media.sources[1].url }}"
                     ></video>
                   </div>
                 </div>
-              </div>
-            </li>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="images-grid-bottom">
+            {% comment %} Load images from product metafields {% endcomment %}
+            {% if product.metafields.custom.image_grid_button %}
+              {% comment %} Debug: Show what we have in metafield {% endcomment %}
+              {% comment %} {{ product.metafields.custom.image_grid_button.value | json }} {% endcomment %}
 
-            <li
-              class="splide__slide is-visible"
-              data-index="4"
-              id="splide-slider-slide05"
-              aria-roledescription="slide"
-              aria-label="5 of 6"
-              style="width: calc(100%);"
-              data-acsb-hidden="true"
-            >
-              <div class="slider-item">
+              {% comment %} Access metafield values directly {% endcomment %}
+              {% for metafield_image in product.metafields.custom.image_grid_button.value limit: 2 %}
                 <img
-                  src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_5.jpg?format=webp&amp;v=1757937436&amp;width=600"
-                  srcset="
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_5.jpg?format=webp&amp;v=1757937436&amp;width=300 300w,
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_5.jpg?format=webp&amp;v=1757937436&amp;width=600 600w,
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_5.jpg?format=webp&amp;v=1757937436&amp;width=900 900w
-                  "
-                  sizes="(max-width: 600px) 100vw, 600px"
-                  width="600"
-                  height="600"
-                  alt="Mouth Tape"
-                  loading="eager"
-                  class="media-thumbnail main-image-media-gallery modal-trigger"
+                  width="1024"
+                  height="1024"
+                  class="grid-item-{{ forloop.index | plus: 4 }} modal-trigger metafield-bottom-image"
+                  src="{{ metafield_image | image_url: width: 666 }}"
+                  srcset="{{ metafield_image | image_url: width: 375 }} 375w, {{ metafield_image | image_url: width: 550 }} 550w, {{ metafield_image | image_url: width: 768 }} 768w"
+                  sizes="(max-width: 1024px) 100vw, 666px"
+                  alt="{{ metafield_image.alt | default: product.title | escape }}"
+                  loading="lazy"
                 >
-              </div>
-            </li>
-
-            <li
-              class="splide__slide is-visible"
-              data-index="5"
-              id="splide-slider-slide06"
-              aria-roledescription="slide"
-              aria-label="6 of 6"
-              style="width: calc(100%);"
-              data-acsb-hidden="true"
-            >
-              <div class="slider-item">
-                <img
-                  src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_6.jpg?format=webp&amp;v=1757937436&amp;width=600"
-                  srcset="
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_6.jpg?format=webp&amp;v=1757937436&amp;width=300 300w,
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_6.jpg?format=webp&amp;v=1757937436&amp;width=600 600w,
-                    //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_6.jpg?format=webp&amp;v=1757937436&amp;width=900 900w
-                  "
-                  sizes="(max-width: 600px) 100vw, 600px"
-                  width="600"
-                  height="600"
-                  alt="Mouth Tape"
-                  loading="eager"
-                  class="media-thumbnail main-image-media-gallery modal-trigger"
-                >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="desktop-slider" data-testid="pdp-desktop-slider" data-acsb-hidden="false">
-        <div id="image-modal" class="modal hidden" data-acsb-hidden="true">
-          <div class="modal-content">
-            <span
-              class="close-modal"
-              data-acsb-clickable="true"
-              data-acsb-navigable="true"
-              data-acsb-now-navigable="false"
-              >×</span
-            >
-            <img id="modal-image-desktop" src="" alt="Expanded View">
+              {% endfor %}
+            {% endif %}
           </div>
         </div>
-
-        <style data-shopify=""></style>
-
-        <div class="images-grid  extra-height ">
-          <img
-            width="448"
-            height="448"
-            class="grid-item-1 modal-trigger"
-            src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_1.jpg?format=webp&amp;v=1757501310&amp;width=448"
-            srcset="
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_1.jpg?format=webp&amp;v=1757501310&amp;width=375 375w,
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_1.jpg?format=webp&amp;v=1757501310&amp;width=550 550w,
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_1.jpg?format=webp&amp;v=1757501310&amp;width=768 768w
-            "
-            sizes="(max-width: 1024px) 100vw, 448px"
-            alt="Mouth Tape"
-            loading="eager"
-          >
-
-          <img
-            width="200"
-            height="200"
-            class="grid-item-2 modal-trigger"
-            src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_2.jpg?format=webp&amp;v=1757501311&amp;width=200"
-            srcset="
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_2.jpg?format=webp&amp;v=1757501311&amp;width=375 375w,
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_2.jpg?format=webp&amp;v=1757501311&amp;width=550 550w,
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_2.jpg?format=webp&amp;v=1757501311&amp;width=768 768w
-            "
-            sizes="(max-width: 1024px) 100vw, 200px"
-            alt="Mouth Tape"
-            loading="eager"
-          >
-
-          <img
-            width="200"
-            height="200"
-            class="grid-item-3 modal-trigger"
-            src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_4.jpg?format=webp&amp;v=1757936117&amp;width=200"
-            srcset="
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_4.jpg?format=webp&amp;v=1757936117&amp;width=375 375w,
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_4.jpg?format=webp&amp;v=1757936117&amp;width=550 550w,
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_4.jpg?format=webp&amp;v=1757936117&amp;width=768 768w
-            "
-            sizes="(max-width: 1024px) 100vw, 200px"
-            alt="Mouth Tape"
-            loading="eager"
-          >
-
-          <div
-            class="video_with_icon_new grid-item-4 play_icon_new"
-            data-acsb-clickable="true"
-            data-acsb-navigable="true"
-            data-acsb-now-navigable="true"
-            tabindex="0"
-          >
-            <div class="video_with_icon_inner_new">
-              <svg
-                class="play_icon"
-                width="70"
-                height="36"
-                viewBox="0 0 70 36"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                data-acsb-hidden="true"
-              >
-                <path d="M51.5 0.5H18.5C8.83502 0.5 1 8.33502 1 18C1 27.665 8.83502 35.5 18.5 35.5H51.5C61.165 35.5 69 27.665 69 18C69 8.33502 61.165 0.5 51.5 0.5Z" stroke="#FFFDF1"></path>
-                <path d="M44.8957 17.5338C45.3229 17.6982 45.3229 18.3026 44.8957 18.467L28.4296 24.8048C28.1021 24.9309 27.75 24.6892 27.75 24.3382V11.6626C27.75 11.3116 28.1021 11.0699 28.4296 11.196L44.8957 17.5338Z" stroke="#FFFDF1" stroke-linejoin="round"></path>
-              </svg>
-
-              <video
-                playsinline="playsinline"
-                loop="loop"
-                preload="metadata"
-                poster="//shopskinnyconfidential.com/cdn/shop/files/preview_images/IMG_6034.jpg?v=1755886877"
-                video_url="//shopskinnyconfidential.com/cdn/shop/videos/c/vp/36d4bd280d90464e8e08853509ec26b5/36d4bd280d90464e8e08853509ec26b5.HD-1080p-3.3Mbps-55686231.mp4?v=0"
-              ></video>
-            </div>
-          </div>
-        </div>
-
-        <div class="images-grid-bottom">
-          <img
-            width="1024"
-            height="1024"
-            class="grid-item-5 modal-trigger 123"
-            src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_5.jpg?format=webp&amp;v=1757937436&amp;width=666"
-            srcset="
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_5.jpg?format=webp&amp;v=1757937436&amp;width=375 375w,
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_5.jpg?format=webp&amp;v=1757937436&amp;width=550 550w,
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_5.jpg?format=webp&amp;v=1757937436&amp;width=768 768w
-            "
-            sizes="(max-width: 1024px) 100vw, 666px"
-            alt="Mouth Tape"
-            loading="lazy"
-          >
-
-          <img
-            width="1024"
-            height="1024"
-            class="grid-item-6 modal-trigger 123"
-            src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_6.jpg?format=webp&amp;v=1757937436&amp;width=666"
-            srcset="
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_6.jpg?format=webp&amp;v=1757937436&amp;width=375 375w,
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_6.jpg?format=webp&amp;v=1757937436&amp;width=550 550w,
-              //shopskinnyconfidential.com/cdn/shop/files/Blanc_-_6.jpg?format=webp&amp;v=1757937436&amp;width=768 768w
-            "
-            sizes="(max-width: 1024px) 100vw, 666px"
-            alt="Mouth Tape"
-            loading="lazy"
-          >
-        </div>
       </div>
+    </div>
 
-      <link
-        href="//shopskinnyconfidential.com/cdn/shop/t/399/assets/pdp-images-modal.css?v=1230739246872861921759845744"
-        rel="stylesheet"
-        type="text/css"
-        media="all"
-      >
+    {%- comment -%} Product Details {%- endcomment -%}
+    <div class="pdp-details-container">
+      <div class="product-badges-wrapper">
+        <div class="pdp-details-reviews-container test">
+          {% if product.metafields.custom.reviews_widget %}
+            {{ product.metafields.custom.reviews_widget }}
+          {% endif %}
+        </div>
+
+        {% if product.metafields.custom.limited_edition %}
+          <div class="product-badges desktop" data-acsb-hidden="false">
+            <div class="badge-text">{{ product.metafields.custom.limited_edition }}</div>
+          </div>
+        {% endif %}
+      </div>
 
       <div
-        id="media-modal"
-        class="media-modal splide is-initialized splide--slide splide--ltr splide--draggable is-active"
-        role="region"
-        aria-roledescription="carousel"
-        data-acsb-hidden="true"
+        class="h1 pdp-details-title"
+        style="color: {{ section.settings.title_color }};"
+        data-acsb-fake-title="true"
+        role="heading"
+        aria-level="1"
       >
-        <div class="splide__arrows splide__arrows--ltr">
-          <button
-            class="splide__arrow splide__arrow--prev"
-            type="button"
-            disabled=""
-            aria-label="Previous slide"
-            aria-controls="media-modal-track"
-            data-acsb-clickable="true"
-            data-acsb-navigable="true"
-            tabindex="-1"
-            data-acsb-now-navigable="false"
-            data-custom-button-processed="true"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false">
-              <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
-            </svg></button
-          ><button
-            class="splide__arrow splide__arrow--next"
-            type="button"
-            aria-label="Next slide"
-            aria-controls="media-modal-track"
-            data-acsb-clickable="true"
-            data-acsb-navigable="true"
-            tabindex="-1"
-            data-acsb-now-navigable="false"
-            data-custom-button-processed="true"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false">
-              <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
-            </svg>
-          </button>
+        {{ product.title }}
+      </div>
+
+      {% if product.tags.size > 0 %}
+        <p class="product-tags">{{ product.tags | join: ' · ' | upcase }}</p>
+      {% endif %}
+
+      {% if product.metafields.custom.meta_tags %}
+        <div class="product-metafields-tags">
+          {% assign meta_tags = product.metafields.custom.meta_tags | split: '|' %}
+          {% for tag in meta_tags %}
+            <div class="product-metafields-tag">{{ tag }}</div>
+          {% endfor %}
         </div>
+      {% endif %}
+
+      <div class="pdp-details-description-text">
+        <div class="description-content" data-acsb-overflower="true">
+          {{ product.description }}
+        </div>
+      </div>
+
+      {% if product.selling_plan_groups.size > 0 %}
+        <div class="rc-section-heading" style="display: block;" data-acsb-hidden="true">Frequency</div>
+
         <div
-          class="splide__track splide__track--slide splide__track--ltr splide__track--draggable"
-          id="media-modal-track"
-          style="padding-left: 0px; padding-right: 0px;"
-          aria-live="polite"
-          aria-atomic="true"
+          id="custom-subscription-options"
+          data-per-day-price="{{ product.metafields.custom.per_day_price }}"
+          data-onetime-price="{{ product.price | money_without_trailing_zeros }}"
+          style="display: flex;"
+          data-acsb-hidden="true"
         >
-          <span class="media-modal-close" onclick="closeModal()">×</span>
-          <ul class="splide__list" id="media-modal-list" style="transform: translateX(0px);">
-            <li
-              class="splide__slide is-active is-visible"
-              id="media-modal-slide01"
-              role="group"
-              aria-roledescription="slide"
-              aria-label="1 of 6"
-              style="width: calc(100%);"
-            >
-              <div class="media-modal-content slider-item">
-                <img
-                  id="modal-image"
-                  src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_1.jpg?v=1757501310&amp;width=1024"
-                  width="auto"
-                  height="auto"
-                  alt="Product Image 1"
-                  loading="lazy"
-                >
-              </div>
-            </li>
-
-            <li
-              class="splide__slide is-visible is-next"
-              id="media-modal-slide02"
-              role="group"
-              aria-roledescription="slide"
-              aria-label="2 of 6"
-              style="width: calc(100%);"
-            >
-              <div class="media-modal-content slider-item">
-                <img
-                  id="modal-image"
-                  src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_2.jpg?v=1757501311&amp;width=1024"
-                  width="auto"
-                  height="auto"
-                  alt="Product Image 1"
-                  loading="lazy"
-                >
-              </div>
-            </li>
-
-            <li
-              class="splide__slide is-visible"
-              id="media-modal-slide03"
-              role="group"
-              aria-roledescription="slide"
-              aria-label="3 of 6"
-              style="width: calc(100%);"
-            >
-              <div class="media-modal-content slider-item">
-                <img
-                  id="modal-image"
-                  src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_4.jpg?v=1757936117&amp;width=1024"
-                  width="auto"
-                  height="auto"
-                  alt="Product Image 1"
-                  loading="lazy"
-                >
-              </div>
-            </li>
-
-            <li
-              class="splide__slide is-visible"
-              id="media-modal-slide04"
-              role="group"
-              aria-roledescription="slide"
-              aria-label="4 of 6"
-              style="width: calc(100%);"
-            >
-              <div class="media-modal-content slider-item">
-                <img
-                  id="modal-image"
-                  src="//shopskinnyconfidential.com/cdn/shop/files/preview_images/IMG_6034.jpg?v=1755886877&amp;width=1024"
-                  width="auto"
-                  height="auto"
-                  alt="Product Image 1"
-                  loading="lazy"
-                >
-              </div>
-            </li>
-
-            <li
-              class="splide__slide is-visible"
-              id="media-modal-slide05"
-              role="group"
-              aria-roledescription="slide"
-              aria-label="5 of 6"
-              style="width: calc(100%);"
-            >
-              <div class="media-modal-content slider-item">
-                <img
-                  id="modal-image"
-                  src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_5.jpg?v=1757937436&amp;width=1024"
-                  width="auto"
-                  height="auto"
-                  alt="Product Image 1"
-                  loading="lazy"
-                >
-              </div>
-            </li>
-
-            <li
-              class="splide__slide is-visible"
-              id="media-modal-slide06"
-              role="group"
-              aria-roledescription="slide"
-              aria-label="6 of 6"
-              style="width: calc(100%);"
-            >
-              <div class="media-modal-content slider-item">
-                <img
-                  id="modal-image"
-                  src="//shopskinnyconfidential.com/cdn/shop/files/Blanc_-_6.jpg?v=1757937436&amp;width=1024"
-                  width="auto"
-                  height="auto"
-                  alt="Product Image 1"
-                  loading="lazy"
-                >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="pdp-details-container">
-    <div class="product-badges-wrapper">
-      <div class="pdp-details-reviews-container test">
-        <div data-oke-star-rating="" data-oke-reviews-product-id="shopify-7967705137245" data-oke-rendered="">
-          <div data-oke-reviews-version="0.82.1" data-oke-container="" class="okeReviews oke-sr">
-            <div class="">
-              <div class="oke-sr-rating" data-acsb-hidden="true">4.7</div>
-              <div class="oke-sr-stars">
-                <div class="oke-stars">
-                  <!--  -->
-                  <div class="oke-stars-background">
-                    <svg height="16" viewBox="0 0 71 12" aria-hidden="true" role="none" data-acsb-hidden="true">
-                      <use x="0" href="#oke-star-empty"></use><use x="14.5" href="#oke-star-empty"></use><use x="29" href="#oke-star-empty"></use><use x="43.5" href="#oke-star-empty"></use><use x="58" href="#oke-star-empty"></use>
-                    </svg>
-                  </div>
-                  <div class="oke-stars-foreground" style="width: 94.507%;" data-acsb-overflower="true">
-                    <svg height="16" viewBox="0 0 71 12" aria-hidden="true" role="none" data-acsb-hidden="true">
-                      <use x="0" href="#oke-star-filled"></use><use x="14.5" href="#oke-star-filled"></use><use x="29" href="#oke-star-filled"></use><use x="43.5" href="#oke-star-filled"></use><use x="58" href="#oke-star-filled"></use>
-                    </svg>
-                  </div>
-                  <span
-                    class="oke-a11yText acsb-sr-only"
-                    data-acsb-hidden="false"
-                    data-acsb-sr-only="true"
-                    data-acsb-force-visible="true"
-                    >Rated 4.7 out of 5 stars</span
-                  >
-                </div>
-              </div>
-              <div class="oke-sr-count">
-                <span class="oke-sr-count-number">663</span><span class="oke-sr-label-text"> Reviews</span>
-                <!--  -->
-              </div>
-              <!--  -->
-            </div>
-            <script type="application/json" data-oke-metafield-data="">
-              { "averageRating": "4.7", "reviewCount": 663 }
-            </script>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-badges desktop" data-acsb-hidden="false"><div class="badge-text">Limited Edition</div></div>
-    </div>
-
-    <div class="h1 pdp-details-title" style="color: #1b365d;" data-acsb-fake-title="true" role="heading" aria-level="1">
-      Mouth Tape
-    </div>
-
-    <p class="product-tags">STRENGTHEN · CHISEL · ENERGIZE</p>
-
-    <div class="product-metafields-tags">
-      <div class="product-metafields-tag">30 tapes</div>
-      <div class="product-metafields-tag">From $1.20 / day</div>
-    </div>
-
-    <div class="pdp-details-description-text">
-      <div class="description-content" data-acsb-overflower="true">
-        <p>
-          Wear with intention. Wake with ambition. Made for those who take their beauty sleep seriously, The Skinny
-          Confidential Mouth Tape may help support a sculpted jawline, brighter eyes and renewed energy by sunrise.
-        </p>
-
-        <div class="description-wrapper">
-          <ul>
-            <li>Sculpts jawline</li>
-
-            <li>Reduces snoring</li>
-
-            <li>Improves profile</li>
-
-            <li>Brightens eyes</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="rc-section-heading " style="display: block;" data-acsb-hidden="true">Frequency</div>
-
-    <div
-      id="custom-subscription-options"
-      data-per-day-price="$1.40 / day"
-      data-onetime-price="$42"
-      style="display: flex;"
-      data-acsb-hidden="true"
-    >
-      <button
-        class="subscription-button active"
-        data-value="4206657629"
-        data-acsb-clickable="true"
-        data-acsb-navigable="true"
-        tabindex="-1"
-        data-acsb-now-navigable="false"
-        data-custom-button-processed="true"
-      >
-        Delivery every 30 days</button
-      ><button
-        class="subscription-button"
-        data-value="4206559325"
-        data-acsb-clickable="true"
-        data-acsb-navigable="true"
-        tabindex="-1"
-        data-acsb-now-navigable="false"
-        data-custom-button-processed="true"
-      >
-        Delivery every 60 days</button
-      ><button
-        class="subscription-button"
-        data-value="4206592093"
-        data-acsb-clickable="true"
-        data-acsb-navigable="true"
-        tabindex="-1"
-        data-acsb-now-navigable="false"
-        data-custom-button-processed="true"
-      >
-        Delivery every 90 days
-      </button>
-    </div>
-
-    <div class="Meta_stitch_product_list_main_new ">
-      <div class="Meta_stitch_product_list_inner_new">
-        <div class="Meta_stitch_product_list_title_new">LIMITED EDITION:</div>
-        <div class="Meta_stitch_product_list_mainloops_new">
-          <div class="Meta_stitch_product_list_innerloops_new">
-            <div class="Meta_stitch_product_list_innerloops_mainboxs_new ">
-              <a
-                href="/products/mouth-tape-uniform"
-                data-product-handle="mouth-tape-uniform"
-                data-acsb-clickable="true"
-                data-acsb-navigable="true"
-                data-acsb-now-navigable="true"
-                data-custom-button-processed="true"
-              >
-                <div class="Meta_stitch_product_list_innerloops_innerboxs_new">
-                  <div class="Meta_stitch_product_list_innerloops_innerboxs_image_new">
-                    <img
-                      src="//shopskinnyconfidential.com/cdn/shop/files/Uniform.png?v=1757501547"
-                      alt=""
-                      srcset="//shopskinnyconfidential.com/cdn/shop/files/Uniform.png?v=1757501547&amp;width=750 750w, //shopskinnyconfidential.com/cdn/shop/files/Uniform.png?v=1757501547&amp;width=900 900w, //shopskinnyconfidential.com/cdn/shop/files/Uniform.png?v=1757501547&amp;width=1080 1080w, //shopskinnyconfidential.com/cdn/shop/files/Uniform.png?v=1757501547&amp;width=1296 1296w"
-                      width="1500"
-                      height="676"
-                      fetchpriority="auto"
-                      class="Static_image_new"
-                    >
-                  </div>
-
-                  <div class="Meta_stitch_product_list_innerloops_innerboxs_name_new">Uniform</div>
-                </div>
-              </a>
-            </div>
-            <div class="Meta_stitch_product_list_innerloops_mainboxs_new  active">
-              <a
-                href="/products/mouth-tape-blanc"
-                data-product-handle="mouth-tape-blanc"
-                data-acsb-clickable="true"
-                data-acsb-navigable="true"
-                data-acsb-now-navigable="true"
-                data-custom-button-processed="true"
-              >
-                <div class="Meta_stitch_product_list_innerloops_innerboxs_new">
-                  <div class="Meta_stitch_product_list_innerloops_innerboxs_image_new">
-                    <img
-                      src="//shopskinnyconfidential.com/cdn/shop/files/Blanc.png?v=1757501579"
-                      alt=""
-                      srcset="//shopskinnyconfidential.com/cdn/shop/files/Blanc.png?v=1757501579&amp;width=750 750w, //shopskinnyconfidential.com/cdn/shop/files/Blanc.png?v=1757501579&amp;width=900 900w, //shopskinnyconfidential.com/cdn/shop/files/Blanc.png?v=1757501579&amp;width=1080 1080w, //shopskinnyconfidential.com/cdn/shop/files/Blanc.png?v=1757501579&amp;width=1296 1296w"
-                      width="1500"
-                      height="664"
-                      fetchpriority="auto"
-                      class="Static_image_new"
-                    >
-                  </div>
-
-                  <div class="Meta_stitch_product_list_innerloops_innerboxs_name_new">Blanc</div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="Meta_stitch_product_list_inner_new">
-        <div class="Meta_stitch_product_list_title_new">SIGNATURE SHADE:</div>
-        <div class="Meta_stitch_product_list_mainloops_new">
-          <div class="Meta_stitch_product_list_innerloops_new">
-            <div class="Meta_stitch_product_list_innerloops_mainboxs_new ">
-              <a
-                href="/products/mouth-tape"
-                data-product-handle="mouth-tape"
-                data-acsb-clickable="true"
-                data-acsb-navigable="true"
-                data-acsb-now-navigable="true"
-                data-custom-button-processed="true"
-              >
-                <div class="Meta_stitch_product_list_innerloops_innerboxs_new">
-                  <div class="Meta_stitch_product_list_innerloops_innerboxs_image_new">
-                    <img
-                      src="//shopskinnyconfidential.com/cdn/shop/files/Classic.png?v=1757502343"
-                      alt=""
-                      srcset="//shopskinnyconfidential.com/cdn/shop/files/Classic.png?v=1757502343&amp;width=750 750w, //shopskinnyconfidential.com/cdn/shop/files/Classic.png?v=1757502343&amp;width=900 900w, //shopskinnyconfidential.com/cdn/shop/files/Classic.png?v=1757502343&amp;width=1080 1080w, //shopskinnyconfidential.com/cdn/shop/files/Classic.png?v=1757502343&amp;width=1296 1296w"
-                      width="1500"
-                      height="671"
-                      fetchpriority="auto"
-                      class="Static_image_new"
-                    >
-                  </div>
-
-                  <div class="Meta_stitch_product_list_innerloops_innerboxs_name_new">Classic</div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      id="shopify-block-ATEFMRWJ6SndteGpqT__recharge_subscriptions_subscription_widget_NQbXUa"
-      class="shopify-block shopify-app-block recharge-subscription-widget"
-    >
-      <!-- BEGIN app snippet: vite-tag -->
-
-      <script
-        src="https://cdn.shopify.com/extensions/0199cfd8-ac95-700a-ae75-fbe1fd237db1/app-281/assets/rc-widget.a8e703a4.js"
-        type="module"
-        crossorigin="anonymous"
-      ></script>
-      <link
-        href="//cdn.shopify.com/extensions/0199cfd8-ac95-700a-ae75-fbe1fd237db1/app-281/assets/rc-widget.fecb1bd3.css"
-        rel="stylesheet"
-        type="text/css"
-        media="all"
-      >
-      <link
-        rel="modulepreload"
-        href="https://cdn.shopify.com/extensions/0199cfd8-ac95-700a-ae75-fbe1fd237db1/app-281/assets/vendor.a24d3e22.js"
-        crossorigin="anonymous"
-      >
-
-      <!-- END app snippet -->
-      <div id="RechargeWidget_7967705137245" data-v-app="">
-        <!--  -->
-        <div class="rc-section-heading" data-acsb-hidden="true">Choose an option</div>
-        <div class="rc-widget" data-v-ec7f103a="">
-          <div class="rc-template__radio" data-v-283da5f2="" data-v-ec7f103a="">
-            <div class="rc-widget-wrapper">
-              <label
-                class="rc-radio rc-radio--active subscription-radio px-3 py-2 acsb-connected-input-shown"
-                for="rc-radio1"
-                data-v-3d41861e=""
-                data-v-283da5f2=""
-                ><input
-                  id="rc-radio1"
-                  class="rc-radio__input m-0 mr-3"
-                  type="radio"
-                  name="purchaseOption"
-                  value="subscription"
-                  data-v-3d41861e=""
-                  data-acsb-navigable="true"
-                  data-acsb-hidden="false"
-                  data-acsb-now-navigable="true"
-                  data-acsb-validation-uuid="rc-radio1"
-                  data-acsb-field-visible="true"
-                  aria-label="Subscribe and save$1.20 / day$42$36"
-                  placeholder="Subscribe and save$1.20 / day$42$36"
-                  data-acsb-tooltip="Subscribe and save$1.20 / day$42$36"
-
-                ><span class="rc-radio__label" data-v-3d41861e=""
-                  ><span class="rc-radio__subscription" data-v-283da5f2="">
-                    <div class="subs-text">Subscribe and save</div>
-                    <div class="subs-unit-price">$1.20 / day</div></span
-                  ><span class="rc-radio__price" data-v-283da5f2=""
-                    ><span class="subs-compare-price">$42</span><span class="subs-original-price">$36</span></span
-                  >
-                  <span class="rc-save" data-acsb-hidden="true">save 15%</span></span
-                ></label
-              >
-              <div class="rc-delivery-plans-wrapper">
-                <p class="rc-delivery-info">
-                  <ol style="margin-left: 22px;">
-                    <li>15% off on every order</li>
-                    <li>Free shipping, always</li>
-                    <li>No commitment, cancel anytime</li>
-                  </ol>
-                </p>
-                <div class="rc-selling-plans" data-v-ac513cdf="" data-v-283da5f2="">
-                  <label
-                    for="sellingPlan7967705137245"
-                    class="rc-selling-plans-dropdown"
-                    data-v-43993cfe=""
-                    data-v-ac513cdf=""
-                    ><span
-                      class="rc-selling-plans-dropdown__label pb-1 visually-hidden acsb-sr-only"
-                      data-v-43993cfe=""
-                      data-acsb-hidden="false"
-                      data-acsb-sr-only="true"
-                      data-acsb-force-visible="true"
-                      >Delivery</span
-                    ><select
-                      id="sellingPlan7967705137245"
-                      class="rc-selling-plans-dropdown__select"
-                      name="rc_selling_plan"
-                      data-v-43993cfe=""
-                      data-acsb-navigable="true"
-                      data-acsb-now-navigable="true"
-                      data-acsb-hidden="false"
-                      type="select-one"
-                      data-acsb-validation-uuid="sellingPlan7967705137245"
-                      data-acsb-field-visible="true"
-                      aria-label="Delivery every 30 days"
-                      placeholder="Delivery every 30 days"
-                      data-acsb-tooltip="Delivery every 30 days"
-                    >
-                      <option value="4206657629" data-v-43993cfe="">Delivery every 30 days</option>
-                      <option value="4206559325" data-v-43993cfe="">Delivery every 60 days</option>
-                      <option value="4206592093" data-v-43993cfe="">Delivery every 90 days</option>
-                    </select></label
-                  >
-                </div>
-              </div>
-            </div>
-            <label
-              class="rc-radio onetime-radio px-3 py-2 acsb-connected-input-shown"
-              for="rc-radio2"
-              data-v-3d41861e=""
-              data-v-283da5f2=""
-              ><input
-                id="rc-radio2"
-                class="rc-radio__input m-0 mr-3"
-                type="radio"
-                name="purchaseOption"
-                value="onetime"
-                data-v-3d41861e=""
-                data-acsb-navigable="true"
-                data-acsb-hidden="false"
-                data-acsb-now-navigable="true"
-                data-acsb-validation-uuid="rc-radio2"
-                data-acsb-field-visible="true"
-                aria-label="One-time purchase $1.40 / day $42"
-                placeholder="One-time purchase $1.40 / day $42"
-                data-acsb-tooltip="One-time purchase $1.40 / day $42"
-
-              ><span class="rc-radio__label" data-v-3d41861e="">
-                <div class="onetime-text-wrapper">
-                  <div class="text">One-time purchase</div>
-                  <div class="unit-price">$1.40 / day</div>
-                </div>
-                <div class="onetime-price-wrapper">
-                  <span class="regular-price" data-acsb-hidden="true"></span><span class="compare-price">$42</span>
-                </div>
-              </span></label
-            >
-          </div>
-          <div class="rc-subscription-details" data-v-e69cc34d="" data-v-ec7f103a="" data-acsb-hidden="true">
+          {% assign subscription_plans = product.selling_plan_groups.first.selling_plans %}
+          {% for plan in subscription_plans %}
             <button
-              type="button"
-              class="rc-subscription-details__button p-0"
-              data-v-e69cc34d=""
+              class="subscription-button {% if forloop.first %}active{% endif %}"
+              data-value="{{ plan.id }}"
               data-acsb-clickable="true"
               data-acsb-navigable="true"
               tabindex="-1"
               data-acsb-now-navigable="false"
               data-custom-button-processed="true"
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="reload-icon mr-2"
-                data-v-e69cc34d=""
-              >
-                <path fill="currentColor" d="M13.64 2.35C12.19 0.9 10.2 0 7.99 0C3.57 0 0 3.58 0 8C0 12.42 3.57 16 7.99 16C11.72 16 14.83 13.45 15.72 10H13.64C12.82 12.33 10.6 14 7.99 14C4.68 14 1.99 11.31 1.99 8C1.99 4.69 4.68 2 7.99 2C9.65 2 11.13 2.69 12.21 3.78L8.99 7H15.99V0L13.64 2.35Z" style="display: block;"></path>
-              </svg>
-              <span data-v-e69cc34d="">Subscription details</span>
+              {{ plan.name }}
             </button>
-            <div class="rc-tooltip" data-v-e69cc34d="" style="display: none;">
-              <div class="rc-tooltip__content p-3" data-v-e69cc34d="">
-                <div class="how-it-works" data-v-e69cc34d="">
-                  <strong>How subscriptions work</strong><br>
-                  Products are automatically delivered on your schedule. No obligation, modify or cancel your
-                  subscription anytime.
-                </div>
-                <a
-                  class="learn-more"
-                  href="http://rechargepayments.com/subscribe-with-recharge"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  data-v-e69cc34d=""
-                  data-acsb-clickable="true"
-                  data-acsb-navigable="true"
-                  tabindex="-1"
-                  data-acsb-now-navigable="false"
-                  data-custom-button-processed="true"
-                  >Learn more...</a
-                >
-                <div class="rc-tooltip__footer mt-2" data-v-e69cc34d="">
-                  <a
-                    href="http://rechargepayments.com/subscribe-with-recharge"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="recharge-badge py-1 px-3"
-                    data-v-e69cc34d=""
-                    data-acsb-clickable="true"
-                    data-acsb-navigable="true"
-                    tabindex="-1"
-                    data-acsb-now-navigable="false"
-                    data-custom-button-processed="true"
-                    ><span class="powered-by mr-1" data-v-e69cc34d="">Powered by</span>
-                    <svg viewBox="100 0 270 74" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-e69cc34d="">
-                      <path d="M100.034 21.1209H113.048C113.658 21.1209 114.065 21.4598 113.929 22.1376L113.184 26.34C115.759 22.6121 119.487 20.3753 123.283 20.3753C125.181 20.3753 127.214 21.1209 128.299 22.1376C128.909 22.7476 128.909 23.0865 128.502 23.6966L124.707 29.0513C124.232 29.7291 123.893 29.6613 123.148 29.3224C122.402 28.9835 121.453 28.7124 120.436 28.7124C115.895 28.7124 112.099 31.6947 110.337 40.7096L107.693 54.3336C107.49 55.2147 106.812 55.4181 106.473 55.4181H99.5598C99.0175 55.4181 98.543 54.9436 98.6786 54.3336L103.83 28.1701L99.492 22.0698C99.1531 21.5954 99.4242 21.1209 100.034 21.1209Z" fill="currentColor" style="display: block;"></path><path d="M124.977 37.9984C126.74 27.3567 134.534 20.3753 144.701 20.3753C155.004 20.3753 159.884 28.5768 158.393 37.5239C158.054 39.8284 157.241 41.6585 155.343 41.6585H133.382C133.585 46.6743 137.042 49.0467 141.651 49.0467C144.701 49.0467 147.548 47.8944 149.717 46.471C150.26 46.0643 150.87 45.861 151.276 46.471L153.784 50.4023C154.191 51.0123 153.987 51.419 153.377 51.9612C150.124 54.9436 144.837 56.2992 140.025 56.2992C129.18 56.2992 123.283 48.3011 124.977 37.9984ZM150.531 35.6938C150.87 30.3391 147.209 28.1023 143.685 28.1023C139.076 28.1023 135.483 31.2203 134.128 35.6938H150.531Z" fill="currentColor" style="display: block;"></path><path d="M191.199 54.6045L199.062 14.4782L195.198 9.3268C194.995 8.98789 195.266 8.51343 195.741 8.51343H207.806C208.483 8.51343 208.822 8.92011 208.687 9.53014L205.162 27.221C207.873 23.1541 211.94 20.3751 216.685 20.3751C224.276 20.3751 228.614 26.8821 226.988 34.8802L223.056 54.3334C222.921 55.079 222.311 55.4179 221.836 55.4179H214.719C214.041 55.4179 213.703 55.0112 213.838 54.3334L217.363 36.7781C218.312 32.0334 217.024 29.1188 214.109 29.1188C208.687 29.1188 204.417 35.2191 202.586 43.8273L200.282 54.6045C200.214 55.0112 199.875 55.4179 199.401 55.4179H191.877C191.47 55.4179 191.131 55.0112 191.199 54.6045Z" fill="currentColor" style="display: block;"></path><path d="M229.428 38.4051C231.19 27.0856 239.188 20.3753 248.542 20.3753C253.49 20.3753 257.353 22.6121 258.845 26.34L259.658 22.2054C259.794 21.4598 260.336 21.1209 260.946 21.1209H267.521C268.266 21.1209 268.537 21.5954 268.402 22.2054L262.098 54.4014C261.963 55.0114 261.556 55.4181 260.81 55.4181H254.168C253.558 55.4181 253.219 55.0792 253.354 54.4014L253.964 51.0801C250.847 54.6047 246.983 56.367 242.781 56.367C233.223 56.367 227.869 48.4366 229.428 38.4051ZM245.492 48.1655C250.982 48.1655 255.049 43.5564 255.862 38.1339C256.676 32.7114 253.761 28.6446 248.678 28.6446C243.255 28.6446 239.324 33.0503 238.443 38.2017C237.561 43.4208 240.205 48.1655 245.492 48.1655Z" fill="currentColor" style="display: block;"></path><path d="M266.369 54.3336L272.74 22.002C272.876 21.4598 273.147 21.1209 273.554 21.1209H280.738C281.349 21.1209 281.755 21.4598 281.62 22.1376L280.874 26.34C283.45 22.6121 287.178 20.3753 290.973 20.3753C292.871 20.3753 294.905 21.1209 295.989 22.1376C296.599 22.7476 296.599 23.0865 296.193 23.6966L292.397 29.0513C291.922 29.7291 291.583 29.6613 290.838 29.3224C290.092 28.9835 289.143 28.7124 288.127 28.7124C283.585 28.7124 279.79 31.6947 278.027 40.7096L275.384 54.3336C275.18 55.2147 274.503 55.4181 274.164 55.4181H267.25C266.708 55.4181 266.233 54.9436 266.369 54.3336Z" fill="currentColor" style="display: block;"></path><path d="M290.024 65.2463C289.618 64.9074 289.618 64.3652 289.889 63.8907L293.074 58.8749C293.413 58.3327 293.956 58.1971 294.362 58.536C297.48 60.5016 300.53 61.7217 304.258 61.7217C310.765 61.7217 316.188 59.0783 318.086 50.3345C314.493 53.7236 311.172 55.3503 306.156 55.3503C296.328 55.3503 291.177 47.081 292.803 37.8628C294.633 27.4245 302.428 20.3753 312.257 20.3753C317.679 20.3753 321.407 23.4254 322.559 25.9333L323.373 22.2054C323.508 21.4598 323.983 21.1209 324.525 21.1209H331.167C331.845 21.1209 332.184 21.5276 332.049 22.2054L326.491 50.5378C324.05 62.874 315.51 69.3132 303.919 69.3132C299.039 69.3132 293.549 68.0931 290.024 65.2463ZM308.732 47.4199C314.222 47.4199 318.289 43.0142 319.102 37.795C319.916 32.5759 317.001 28.6446 311.918 28.6446C306.495 28.6446 302.564 32.9148 301.683 37.8628C300.802 42.8786 303.445 47.4199 308.732 47.4199Z" fill="currentColor" style="display: block;"></path><path d="M332.32 37.9984C334.082 27.3567 341.877 20.3753 352.044 20.3753C362.347 20.3753 367.227 28.5768 365.736 37.5239C365.397 39.8284 364.584 41.6585 362.686 41.6585H340.725C340.928 46.6743 344.385 49.0467 348.994 49.0467C352.044 49.0467 354.891 47.8944 357.06 46.471C357.602 46.0643 358.212 45.861 358.619 46.471L361.127 50.4023C361.533 51.0123 361.33 51.419 360.72 51.9612C357.467 54.9436 352.18 56.2992 347.367 56.2992C336.522 56.2992 330.625 48.3011 332.32 37.9984ZM357.873 35.6938C358.212 30.3391 354.552 28.1023 351.027 28.1023C346.418 28.1023 342.826 31.2203 341.47 35.6938H357.873Z" fill="currentColor" style="display: block;"></path><path d="M176.04 56.367C180.581 56.367 185.054 55.0792 189.121 51.2157C189.731 50.6734 189.799 49.9278 189.392 49.5211L185.664 45.3865C185.326 44.9798 184.783 44.9798 184.309 45.3187C182.75 46.471 180.242 47.8266 177.26 47.8266C171.905 47.8266 168.923 43.6242 169.6 38.3373C170.278 33.1181 174.413 28.9157 179.632 28.9157C182.479 28.9157 184.309 29.9324 186.342 31.9659C186.885 32.5081 187.223 32.5081 187.833 32.0336L192.646 27.899C193.12 27.4923 193.256 27.0178 192.917 26.4756C190.002 22.341 185.461 20.3753 180.445 20.3753C170.346 20.3753 162.144 27.899 160.789 37.8628C159.298 48.7078 166.482 56.367 176.04 56.367Z" fill="currentColor" style="display: block;"></path>
-                    </svg>
-                  </a>
-                </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% comment %} Variant product list based on product options {% endcomment %}
+      {% if product.options.size > 0 and product.variants.size > 1 %}
+        <div class="Meta_stitch_product_list_main_new">
+          <div class="Meta_stitch_product_list_inner_new">
+            <div class="Meta_stitch_product_list_title_new">{{ product.options.first.name }}</div>
+            <div class="Meta_stitch_product_list_mainloops_new">
+              <div class="Meta_stitch_product_list_innerloops_new">
+                {% for variant in product.variants %}
+                  <div class="Meta_stitch_product_list_innerloops_mainboxs_new {% if variant.id == product.selected_or_first_available_variant.id %}active{% endif %}">
+                    <a
+                      href="?variant={{ variant.id }}"
+                      data-product-handle="{{ product.handle }}"
+                      data-acsb-clickable="true"
+                      data-acsb-navigable="true"
+                      data-acsb-now-navigable="true"
+                      data-custom-button-processed="true"
+                    >
+                      <div class="Meta_stitch_product_list_innerloops_innerboxs_new">
+                        <div class="Meta_stitch_product_list_innerloops_innerboxs_image_new">
+                          {% if variant.image %}
+                            <img
+                              src="{{ variant.image | image_url: width: 1500 }}"
+                              alt="{{ variant.title }}"
+                              srcset="{{ variant.image | image_url: width: 750 }} 750w, {{ variant.image | image_url: width: 900 }} 900w, {{ variant.image | image_url: width: 1080 }} 1080w, {{ variant.image | image_url: width: 1296 }} 1296w"
+                              width="1500"
+                              height="676"
+                              fetchpriority="auto"
+                              class="Static_image_new"
+                            >
+                          {% else %}
+                            <img
+                              src="{{ product.featured_image | image_url: width: 1500 }}"
+                              alt="{{ variant.title }}"
+                              srcset="{{ product.featured_image | image_url: width: 750 }} 750w, {{ product.featured_image | image_url: width: 900 }} 900w, {{ product.featured_image | image_url: width: 1080 }} 1080w, {{ product.featured_image | image_url: width: 1296 }} 1296w"
+                              width="1500"
+                              height="676"
+                              fetchpriority="auto"
+                              class="Static_image_new"
+                            >
+                          {% endif %}
+                        </div>
+                        <div class="Meta_stitch_product_list_innerloops_innerboxs_name_new">{{ variant.title }}</div>
+                      </div>
+                    </a>
+                  </div>
+                {% endfor %}
               </div>
-              <div class="arrow" data-v-e69cc34d=""></div>
             </div>
           </div>
         </div>
-        <!--  -->
-      </div>
+      {% endif %}
 
-      <script>
-        function initRecharge() {
-          const appIdWhiteList = ['294517', '6740180993', null];
-          const shopifySellingPlanGroups = [
-            {
-              id: '3e45a1f95ee5597501332cf69e909e2b03cea662',
-              name: 'Delivery every 30 days',
-              options: [
-                { name: 'Recharge Plan ID', position: 1, values: ['19796311'] },
-                { name: 'Order Frequency and Unit', position: 2, values: ['30-day'] },
-              ],
-              selling_plans: [
-                {
-                  id: 4206657629,
-                  name: 'Delivery every 30 days',
-                  description: null,
-                  options: [
-                    { name: 'Recharge Plan ID', position: 1, value: '19796311' },
-                    { name: 'Order Frequency and Unit', position: 2, value: '30-day' },
-                  ],
-                  recurring_deliveries: true,
-                  price_adjustments: [{ order_count: null, position: 1, value_type: 'percentage', value: 15 }],
-                  checkout_charge: { value_type: 'percentage', value: 100 },
-                },
-              ],
-              app_id: '294517',
-            },
-            {
-              id: 'cfbad8b47c01f7303008bd549d3d586729f12734',
-              name: 'Delivery every 60 days',
-              options: [
-                { name: 'Recharge Plan ID', position: 1, values: ['19796312'] },
-                { name: 'Order Frequency and Unit', position: 2, values: ['60-day'] },
-              ],
-              selling_plans: [
-                {
-                  id: 4206559325,
-                  name: 'Delivery every 60 days',
-                  description: null,
-                  options: [
-                    { name: 'Recharge Plan ID', position: 1, value: '19796312' },
-                    { name: 'Order Frequency and Unit', position: 2, value: '60-day' },
-                  ],
-                  recurring_deliveries: true,
-                  price_adjustments: [{ order_count: null, position: 1, value_type: 'percentage', value: 15 }],
-                  checkout_charge: { value_type: 'percentage', value: 100 },
-                },
-              ],
-              app_id: '294517',
-            },
-            {
-              id: 'dda4e7a44cd1619aea0a928d27f3c371385a162a',
-              name: 'Delivery every 90 days',
-              options: [
-                { name: 'Recharge Plan ID', position: 1, values: ['19796313'] },
-                { name: 'Order Frequency and Unit', position: 2, values: ['90-day'] },
-              ],
-              selling_plans: [
-                {
-                  id: 4206592093,
-                  name: 'Delivery every 90 days',
-                  description: null,
-                  options: [
-                    { name: 'Recharge Plan ID', position: 1, value: '19796313' },
-                    { name: 'Order Frequency and Unit', position: 2, value: '90-day' },
-                  ],
-                  recurring_deliveries: true,
-                  price_adjustments: [{ order_count: null, position: 1, value_type: 'percentage', value: 15 }],
-                  checkout_charge: { value_type: 'percentage', value: 100 },
-                },
-              ],
-              app_id: '294517',
-            },
-          ];
-          const sellingPlanGroups = shopifySellingPlanGroups.filter((sp) => appIdWhiteList.includes(sp.app_id));
-          const sellingPlanGroupDiscounts = sellingPlanGroups
-            .flatMap((plan) => plan.selling_plans)
-            .reduce((obj, sellingPlan) => {
-              obj[sellingPlan.id] = {
-                discountType: sellingPlan.price_adjustments[0]?.value_type,
-                discountValue: sellingPlan.price_adjustments[0]?.value,
-              };
-              return obj;
-            }, {});
+      <div style="flex: 1; width: 100%;">
+        <product-form class="product-form" data-hide-errors="false" data-section-id="{{ section.id }}">
+          <div class="product-form__error-message-wrapper" role="alert" hidden data-acsb-hidden="true">
+            <span class="svg-wrapper">
+              <svg class="icon icon-error" viewBox="0 0 13 13">
+                <circle cx="6.5" cy="6.5" r="5.5" stroke="#fff" stroke-width="2"></circle>
+                <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width=".7"></circle>
+                <path fill="#fff" d="m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656"></path>
+                <path fill="#fff" stroke="#EB001B" stroke-width=".7" d="M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031 1.006.47 1.006 1.03 1.006Z"></path>
+              </svg>
+            </span>
+            <span class="product-form__error-message"></span>
+          </div>
 
-          window.Recharge.init({
-            shop: {
-              selectedCurrency: 'USD',
-              defaultCurrency: 'USD',
-              identifier: 'shopskinny.myshopify.com',
-            },
-            element: document.getElementById('RechargeWidget_7967705137245'),
-            product: {
-              id: 7967705137245,
-              initialVariantId: 43644376580189,
-              initialSellingPlanId: 4206657629,
-              sellingPlanGroups,
-              available: true,
-              formattedVariantPrices: {
-                [43644376580189]: {
-                  unitWithCurrency: '$42 USD',
-                  discountedWithCurrency: '$36 USD',
-                  unit: '$42',
-                  discounted: '$36',
-                  formattedSellingPlanPrices: {
-                    [4206657629]: {
-                      unitWithCurrency: '$36 USD',
-                      discountedWithCurrency: '$36 USD',
-                      unit: '$36',
-                      discounted: '$36',
-                      ...sellingPlanGroupDiscounts[4206657629],
-                    },
-
-                    [4206559325]: {
-                      unitWithCurrency: '$36 USD',
-                      discountedWithCurrency: '$36 USD',
-                      unit: '$36',
-                      discounted: '$36',
-                      ...sellingPlanGroupDiscounts[4206559325],
-                    },
-
-                    [4206592093]: {
-                      unitWithCurrency: '$36 USD',
-                      discountedWithCurrency: '$36 USD',
-                      unit: '$36',
-                      discounted: '$36',
-                      ...sellingPlanGroupDiscounts[4206592093],
-                    },
-                  },
-                },
-              },
-            },
-          });
-        }
-        if (window.Recharge) {
-          initRecharge();
-        } else {
-          onRechargeLoad = initRecharge;
-        }
-      </script>
-    </div>
-
-    <div style="flex: 1; width: 100%;">
-      <product-form
-        class="product-form"
-        data-hide-errors="false"
-        data-section-id="template--18964511293533__pdp-details"
-      >
-        <div class="product-form__error-message-wrapper" role="alert" hidden="" data-acsb-hidden="true">
-          <span class="svg-wrapper">
-            <svg class="icon icon-error" viewBox="0 0 13 13">
-              <circle cx="6.5" cy="6.5" r="5.5" stroke="#fff" stroke-width="2"></circle><circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width=".7"></circle><path fill="#fff" d="m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656"></path><path fill="#fff" stroke="#EB001B" stroke-width=".7" d="M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031 1.006.47 1.006 1.03 1.006Z"></path>
-            </svg>
-          </span>
-          <span class="product-form__error-message"></span>
-        </div>
-        <form
-          method="post"
-          action="/cart/add"
-          id="product-form-template--18964511293533__pdp-details"
-          accept-charset="UTF-8"
-          class="form"
-          enctype="multipart/form-data"
-          data-type="add-to-cart-form"
-          data-acsb-form-uuid="ad1cb5o3ewnq"
-          data-acsb-form-type="cart"
-        >
-          <input
-            name="selling_plan"
-            type="hidden"
-            value="4206657629"
-            data-acsb-hidden="true"
-            tabindex="-1"
-            data-acsb-now-navigable="false"
-
-          ><input
-            type="hidden"
-            name="form_type"
-            value="product"
-            data-acsb-hidden="true"
-            tabindex="-1"
-            data-acsb-now-navigable="false"
-
-          ><input
-            type="hidden"
-            name="utf8"
-            value="✓"
-            data-acsb-hidden="true"
-            tabindex="-1"
-            data-acsb-now-navigable="false"
-
-          ><input
-            type="hidden"
-            name="id"
-            value="43644376580189"
-            class="product-variant-id"
-            data-acsb-hidden="true"
-            tabindex="-1"
-            data-acsb-now-navigable="false"
+          <form
+            method="post"
+            action="/cart/add"
+            id="product-form-{{ section.id }}"
+            accept-charset="UTF-8"
+            class="form"
+            enctype="multipart/form-data"
+            data-type="add-to-cart-form"
           >
-          <input
-            type="hidden"
-            name="type"
-            value=""
-            data-acsb-hidden="true"
-            tabindex="-1"
-            data-acsb-now-navigable="false"
-          >
-
-          <div class="product-form__buttons">
-            <button
-              type="submit"
-              name="add"
-              class="h5 cta-gig-primary add-to-cart button cta product-grid-button ProductSubmitButton ProductSubmitButton-template--18964511293533__pdp-details"
-              aria-haspopup="dialog"
-              data-acsb-overflower="true"
-              data-acsb-clickable="true"
-              data-acsb-navigable="true"
-              data-acsb-now-navigable="true"
-              data-custom-button-processed="true"
+            <input
+              name="selling_plan"
+              type="hidden"
+              value="{% if product.selected_or_first_available_selling_plan_allocation %}{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}{% endif %}"
+              data-acsb-hidden="true"
+              tabindex="-1"
+              data-acsb-now-navigable="false"
             >
-              <span> PREORDER </span>
-              <span class="dash">-</span>
-
-              <span
-                id="atc-price"
-                js-atc-price=""
-                data-variant-without-discount-price="$42"
-                data-variant-price="$42"
-                data-variant-compare-price=""
-              >
-                <span class="product-grid-item-atc-price texts" js-normal-price=""> $36</span>
-                <span class="regular-price" js-compare-price="">$42</span>
-              </span>
-
-              <div class="loading__spinner hidden" data-acsb-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
-                  <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
-                </svg>
-              </div>
-            </button>
-          </div>
-
-          <div style="display: flex; justify-content: center; padding-top: 10px;" class="meta__shipdate">
-            Estimated to ship by 11/3
-          </div>
-          <input
-            type="hidden"
-            name="properties[Estimated Ship Date]"
-            value="Estimated to ship by 11/3"
-            data-acsb-hidden="true"
-            tabindex="-1"
-            data-acsb-now-navigable="false"
-          >
-
-          <input
-            type="hidden"
-            name="product-id"
-            value="7967705137245"
-            data-acsb-hidden="true"
-            tabindex="-1"
-            data-acsb-now-navigable="false"
-
-          ><input
-            type="hidden"
-            name="section-id"
-            value="template--18964511293533__pdp-details"
-            data-acsb-hidden="true"
-            tabindex="-1"
-            data-acsb-now-navigable="false"
-          >
-        </form>
-      </product-form>
-    </div>
-
-    <div
-      id="shopify-block-AcHlrczlDdUpaVlN2R__afterpay_on_site_messaging_payments_messaging_tintUg"
-      class="shopify-block shopify-app-block"
-    >
-      <!-- BEGIN app snippet: messaging-component -->
-
-      <style data-shopify="">
-        #placement-AcHlrczlDdUpaVlN2R__afterpay_on_site_messaging_payments_messaging_tintUg {
-          text-align: center;
-
-          margin-top: 0px;
-
-          margin-bottom: 15px;
-        }
-
-        @media only screen and (max-width: 749px) {
-          #placement-AcHlrczlDdUpaVlN2R__afterpay_on_site_messaging_payments_messaging_tintUg {
-            text-align: center;
-
-            margin-top: 0px;
-
-            margin-bottom: 15px;
-          }
-        }
-      </style>
-
-      <square-placement
-        id="placement-AcHlrczlDdUpaVlN2R__afterpay_on_site_messaging_payments_messaging_tintUg"
-        data-mpid="shopskinny.myshopify.com"
-        data-currency="USD"
-        data-consumer-locale="en_US"
-        data-amount="42"
-        data-size="md"
-        data-show-lower-limit="true"
-        data-show-upper-limit="true"
-        data-show-if-outside-limits="true"
-        data-intro-text="or"
-        data-show-interest-free="true"
-        data-payment-amount-is-bold="true"
-        data-show-with="true"
-        data-logo-type="badge"
-        data-badge-theme="black-on-mint"
-        data-modal-link-style="circled-info-icon"
-        data-modal-theme="white"
-        data-platform="shopify-app-blocks"
-      ></square-placement>
-
-      <script></script>
-
-      <!-- END app snippet -->
-    </div>
-
-    <div class="product-accordion">
-      <div class="details-wrapper">
-        <details id="block-summary_piCAf8" class="details">
-          <summary data-acsb-clickable="true" data-acsb-navigable="true" tabindex="0" data-acsb-now-navigable="true">
-            <span> Benefits </span>
-          </summary>
-
-          <div class="body1 summary-content">
-            <ul>
-              <li>May help strengthen/define jawline</li>
-              <li>May create a stronger chin profile</li>
-              <li>Deep rest may help your eyes appear brighter</li>
-              <li>May help you wake up more energized</li>
-              <li>May help reduce snoring and bad breath</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-      <div class="details-wrapper">
-        <details id="block-summary_piCAf8" class="details">
-          <summary data-acsb-clickable="true" data-acsb-navigable="true" tabindex="0" data-acsb-now-navigable="true">
-            <span> How To Use </span>
-          </summary>
-
-          <div class="body1 summary-content">
-            <ul>
-              <li>
-                When you’ve finished your nighttime routine apply mouth tape over the lips and prepare for a deep sleep.
-                When removing the tape the next morning, pull skin taut and gently remove.
-              </li>
-              <li>You’ll never go to sleep without your Mouth Tape again…especially with that new chiseled jawline.</li>
-              <li>For best results, use every night.</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-      <div class="details-wrapper">
-        <details id="block-summary_piCAf8" class="details">
-          <summary data-acsb-clickable="true" data-acsb-navigable="true" tabindex="0" data-acsb-now-navigable="true">
-            <span> FEATURES </span>
-          </summary>
-
-          <div class="body1 summary-content">
-            <ul>
-              <li>30 Mouth Tapes in a compact tin to keep on your nightstand.</li>
-              <li>97% Rayon, 3% Spandex</li>
-              <li>tape made in the USA</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <div class="pro-tip-container">
-      <!-- Product Image -->
-
-      <div class="pro-tip-heading">Pro Tip: Tap into the power of cold therapy</div>
-
-      <div class="pro-tip-item">
-        <div class="product-image">
-          <a
-            href="/products/mint-roller"
-            data-acsb-clickable="true"
-            data-acsb-navigable="true"
-            data-acsb-now-navigable="true"
-            data-custom-button-processed="true"
-          >
-            <img
-              src="//shopskinnyconfidential.com/cdn/shop/files/MINT-ROLLER-PDPMINT-3.gif?v=1714753369&amp;width=1000"
-              alt="Mint Roller"
-              width="auto"
-              height="auto"
-              loading="lazy"
+            <input
+              type="hidden"
+              name="form_type"
+              value="product"
+              data-acsb-hidden="true"
+              tabindex="-1"
+              data-acsb-now-navigable="false"
             >
-          </a>
-        </div>
-        <div class="pro-tip-item-content">
-          <div class="product-title">
-            <a
-              href="/products/mint-roller"
-              data-acsb-clickable="true"
-              data-acsb-navigable="true"
-              data-acsb-now-navigable="true"
-              data-custom-button-processed="true"
+            <input
+              type="hidden"
+              name="utf8"
+              value="✓"
+              data-acsb-hidden="true"
+              tabindex="-1"
+              data-acsb-now-navigable="false"
             >
-              <h4 role="heading" aria-level="2">Mint roller</h4>
-            </a>
-          </div>
-          <product-form>
-            <form
-              action="/cart/add"
-              data-productid="7477514240093"
-              method="post"
-              enctype="multipart/form-data"
-              id="add-to-cart-mint-roller--template--18964511293533__pdp-details"
-              data-acsb-form-uuid="ak6wglpwoa3"
-              data-acsb-form-type="cart"
+            <input
+              type="hidden"
+              name="id"
+              value="{{ product.selected_or_first_available_variant.id }}"
+              class="product-variant-id"
+              data-acsb-hidden="true"
+              tabindex="-1"
+              data-acsb-now-navigable="false"
             >
-              <input
-                type="hidden"
-                name="id"
-                value="42100973142109"
-                class="product-variant-id"
-                id="variant-id-7477514240093"
-                data-acsb-hidden="true"
-                tabindex="-1"
-                data-acsb-now-navigable="false"
-              >
-              <input
-                type="hidden"
-                name="type"
-                value=""
-                data-acsb-hidden="true"
-                tabindex="-1"
-                data-acsb-now-navigable="false"
-              >
-              <input
-                type="hidden"
-                name="quantity"
-                value="1"
-                min="1"
-                maxlength="12"
-                id="Quantity"
-                data-acsb-hidden="true"
-                tabindex="-1"
-                data-acsb-now-navigable="false"
-              >
+            <input
+              type="hidden"
+              name="type"
+              value=""
+              data-acsb-hidden="true"
+              tabindex="-1"
+              data-acsb-now-navigable="false"
+            >
+
+            <div class="product-form__buttons">
               <button
                 type="submit"
                 name="add"
-                data-add-to-cart=""
-                class="upsell-atc-btn add-to-cart cta cta-gig-secondary product-grid-button button"
+                class="h5 cta-gig-primary add-to-cart button cta product-grid-button ProductSubmitButton ProductSubmitButton-{{ section.id }}"
                 aria-haspopup="dialog"
                 data-acsb-overflower="true"
                 data-acsb-clickable="true"
                 data-acsb-navigable="true"
                 data-acsb-now-navigable="true"
                 data-custom-button-processed="true"
+                {% unless product.available %}
+                  disabled
+                {% endunless %}
               >
-                <span data-add-to-cart-text=""
-                  >ADD TO CART -
-
-                  <span class="product-grid-item-atc-price">$89</span>
+                <span>
+                  {%- if product.metafields.custom.button_text -%}
+                    {{- product.metafields.custom.button_text -}}
+                  {%- else -%}
+                    ADD TO CART
+                  {%- endif -%}
                 </span>
-
+                <span class="dash">-</span>
+                <span
+                  id="atc-price"
+                  js-atc-price
+                  data-variant-without-discount-price="{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}"
+                  data-variant-price="{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}"
+                  data-variant-compare-price="{% if product.selected_or_first_available_variant.compare_at_price %}{{ product.selected_or_first_available_variant.compare_at_price | money_without_trailing_zeros }}{% endif %}"
+                >
+                  <span class="product-grid-item-atc-price texts" js-normal-price>
+                    {{- product.selected_or_first_available_variant.price | money_without_trailing_zeros -}}
+                  </span>
+                  {% if product.selected_or_first_available_variant.compare_at_price %}
+                    <span class="regular-price" js-compare-price>
+                      {{-
+                        product.selected_or_first_available_variant.compare_at_price
+                        | money_without_trailing_zeros
+                      -}}
+                    </span>
+                  {% endif %}
+                </span>
                 <div class="loading__spinner hidden" data-acsb-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
                     <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
                   </svg>
                 </div>
               </button>
-            </form>
-          </product-form>
-        </div>
+            </div>
+
+            {% if product.metafields.custom.ship_date %}
+              <div style="display: flex; justify-content: center; padding-top: 10px;" class="meta__shipdate">
+                {{ product.metafields.custom.ship_date }}
+              </div>
+              <input
+                type="hidden"
+                name="properties[Estimated Ship Date]"
+                value="{{ product.metafields.custom.ship_date }}"
+                data-acsb-hidden="true"
+                tabindex="-1"
+                data-acsb-now-navigable="false"
+              >
+            {% endif %}
+
+            <input
+              type="hidden"
+              name="product-id"
+              value="{{ product.id }}"
+              data-acsb-hidden="true"
+              tabindex="-1"
+              data-acsb-now-navigable="false"
+            >
+            <input
+              type="hidden"
+              name="section-id"
+              value="{{ section.id }}"
+              data-acsb-hidden="true"
+              tabindex="-1"
+              data-acsb-now-navigable="false"
+            >
+          </form>
+        </product-form>
       </div>
+
+      {%- comment -%} Product Accordion {%- endcomment -%}
+      <div class="product-accordion">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'accordion' %}
+              <div class="details-wrapper">
+                <details id="block-summary_{{ block.id }}" class="details" {{ block.shopify_attributes }}>
+                  <summary
+                    data-acsb-clickable="true"
+                    data-acsb-navigable="true"
+                    tabindex="0"
+                    data-acsb-now-navigable="true"
+                  >
+                    <span>{{ block.settings.title }}</span>
+                  </summary>
+                  <div class="body1 summary-content">
+                    {{ block.settings.content }}
+                  </div>
+                </details>
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+
+      {%- comment -%} Pro Tip Upsell {%- endcomment -%}
+      {% if section.settings.upsell_product != blank %}
+        {% assign upsell_product = all_products[section.settings.upsell_product] %}
+        {% if upsell_product != blank %}
+          <div class="pro-tip-container">
+            <div class="pro-tip-heading">{{ section.settings.upsell_heading }}</div>
+            <div class="pro-tip-item">
+              <div class="product-image">
+                <a
+                  href="{{ upsell_product.url }}"
+                  data-acsb-clickable="true"
+                  data-acsb-navigable="true"
+                  data-acsb-now-navigable="true"
+                  data-custom-button-processed="true"
+                >
+                  <img
+                    src="{{ upsell_product.featured_image | image_url: width: 1000 }}"
+                    alt="{{ upsell_product.title }}"
+                    width="auto"
+                    height="auto"
+                    loading="lazy"
+                  >
+                </a>
+              </div>
+              <div class="pro-tip-item-content">
+                <div class="product-title">
+                  <a
+                    href="{{ upsell_product.url }}"
+                    data-acsb-clickable="true"
+                    data-acsb-navigable="true"
+                    data-acsb-now-navigable="true"
+                    data-custom-button-processed="true"
+                  >
+                    <h4 role="heading" aria-level="2">{{ upsell_product.title }}</h4>
+                  </a>
+                </div>
+                <product-form>
+                  <form
+                    action="/cart/add"
+                    data-productid="{{ upsell_product.id }}"
+                    method="post"
+                    enctype="multipart/form-data"
+                    id="add-to-cart-{{ upsell_product.handle }}--{{ section.id }}"
+                  >
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="{{ upsell_product.selected_or_first_available_variant.id }}"
+                      class="product-variant-id"
+                      id="variant-id-{{ upsell_product.id }}"
+                      data-acsb-hidden="true"
+                      tabindex="-1"
+                      data-acsb-now-navigable="false"
+                    >
+                    <input
+                      type="hidden"
+                      name="type"
+                      value=""
+                      data-acsb-hidden="true"
+                      tabindex="-1"
+                      data-acsb-now-navigable="false"
+                    >
+                    <input
+                      type="hidden"
+                      name="quantity"
+                      value="1"
+                      min="1"
+                      maxlength="12"
+                      id="Quantity"
+                      data-acsb-hidden="true"
+                      tabindex="-1"
+                      data-acsb-now-navigable="false"
+                    >
+                    <button
+                      type="submit"
+                      name="add"
+                      data-add-to-cart
+                      class="upsell-atc-btn add-to-cart cta cta-gig-secondary product-grid-button button"
+                      aria-haspopup="dialog"
+                      data-acsb-overflower="true"
+                      data-acsb-clickable="true"
+                      data-acsb-navigable="true"
+                      data-acsb-now-navigable="true"
+                      data-custom-button-processed="true"
+                    >
+                      <span data-add-to-cart-text
+                        >ADD TO CART -
+                        <span class="product-grid-item-atc-price">
+                          {{-
+                            upsell_product.selected_or_first_available_variant.price
+                            | money_without_trailing_zeros
+                          -}}
+                        </span></span
+                      >
+                      <div class="loading__spinner hidden" data-acsb-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
+                          <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
+                        </svg>
+                      </div>
+                    </button>
+                  </form>
+                </product-form>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
     </div>
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1b365d"
+    },
+    {
+      "type": "text",
+      "id": "upsell_product",
+      "label": "Upsell Product Handle",
+      "info": "Enter product handle (e.g., mint-roller)"
+    },
+    {
+      "type": "text",
+      "id": "upsell_heading",
+      "label": "Upsell Heading",
+      "default": "Pro Tip: Tap into the power of cold therapy"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Accordion Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<ul><li>List item 1</li><li>List item 2</li></ul>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Information",
+      "blocks": [
+        {
+          "type": "accordion",
+          "settings": {
+            "title": "Benefits",
+            "content": "<ul><li>May help strengthen/define jawline</li><li>May create a stronger chin profile</li><li>Deep rest may help your eyes appear brighter</li><li>May help you wake up more energized</li><li>May help reduce snoring and bad breath</li></ul>"
+          }
+        },
+        {
+          "type": "accordion",
+          "settings": {
+            "title": "How To Use",
+            "content": "<ul><li>When you've finished your nighttime routine apply mouth tape over the lips and prepare for a deep sleep. When removing the tape the next morning, pull skin taut and gently remove</li></ul>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
