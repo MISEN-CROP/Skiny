@@ -92,7 +92,7 @@
     }
 
     .announcement-bar .nav-link {
-        font-family    : var(--blanka-font);
+        font-family    : var(--font-primary);
         font-size      : 12px;
         font-weight    : 500;
         line-height    : 13px;

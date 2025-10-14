@@ -29,7 +29,7 @@ footer {
 }
 
 .footer .follow-along-heading {
-    font-family             : var(--blanka-font);
+    font-family             : var(--font-primary);
     font-size               : 24px;
     font-weight             : 500;
     line-height             : 24px;
@@ -45,7 +45,7 @@ footer {
     position                : relative;
     overflow                : hidden;
     text-decoration         : none;
-    font-family             : var(--blanka-font);
+    font-family             : var(--font-primary);
     font-size               : 16px;
     font-weight             : 500;
     line-height             : 18px;
@@ -73,7 +73,7 @@ footer {
 }
 
 .footer .social-media-address {
-    font-family             : var(--blanka-font);
+    font-family             : var(--font-primary);
     font-size               : 20px;
     font-weight             : 500;
     line-height             : 42px;
@@ -105,7 +105,7 @@ footer {
     justify-content         : space-between;
     align-items             : center;
     text-decoration         : none;
-    font-family             : var(--blanka-font);
+    font-family             : var(--font-primary);
     font-size               : 24px;
     font-weight             : 300;
     line-height             : 18px;
@@ -151,7 +151,7 @@ footer {
 }
 
 .footer .footer-wrapper .footer-newsletter .newsletter-heading {
-    font-family             : var(--blanka-font);
+    font-family             : var(--font-primary);
     font-size               : 20px;
     font-weight             : 300;
     line-height             : 24px;
@@ -395,7 +395,7 @@ footer {
 
 @media (min-width: 992px) {
     .footer .footer-wrapper .footer-newsletter .newsletter-heading {
-        font-family             : var(--blanka-font);
+        font-family             : var(--font-primary);
         font-size               : 20px;
         font-weight             : 300;
         line-height             : 24px;
@@ -415,7 +415,7 @@ footer {
     }
 
     .footer .follow-along-link {
-        font-family             : var(--blanka-font);
+        font-family             : var(--font-primary);
         font-size               : 20px;
         font-weight             : 500;
         line-height             : 18px;

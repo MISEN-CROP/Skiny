@@ -33,6 +33,7 @@
       media="all"
       onload="this.media='all'"
     >
+    {{ 'oke-review.css' | asset_url | stylesheet_tag }}
   </head>
   <body>
     {% sections 'header-group' %}

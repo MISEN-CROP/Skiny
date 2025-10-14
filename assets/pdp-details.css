@@ -20,7 +20,7 @@
 
 .pdp-details .oke-sr-count {
     color         : var(--gig-primary);
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 14px;
     font-style    : normal;
     font-weight   : 300;
@@ -60,7 +60,7 @@
 
 .pdp-details-title {
     color         : var(--gig-primary);
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 42px;
     font-style    : normal;
     font-weight   : 500;
@@ -114,7 +114,7 @@
 
 .pdp-details-container .pro-tip-item .product-title h4 {
     color      : var(--gig-primary);
-    font-family: var(--blanka-font);
+    font-family: var(--font-primary);
     font-size  : 20px;
     font-style : normal;
     font-weight: 500;
@@ -124,7 +124,7 @@
 .pdp-details-container .pro-tip-item button {
     width           : fit-content;
     color           : var(--gig-primary);
-    font-family     : var(--blanka-font);
+    font-family     : var(--font-primary);
     background-color: var(--gig-tertiary);
     border          : 1px solid var(--gig-primary);
     font-size       : 16px;
@@ -173,7 +173,7 @@
 
 .pdp-details-container .subscription-item .product-title h4 {
     color      : var(--gig-primary);
-    font-family: var(--blanka-font);
+    font-family: var(--font-primary);
     font-size  : 20px;
     font-style : normal;
     font-weight: 500;
@@ -183,7 +183,7 @@
 .pdp-details-container .subscription-item button {
     width           : fit-content;
     color           : var(--gig-primary);
-    font-family     : var(--blanka-font);
+    font-family     : var(--font-primary);
     background-color: var(--gig-tertiary);
     border          : 1px solid var(--gig-primary);
     font-size       : 16px;
@@ -207,7 +207,7 @@
 
 .pdp-details .read-more-btn {
     background    : transparent;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     border        : none;
     font-size     : 16px;
     font-weight   : 500;
@@ -247,7 +247,7 @@
 }
 
 body #placement-afterpay_on_site_messaging_payments_messaging_tintUg {
-    font-family: var(--blanka-font) !important;
+    font-family: var(--font-primary) !important;
     font-size  : 14px !important;
     margin     : unset !important;
     text-align : center !important
@@ -259,7 +259,7 @@ body #placement-afterpay_on_site_messaging_payments_messaging_tintUg {
 
 .pdp-details .product-tags {
     color         : var(--gig-primary);
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 14px;
     font-style    : normal;
     font-weight   : 500;
@@ -404,7 +404,7 @@ body #placement-afterpay_on_site_messaging_payments_messaging_tintUg {
     font-size     : 16px;
     color         : var(--gig-primary);
     text-align    : center;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-weight   : 500;
     line-height   : 17.52px;
     letter-spacing: 0%;
@@ -438,7 +438,7 @@ body #placement-afterpay_on_site_messaging_payments_messaging_tintUg {
 
 .pdp-details .pro-tip-heading {
     color         : var(--gig-primary);
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 24px;
     font-style    : normal;
     font-weight   : 500;
@@ -454,7 +454,7 @@ body #placement-afterpay_on_site_messaging_payments_messaging_tintUg {
 
 .pdp-details .whats-included .whats-included-heading {
     color         : var(--gig-primary);
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 24px;
     font-style    : normal;
     font-weight   : 500;
@@ -479,7 +479,7 @@ body #placement-afterpay_on_site_messaging_payments_messaging_tintUg {
     display    : flex;
     gap        : 18px;
     align-items: center;
-    font-family: var(--blanka-font);
+    font-family: var(--font-primary);
     color      : var(--gig-primary);
     font-size  : 16px;
     line-height: 20px

@@ -44,7 +44,7 @@
 
 .announcement-menu.nav-wrapper .li-link a {
     width                   : 100%;
-    font-family             : var(--blanka-font);
+    font-family             : var(--font-primary);
     font-size               : 16px;
     font-weight             : 500;
     line-height             : 13px;

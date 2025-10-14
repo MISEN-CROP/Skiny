@@ -57,7 +57,7 @@ header nav .child-link-item {
 
 header nav a {
     text-decoration: none;
-    font-family    : var(--blanka-font);
+    font-family    : var(--font-primary);
     font-size      : var(--body1-mob);
     line-height    : var(--body1-lh-mob);
     font-weight    : 500

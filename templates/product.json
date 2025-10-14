@@ -8,52 +8,84 @@
  * ------------------------------------------------------------
  */
 {
-    "sections": {
-        "main": {
-            "type": "main-product",
-            "blocks": {
-                "ai_bundles_quantity_breaks_frequently_bought_UfTkjf": {
-                    "type": "shopify://apps/ai-bundles-quantity-breaks/blocks/frequently_bought/019999bc-3553-75f2-a751-5be39d9372b9",
-                    "settings": {}
-                },
-                "ai_bundles_quantity_breaks_volume_discount_JAA6BY": {
-                    "type": "shopify://apps/ai-bundles-quantity-breaks/blocks/volume_discount/019999bc-3553-75f2-a751-5be39d9372b9",
-                    "settings": {}
-                },
-                "buy_it_now_gXRmAT": {
-                    "type": "buy_it_now",
-                    "settings": {
-                        "button_text": ""
-                    }
-                },
-                "accordion_zAnjWM": {
-                    "type": "accordion",
-                    "settings": {
-                        "title": "FEATURES",
-                        "content": "<ul><li>30 Mouth Tapes in a compact tin to keep on your nightstand.</li><li>97% Rayon, 3% Spandex</li><li>tape made in the USA</li></ul>"
-                    }
-                },
-                "accordion_kmWybd": {
-                    "type": "accordion",
-                    "settings": {
-                        "title": "Accordion Title",
-                        "content": "<ul><li>List item 1</li><li>List item 2</li></ul>"
-                    }
-                }
-            },
-            "block_order": [
-                "ai_bundles_quantity_breaks_frequently_bought_UfTkjf",
-                "ai_bundles_quantity_breaks_volume_discount_JAA6BY",
-                "buy_it_now_gXRmAT",
-                "accordion_zAnjWM",
-                "accordion_kmWybd"
-            ],
-            "settings": {
-                "title_color": "#1b365d",
-                "upsell_product": "",
-                "upsell_heading": "Pro Tip: Tap into the power of cold therapy"
-            }
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "ai_bundles_quantity_breaks_frequently_bought_UfTkjf": {
+          "type": "shopify://apps/ai-bundles-quantity-breaks/blocks/frequently_bought/019999bc-3553-75f2-a751-5be39d9372b9",
+          "settings": {}
+        },
+        "ai_bundles_quantity_breaks_volume_discount_JAA6BY": {
+          "type": "shopify://apps/ai-bundles-quantity-breaks/blocks/volume_discount/019999bc-3553-75f2-a751-5be39d9372b9",
+          "settings": {}
+        },
+        "buy_it_now_gXRmAT": {
+          "type": "buy_it_now",
+          "settings": {
+            "button_text": ""
+          }
+        },
+        "accordion_zAnjWM": {
+          "type": "accordion",
+          "settings": {
+            "title": "FEATURES",
+            "content": "<ul><li>30 Mouth Tapes in a compact tin to keep on your nightstand.</li><li>97% Rayon, 3% Spandex</li><li>tape made in the USA</li></ul>"
+          }
+        },
+        "accordion_kmWybd": {
+          "type": "accordion",
+          "settings": {
+            "title": "Accordion Title",
+            "content": "<ul><li>List item 1</li><li>List item 2</li></ul>"
+          }
         }
+      },
+      "block_order": [
+        "ai_bundles_quantity_breaks_frequently_bought_UfTkjf",
+        "ai_bundles_quantity_breaks_volume_discount_JAA6BY",
+        "buy_it_now_gXRmAT",
+        "accordion_zAnjWM",
+        "accordion_kmWybd"
+      ],
+      "settings": {
+        "title_color": "#1b365d",
+        "upsell_product": "",
+        "upsell_heading": "Pro Tip: Tap into the power of cold therapy"
+      }
     },
-    "order": ["main"]
+    "custom_code_text_etQxw8": {
+      "type": "custom-code-text",
+      "custom_css": [
+        "p {text-align: left !important; font-size: 50px; font-weight: 800; font-family: var(--font-primary);}"
+      ],
+      "name": "Custom Code Text",
+      "settings": {
+        "text_part1": "Reviews",
+        "text_part2": "",
+        "show_images": true
+      }
+    },
+    "1760430110c273bc39": {
+      "type": "apps",
+      "blocks": {
+        "okendo_reviews_widget_aGxNTB": {
+          "type": "shopify://apps/okendo/blocks/reviews-widget/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": "{{product}}",
+            "widget_type": "reviews_widget"
+          }
+        }
+      },
+      "block_order": [
+        "okendo_reviews_widget_aGxNTB"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "custom_code_text_etQxw8",
+    "1760430110c273bc39"
+  ]
 }

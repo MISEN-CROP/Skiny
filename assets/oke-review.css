@@ -1,0 +1,161 @@
+.component-reviews .h2 {
+    font-family   : var(--font-primary);
+    color         : var(--gig-primary);
+    text-transform: uppercase
+}
+
+.component-reviews .okeReviews {
+    max-width: unset !important
+}
+
+.okeReviews[data-oke-container].oke-w,
+div.okeReviews.oke-w,
+.okeReviews[data-oke-container] .oke-w-reviewer-verified,
+div.okeReviews .oke-w-reviewer-verified {
+    color: var(--gig-primary) !important
+}
+
+.okeReviews[data-oke-container] .oke-w-header-content,
+.okeReviews[data-oke-container] .oke-w-filter,
+.okeReviews[data-oke-container] .oke-w-review-footer,
+.okeReviews[data-oke-container] .oke-w-review-footer * {
+    font-family: var(--sohne-font) !important;
+    color      : var(--gig-primary) !important
+}
+
+.okeReviews[data-oke-container] .oke-w-header-content * {
+    color: var(--gig-primary) !important
+}
+
+.okeReviews[data-oke-container] .oke-helpful-vote-button:before,
+div.okeReviews .oke-helpful-vote-button:before {
+    color: var(--gig-primary) !important
+}
+
+.okeReviews[data-oke-container] .oke-reviewContent-readMore {
+    text-decoration: none !important
+}
+
+.okeReviews[data-oke-container] .oke-button,
+div.okeReviews .oke-button {
+    position: relative
+}
+
+.okeReviews[data-oke-container] .oke-button {
+    background-color: var(--gig-tertiary);
+    border          : 1px solid var(--gig-tertiary);
+    font-family     : var(--font-primary) !important;
+    color           : var(--gig-primary) !important;
+    overflow        : hidden
+}
+
+.okeReviews[data-oke-container] .oke-button:active {
+    background-color: #d6c1aa !important;
+    border-color    : #d6c1aa !important
+}
+
+div.okeReviews :not(.oke-w-writeReview) .oke-button:not(.oke-w-writeReview):before {
+    content         : "";
+    position        : absolute !important;
+    bottom          : 0;
+    left            : 0;
+    width           : 100%;
+    height          : 0%;
+    visibility      : none;
+    border          : none;
+    background-color: #d6c1aa !important;
+    transition      : height .8s ease;
+    z-index         : 1
+}
+
+div.okeReviews :not(.oke-w-writeReview) .oke-button:not(.oke-w-writeReview):hover {
+    border: 1px solid #d6c1aa;
+    color : var(--gig-primary)
+}
+
+div.okeReviews .oke-button:not(.oke-w-writeReview) span {
+    position: relative;
+    z-index : 3
+}
+
+div.okeReviews .oke-button:not(.oke-w-writeReview):hover:before {
+    height: 100%
+}
+
+.okeReviews[data-oke-container] .oke-reviewContent-readMore span {
+    font-family             : var(--font-primary);
+    font-size               : 16px;
+    font-weight             : 500;
+    line-height             : 20px;
+    letter-spacing          : -.02em;
+    text-align              : left;
+    text-underline-position : from-font;
+    text-decoration-skip-ink: none;
+    color                   : var(--gig-primary);
+    padding-bottom          : 3px;
+    border-bottom           : 2px solid #F8BED6
+}
+
+.okeReviews[data-oke-container] .oke-w-review-main .oke-reviewContent-title.oke-title {
+    font-size  : 26px !important;
+    font-family: var(--font-primary) !important;
+    color      : var(--gig-primary) !important
+}
+
+.okeReviews[data-oke-container] .oke-is-large .oke-w-review--featuredMedia .oke-w-review-helpful {
+    font-family: var(--sohne-font)
+}
+
+.okeReviews[data-oke-container] .oke-button,
+div.okeReviews .oke-button {
+    background-color: var(--gig-tertiary);
+    font-family     : var(--font-primary) !important;
+    color           : var(--gig-primary) !important
+}
+
+.okeReviews[data-oke-container] .oke-button:before {
+    color: var(--gig-primary) !important
+}
+
+.okeReviews[data-oke-container] .oke-button:not(.oke-is-loading):not(.oke-is-active):hover,
+div.okeReviews .oke-button:not(.oke-is-loading):not(.oke-is-active):hover {
+    background-color: var(--gig-tertiary);
+    border-color    : var(--gig-tertiary);
+    box-shadow      : none
+}
+
+body .okeReviews[data-oke-container] .oke-w-review-side,
+div.okeReviews .oke-w-review-side {
+    background-color: transparent;
+    font-family     : var(--sohne-font)
+}
+
+.okeReviews[data-oke-container] .oke-w-reviews-controls,
+div.okeReviews .oke-w-reviews-controls,
+.okeReviews[data-oke-container] .oke-w-reviews-controls * {
+    font-family: var(--font-primary);
+    color      : var(--gig-primary) !important
+}
+
+@media (min-width: 1441px) {
+    .component-reviews {
+        max-width: 1440px;
+        margin   : 0 auto
+    }
+}
+
+.okeReviews[data-oke-container] .oke-w-reviewSplit-left,
+div.okeReviews .oke-w-reviewSplit-left,
+.okeReviews[data-oke-container] .oke-w-reviewSplit,
+div.okeReviews .oke-w-reviewSplit {
+    text-align: start !important;
+}
+
+.oke-w-controls-nav {
+    display: none !important;
+}
+
+.okeReviews[data-oke-container] .oke-helpful,
+div.okeReviews .oke-helpful {
+    font-weight: bold !important;
+}

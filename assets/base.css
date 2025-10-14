@@ -39,6 +39,27 @@ body {
     color      : var(--color-semibold-primary);
 }
 
+.buy-it-now-buttons {
+    width     : 100%;
+    margin-top: 10px;
+}
+
+.oke-reviewContent-title.oke-title {
+    font-size: 24px !important;
+}
+
+.okeReviews * {
+    font-size  : 16px !important;
+    font-family: var(--font-monospace-mix) !important;
+}
+
+.okeReviews svg {
+    fill: var(--gig-primary) !important;
+}
+
+.okeReviews svg * {
+    fill: var(--gig-primary) !important;
+}
 
 .font-pr {
     font-family: var(--font-primary)
@@ -53,6 +74,9 @@ body {
 }
 
 
+.oke-reviewsTab--small-top-left {
+    display: none !important;
+}
 
 @media (max-width: 575.98px) {
     .container {
@@ -67,6 +91,12 @@ body {
 
 .background-gig-white {
     background-color: var(--gig-white)
+}
+
+.oke-reviewContent-title.oke-title {
+    font-family: var(--font-primary) !important;
+    font-weight: 500 !important;
+    font-size  : 26px !important;
 }
 
 .background-gig-bg-1 {
@@ -182,7 +212,7 @@ body {
 }
 
 .cta {
-    font-family    : var(--blanka-font);
+    font-family    : var(--font-primary);
     text-decoration: none;
     padding        : 6px 18px;
     display        : inline-block;
@@ -339,7 +369,7 @@ body {
 .cta.cta-skinny-underlined span {
     color      : var(--gig-primary);
     font-weight: 500;
-    font-family: var(--blanka-font);
+    font-family: var(--font-primary);
     font-size  : 16px;
     line-height: 20px
 }
@@ -536,7 +566,7 @@ body.template-index {
         font-weight   : 500;
         line-height   : 120%;
         letter-spacing: -0.5px;
-        font-family   : var(--blanka-font);
+        font-family   : var(--font-primary);
         padding       : 0px 18px;
     }
 
@@ -601,7 +631,7 @@ body.template-index {
         padding       : 4px 8px;
         display       : inline-block;
         text-align    : center;
-        font-family   : var(--blanka-font);
+        font-family   : var(--font-primary);
     }
 
     .Header_mobile_nav_innerbottom_innerproducts_innerloops_innerboxs_innerright_loops_lists_new.new_tag_white_new {
@@ -619,7 +649,7 @@ body.template-index {
         font-weight   : 500;
         line-height   : 120%;
         letter-spacing: -0.5px;
-        font-family   : var(--blanka-font);
+        font-family   : var(--font-primary);
         text-transform: capitalize;
     }
 
@@ -1101,11 +1131,11 @@ body.template-index {
     font-weight   : 500;
     line-height   : 133.333%;
     letter-spacing: -0.64px;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
 }
 
 .LP_Bestsellers_template_sides_innerleft_innerinfos_new p {
-    font-family: var(--blanka-font);
+    font-family: var(--font-primary);
     margin     : 0px 0px 16px;
     font-weight: inherit;
     font-size  : inherit;
@@ -1260,7 +1290,7 @@ body.template-index {
     font-size  : 16px;
     font-weight: 500;
     line-height: 125%;
-    font-family: var(--blanka-font);
+    font-family: var(--font-primary);
 }
 
 .LP_Object_testimonial_loops_innerboxs_innerright_infos_new p {
@@ -1357,7 +1387,7 @@ body.template-index {
 
 .LP_Product_grid_item_main_new .oke-sr-count {
     color         : rgb(27, 54, 93);
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 16px;
     font-weight   : 500;
     line-height   : 125%;
@@ -1366,7 +1396,7 @@ body.template-index {
 
 .LP_Product_grid_item_main_new .product-grid-name {
     color         : rgb(27, 54, 93);
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 24px;
     font-weight   : 500;
     line-height   : 116.667%;
@@ -1451,7 +1481,7 @@ body.template-index {
     padding       : 10px 12px;
     color         : rgb(27, 54, 93);
     text-align    : center;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 16px;
     font-weight   : 500;
     letter-spacing: -0.32px;
@@ -1598,7 +1628,7 @@ body.template-index {
     text-align    : center;
     min-width     : 150px;
     text-transform: uppercase;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     cursor        : pointer;
 }
 
@@ -1711,7 +1741,7 @@ body.template-index {
     line-height   : 120%;
     letter-spacing: -0.32px;
     text-transform: uppercase;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     padding-left  : 30px;
     position      : relative;
 }
@@ -1785,7 +1815,7 @@ body.template-index {
 .LP_Image_info_text_image_block_infostexts_new {
     color         : rgb(27, 54, 93);
     text-align    : center;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 32px;
     font-weight   : 300;
     line-height   : 125%;
@@ -1874,7 +1904,7 @@ body.template-index {
     font-weight   : 500;
     line-height   : 20px;
     letter-spacing: -0.32px;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     text-transform: uppercase;
 }
 
@@ -1993,7 +2023,7 @@ body.template-index {
 .LP_Object_tab_testimonial_block_innerdetail_innerdesktop_innerloops_innerboxs_title_new {
     padding-top   : 16px;
     color         : rgb(27, 54, 93);
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 16px;
     font-weight   : 500;
     line-height   : 125%;
@@ -2036,7 +2066,7 @@ body.template-index {
     line-height   : 140%;
     letter-spacing: -0.32px;
     text-transform: uppercase;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
 }
 
 .LP_Morning_night_routine_innersides_innerleft_mainloops_new {
@@ -2096,7 +2126,7 @@ body.template-index {
     font-weight   : 500;
     line-height   : 140%;
     letter-spacing: -0.32px;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
 }
 
 .LP_Morning_night_product_grid_item_innerright_boths_title_new a {
@@ -2148,7 +2178,7 @@ body.template-index {
     line-height   : 140%;
     letter-spacing: -0.32px;
     text-transform: uppercase;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
 }
 
 .LP_Morning_night_routine_innersides_innerright_mainloops_new {
@@ -2237,7 +2267,7 @@ body.template-index {
     font-weight   : 500;
     line-height   : 20px;
     letter-spacing: -0.32px;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     text-transform: uppercase;
 }
 
@@ -2301,7 +2331,7 @@ body.template-index {
     padding       : 32px 32px 32px 0px;
     background    : url("faq_plus_icon.svg") right center no-repeat;
     color         : rgb(27, 54, 93);
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
     font-size     : 20px;
     font-weight   : 500;
     line-height   : 120%;
@@ -2360,7 +2390,7 @@ body.template-index {
     line-height   : 120%;
     letter-spacing: -0.32px;
     text-transform: uppercase;
-    font-family   : var(--blanka-font);
+    font-family   : var(--font-primary);
 }
 
 .LP_Object_instagram_block_innersides_innerboths_innerlinks_new a {
@@ -3361,7 +3391,7 @@ body.template-index {
     .LP_Object_tab_testimonial_block_innerdetail_innermobile_innerloops_innerboxs_title_new {
         padding-top   : 16px;
         color         : rgb(27, 54, 93);
-        font-family   : var(--blanka-font);
+        font-family   : var(--font-primary);
         font-size     : 16px;
         font-weight   : 500;
         line-height   : 125%;
