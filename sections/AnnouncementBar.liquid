@@ -8,17 +8,21 @@
   announcement-bar
 >
   <ul class="nav-wrapper">
-    <li class="li-link active">
-      <a class="nav-link" href="{{ section.settings.link_1_url }}">{{ section.settings.link_1_text }}</a>
-    </li>
-
-    <li class="li-link">
-      <a class="nav-link" href="{{ section.settings.link_2_url }}">{{ section.settings.link_2_text }}</a>
-    </li>
-
-    <li class="li-link">
-      <a class="nav-link" href="{{ section.settings.link_3_url }}">{{ section.settings.link_3_text }}</a>
-    </li>
+    {% if section.settings.link_1_text %}
+      <li class="li-link active">
+        <a class="nav-link" href="{{ section.settings.link_1_url }}">{{ section.settings.link_1_text }}</a>
+      </li>
+    {% endif %}
+    {% if section.settings.link_2_text %}
+      <li class="li-link">
+        <a class="nav-link" href="{{ section.settings.link_2_url }}">{{ section.settings.link_2_text }}</a>
+      </li>
+    {% endif %}
+    {% if section.settings.link_3_text %}
+      <li class="li-link">
+        <a class="nav-link" href="{{ section.settings.link_3_url }}">{{ section.settings.link_3_text }}</a>
+      </li>
+    {% endif %}
   </ul>
 
   <div
