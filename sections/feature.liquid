@@ -1,0 +1,126 @@
+<section class="py-10 bg-var(--bg-second)">
+  <div class="page-container">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <!-- Text Content -->
+      <div class="space-y-8">
+        <!-- Section Title -->
+        <h2 class="text-3xl lg:text-4xl xl:text-7xl font-bold text-slate-800 tracking-tight color-pimary font-pr">
+          {{ section.settings.title | default: 'THE BENEFITS' }}
+        </h2>
+
+        <!-- Benefits List -->
+        <div class="space-y-8 benefits-list-feature">
+          {% for block in section.blocks %}
+            {% if block.type == 'benefit' %}
+              <div class="space-y-3">
+                <!-- Benefit Title -->
+                <h3 class="text-base md:text-lg lg:text-xl font-semibold text-slate-800 uppercase tracking-wider flex items-start color-pimary">
+                  <span class="w-2 h-2 bg-slate-800 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  {{ block.settings.title }}
+                </h3>
+
+                <!-- Benefit Description -->
+                <p class="text-base font-sohne text-slate-600 leading-relaxed ml-5 max-w-md">
+                  {{ block.settings.description }}
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Image Content -->
+      <div class="relative">
+        <div class="aspect-[1/1] rounded-2xl overflow-hidden bg-stone-100">
+          {% if section.settings.image %}
+            <img
+              src="{{ section.settings.image | image_url: width: 600 }}"
+              alt="{{ section.settings.image.alt | default: 'Benefits illustration' }}"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            >
+          {% else %}
+            <!-- Placeholder when no image is set -->
+            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-stone-100 to-stone-200">
+              <div class="text-center">
+                <div class="w-16 h-16 mx-auto mb-4 bg-stone-300 rounded-full flex items-center justify-center">
+                  <svg class="w-8 h-8 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <p class="text-sm text-stone-500">Add an image</p>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feature Benefits",
+  "tag": "section",
+  "class": "feature-benefits-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "THE BENEFITS"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Feature Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Benefit Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Benefit Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Benefits",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "LIFTS, TIGHTENS AND HYDRATES",
+            "description": "Caffeine-powered SPF may help reduce the appearance of wrinkles and puffiness on the skin while visibly lifting, tightening and hydrating the skin."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "PROTECTS AND PREVENTS",
+            "description": "SPF 40 can help shield against UV and blue light, while antioxidants may help prevent dark spots, fine lines and wrinkles."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "CLEAN, LIGHTWEIGHT FORMULA",
+            "description": "Fragrance-free and non-greasy, our clean formula is made without parabens, petrolatum, mineral oil, sulfates, phthalates, nano zinc and chemical SPF."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

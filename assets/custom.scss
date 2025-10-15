@@ -157,3 +157,19 @@
     max-height: 30px;
     display   : none;
 }
+
+.faq-answer {
+    color      : var(--color-semibold-primary) !important;
+    padding-top: 20px !important;
+}
+
+.benefits-list-feature {
+    &>div {
+        border-bottom : 2px solid var(--bg-gis-second-primary);
+        padding-bottom: 14px;
+
+        &:last-child {
+            border-color: transparent;
+        }
+    }
+}

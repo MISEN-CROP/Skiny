@@ -1,4 +1,4 @@
-<div class="video-single-section bg-[var(--bg-gis-second-primary)]">
+<div class="video-single-section bg-[var(--bg-gis-second-primary)]" id="play_section_{{section.id}}">
   <div class="py-10">
     {% if section.settings.section_title != blank %}
       <div class="video-single-heading">
@@ -77,6 +77,7 @@
           <div class="video_with_icon_inner_new">
             <svg
               class="play_icon"
+              id="play_icon"
               width="70"
               height="36"
               viewBox="0 0 70 36"
@@ -153,133 +154,28 @@
 </div>
 
 <script>
-  // Video handling for single video section
-  function initVideoSingleHandlers() {
-    const videoContainers = document.querySelectorAll('.video-single-section .video_with_icon_new');
+  const parentElement = document.querySelector('#play_section_{{section.id}}');
+  if (parentElement) {
+    const playIcon = parentElement.querySelector('.play_icon');
+    const videoElement = parentElement.querySelector('video');
 
-    videoContainers.forEach((videoContainer, index) => {
-      const video = videoContainer.querySelector('video');
-      const playIcon = videoContainer.querySelector('.play_icon');
-
-      console.log(`Video ${index}:`, {
-        video: !!video,
-        playIcon: !!playIcon,
-        videoSrc: video?.src,
-        videoDataUrl: video?.getAttribute('data-video-url'),
-      });
-
-      if (video && playIcon) {
-        // Set up video source if data-video-url attribute exists
-        const videoUrl = video.getAttribute('data-video-url');
-        if (videoUrl && !video.src) {
-          video.src = videoUrl;
-          console.log('Set video src:', videoUrl);
-        }
-
-        // Ensure video is loaded
-        video.load();
-
-        // Click handler for the entire container
-        videoContainer.addEventListener('click', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-
-          console.log('Video container clicked, video paused:', video.paused);
-
-          if (video.paused) {
-            // Pause all other videos on the page first
-            document.querySelectorAll('video').forEach((otherVideo) => {
-              if (otherVideo !== video && !otherVideo.paused) {
-                otherVideo.pause();
-                // Show play icon for other videos
-                const otherContainer = otherVideo.closest('.video_with_icon_new');
-                if (otherContainer) {
-                  const otherIcon = otherContainer.querySelector('.play_icon');
-                  if (otherIcon) {
-                    otherIcon.style.display = 'block';
-                    otherContainer.classList.remove('playing');
-                  }
-                }
-              }
-            });
-
-            // Play current video
-            const playPromise = video.play();
-
-            if (playPromise !== undefined) {
-              playPromise
-                .then(() => {
-                  console.log('Video playing successfully');
-                  playIcon.style.display = 'none';
-                  videoContainer.classList.add('playing');
-                })
-                .catch((error) => {
-                  console.error('Error playing video:', error);
-
-                  // Try to handle common issues
-                  if (error.name === 'NotAllowedError') {
-                    alert('Please interact with the page first to enable video playback');
-                  } else if (error.name === 'NotSupportedError') {
-                    alert('Video format not supported');
-                  } else {
-                    alert('Error playing video: ' + error.message);
-                  }
-                });
+    if (playIcon && videoElement) {
+      playIcon.addEventListener('click', () => {
+        if (videoElement.paused) {
+          videoElement.play();
+          parentElement.querySelector('.video-single-player').classList.add('playing');
+        } else {
+          videoElement.addEventListener('click', () => {
+            if (videoElement.played) {
+              videoElement.pause();
+              parentElement.querySelector('.video-single-player').classList.remove('playing');
             }
-          } else {
-            // Pause current video
-            video.pause();
-            playIcon.style.display = 'block';
-            videoContainer.classList.remove('playing');
-            console.log('Video paused');
-          }
-        });
-
-        // Video event listeners
-        video.addEventListener('ended', function () {
-          console.log('Video ended');
-          playIcon.style.display = 'block';
-          videoContainer.classList.remove('playing');
-        });
-
-        video.addEventListener('pause', function () {
-          console.log('Video paused');
-          playIcon.style.display = 'block';
-          videoContainer.classList.remove('playing');
-        });
-
-        video.addEventListener('play', function () {
-          console.log('Video started playing');
-          playIcon.style.display = 'none';
-          videoContainer.classList.add('playing');
-        });
-
-        video.addEventListener('loadstart', function () {
-          console.log('Video load started');
-        });
-
-        video.addEventListener('canplay', function () {
-          console.log('Video can play');
-        });
-
-        video.addEventListener('error', function (e) {
-          console.error('Video error:', e);
-          console.error('Video error details:', {
-            error: video.error,
-            networkState: video.networkState,
-            readyState: video.readyState,
-            src: video.src,
           });
-        });
-      }
-    });
-  }
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initVideoSingleHandlers);
-  } else {
-    initVideoSingleHandlers();
+          videoElement.pause();
+          parentElement.querySelector('.video-single-player').classList.remove('playing');
+        }
+      });
+    }
   }
 </script>
 
@@ -329,7 +225,6 @@
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
     cursor: pointer;
     z-index: 10;
-    pointer-events: none; /* Let click pass through to container */
   }
 
   .play_icon:hover {

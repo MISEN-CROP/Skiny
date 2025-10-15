@@ -54,6 +54,81 @@
         "upsell_heading": "Pro Tip: Tap into the power of cold therapy"
       }
     },
+    "feature_e9nMLr": {
+      "type": "feature",
+      "blocks": {
+        "benefit_EeTpmq": {
+          "type": "benefit",
+          "settings": {
+            "title": "LIFTS, TIGHTENS AND HYDRATES",
+            "description": "Caffeine-powered SPF may help reduce the appearance of wrinkles and puffiness on the skin while visibly lifting, tightening and hydrating the skin."
+          }
+        },
+        "benefit_AfJByY": {
+          "type": "benefit",
+          "settings": {
+            "title": "PROTECTS AND PREVENTS",
+            "description": "SPF 40 can help shield against UV and blue light, while antioxidants may help prevent dark spots, fine lines and wrinkles."
+          }
+        },
+        "benefit_w7XVkH": {
+          "type": "benefit",
+          "settings": {
+            "title": "CLEAN, LIGHTWEIGHT FORMULA",
+            "description": "Fragrance-free and non-greasy, our clean formula is made without parabens, petrolatum, mineral oil, sulfates, phthalates, nano zinc and chemical SPF."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_EeTpmq",
+        "benefit_AfJByY",
+        "benefit_w7XVkH"
+      ],
+      "name": "Feature Benefits",
+      "settings": {
+        "title": "THE BENEFITS",
+        "image": "shopify://shop_images/SPFSHOPALLArtboard2copy5.webp"
+      }
+    },
+    "ritual_RYfAr8": {
+      "type": "ritual",
+      "blocks": {
+        "video_MXRw7w": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/aa14679bd79441e08454af271183b022.mp4",
+            "caption": "Formulated with caffeine to lift + tighten skin while protecting from the sun.",
+            "author": ""
+          }
+        },
+        "video_XtTEb9": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/bee9e92f4bc04c4d863abbdeaa6c222b.mov",
+            "caption": "Dewy, lifted, protected skin ✨",
+            "author": "@mallycha"
+          }
+        },
+        "video_NtnWC6": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d8c5f65ddbce48da946b23e32a7553c9.mp4",
+            "caption": "Skin tightening + protecting that last all day long.",
+            "author": "@silkonne"
+          }
+        }
+      },
+      "block_order": [
+        "video_MXRw7w",
+        "video_XtTEb9",
+        "video_NtnWC6"
+      ],
+      "name": "The Ritual",
+      "settings": {
+        "title": "THE RITUAL",
+        "subtitle": "Lift, tighten, protect."
+      }
+    },
     "faq_KATqcU": {
       "type": "faq",
       "blocks": {
@@ -122,6 +197,8 @@
   },
   "order": [
     "main",
+    "feature_e9nMLr",
+    "ritual_RYfAr8",
     "faq_KATqcU",
     "video_single_eqPWUE",
     "1760430110c273bc39"

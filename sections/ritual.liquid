@@ -1,0 +1,212 @@
+<section class="py-16 lg:py-24 bg-[var(--bg-gis-second-primary)]">
+  <div class="page-container">
+    <!-- Header -->
+    <div class="mb-10">
+      <h2 class="text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-4 color-primary font-pr">
+        {{ section.settings.title | default: 'THE RITUAL' }}
+      </h2>
+      <div class="inline-block">
+        <p class="text-sm lg:text-base color-primary font-sohne">
+          {{ section.settings.subtitle | default: 'Lift, tighten, protect.' }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Video Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+      {% for block in section.blocks %}
+        {% if block.type == 'video' %}
+          <div class="video-item group">
+            <!-- Video Container -->
+            <div class="relative aspect-[9/16] rounded-2xl overflow-hidden bg-gray-100 shadow-lg mb-4">
+              {% if block.settings.video_url %}
+                <video
+                  class="w-full h-full object-cover"
+                  preload="metadata"
+                  muted
+                  loop
+                  data-video-url="{{ block.settings.video_url }}"
+                >
+                  <source src="{{ block.settings.video_url }}" type="video/mp4">
+                </video>
+              {% elsif block.settings.image %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 400 }}"
+                  alt="{{ block.settings.image.alt | default: 'Video thumbnail' }}"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="w-full h-full bg-gradient-to-br from-stone-200 to-stone-300 flex items-center justify-center">
+                  <div class="text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-stone-400 rounded-full flex items-center justify-center">
+                      <svg class="w-8 h-8 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                      </svg>
+                    </div>
+                    <p class="text-sm text-stone-600">Add video</p>
+                  </div>
+                </div>
+              {% endif %}
+
+              <button
+                class="play-button absolute inset-0 flex items-end justify-end p-4 transition-transform duration-200"
+                data-video-play
+                aria-label="Play video"
+              >
+                <div class="bg-white/20 backdrop-blur-sm rounded-full p-4 border border-white/30">
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 70 36"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="text-white"
+                  >
+                    <rect x="1" y="0.5" width="68" height="35" rx="17.5" stroke="currentColor"></rect>
+                    <path d="M44.8957 17.5334C45.3229 17.6978 45.3229 18.3022 44.8957 18.4666L28.4296 24.8044C28.1021 24.9305 27.75 24.6888 27.75 24.3378L27.75 11.6622C27.75 11.3112 28.1021 11.0695 28.4296 11.1956L44.8957 17.5334Z" stroke="currentColor" stroke-linejoin="round"></path>
+                  </svg>
+                </div>
+              </button>
+            </div>
+
+            <!-- Video Caption -->
+            <div class="text-left">
+              <p class="text-base font-sohne">
+                {{ block.settings.caption }}
+              </p>
+              {% if block.settings.author %}
+                <p class="text-xs text-slate-500 mt-1 font-medium">
+                  {{ block.settings.author }}
+                </p>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const playButtons = document.querySelectorAll('[data-video-play]');
+
+    playButtons.forEach((button) => {
+      button.addEventListener('click', function () {
+        const video = this.parentElement.querySelector('video');
+        if (video) {
+          if (video.paused) {
+            video.play();
+            this.style.opacity = '0';
+          } else {
+            video.pause();
+            this.style.opacity = '1';
+          }
+        }
+      });
+    });
+
+    // Hide play button when video is playing
+    const videos = document.querySelectorAll('video');
+    videos.forEach((video) => {
+      video.addEventListener('play', function () {
+        const playButton = this.parentElement.querySelector('[data-video-play]');
+        if (playButton) {
+          playButton.style.opacity = '0';
+        }
+      });
+
+      video.addEventListener('pause', function () {
+        const playButton = this.parentElement.querySelector('[data-video-play]');
+        if (playButton) {
+          playButton.style.opacity = '1';
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "The Ritual",
+  "tag": "section",
+  "class": "ritual-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "THE RITUAL"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Lift, tighten, protect."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL",
+          "info": "Upload video to Files in Shopify admin and paste URL here"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Video Thumbnail (fallback)",
+          "info": "Used if video URL is not provided"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Video Caption"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author/Credit",
+          "info": "Optional: Display author name below caption"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Ritual",
+      "blocks": [
+        {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/aa14679bd79441e08454af271183b022.mp4",
+            "caption": "Formulated with caffeine to lift + tighten skin while protecting from the sun.",
+            "author": ""
+          }
+        },
+        {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/aa14679bd79441e08454af271183b022.mp4",
+            "caption": "Dewy, lifted, protected skin ✨",
+            "author": "@mallycha"
+          }
+        },
+        {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/aa14679bd79441e08454af271183b022.mp4",
+            "caption": "Skin tightening + protecting that last all day long.",
+            "author": "@silkonne"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

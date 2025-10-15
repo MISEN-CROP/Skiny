@@ -127,4 +127,17 @@
 .loading__spinner {
   max-height: 30px;
   display: none;
+}
+
+.faq-answer {
+  color: var(--color-semibold-primary) !important;
+  padding-top: 20px !important;
+}
+
+.benefits-list-feature > div {
+  border-bottom: 2px solid var(--bg-gis-second-primary);
+  padding-bottom: 14px;
+}
+.benefits-list-feature > div:last-child {
+  border-color: transparent;
 }/*# sourceMappingURL=custom.css.map */
