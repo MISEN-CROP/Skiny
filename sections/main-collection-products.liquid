@@ -1,0 +1,314 @@
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+<div>
+  <div>
+    <nav class="collection-navigation !py-4" aria-label="Page Menu">
+      <ul data-acsb-menu="ul" aria-label="Main Menu" role="tablist" class="page-container">
+        {% for block in section.blocks %}
+          {% if block.type == 'collection_tab' %}
+            {% assign collection = collections[block.settings.collection] %}
+            {% if collection %}
+              <li data-acsb-menu="li" data-acsb-menu-root="true">
+                <a
+                  href="#"
+                  class="section-link{% if forloop.first %} active{% endif %}"
+                  data-section-id="{{ block.settings.section_id | default: collection.handle }}"
+                  data-collection-url="{{ collection.url }}"
+                  data-collection-handle="{{ collection.handle }}"
+                  data-acsb-clickable="true"
+                  data-acsb-navigable="true"
+                  data-acsb-now-navigable="true"
+                  data-custom-button-processed="true"
+                  data-acsb-menu="a"
+                  data-acsb-menu-root-link="true"
+                  {% if forloop.first %}
+                    data-acsb-tooltip="Use ←/→ to navigate"
+                  {% endif %}
+                  role="tab"
+                  onclick="showCollection('{{ collection.handle }}')"
+                >
+                  {% if block.settings.collection_image %}
+                    <img
+                      class="collection-thumb"
+                      src="{{ block.settings.collection_image | img_url: '600x600' }}"
+                      srcset="
+                        {{ block.settings.collection_image | img_url: '300x300' }} 300w,
+                        {{ block.settings.collection_image | img_url: '600x600' }} 600w,
+                        {{ block.settings.collection_image | img_url: '900x900' }} 900w
+                      "
+                      sizes="100vw"
+                      alt="{{ block.settings.display_name | default: collection.title }}"
+                      loading="eager"
+                      height="auto"
+                      width="auto"
+                    >
+                  {% elsif collection.featured_image %}
+                    <img
+                      class="collection-thumb"
+                      src="{{ collection.featured_image | img_url: '600x600' }}"
+                      srcset="
+                        {{ collection.featured_image | img_url: '300x300' }} 300w,
+                        {{ collection.featured_image | img_url: '600x600' }} 600w,
+                        {{ collection.featured_image | img_url: '900x900' }} 900w
+                      "
+                      sizes="100vw"
+                      alt="{{ block.settings.display_name | default: collection.title }}"
+                      loading="eager"
+                      height="auto"
+                      width="auto"
+                    >
+                  {% endif %}
+                  <span>{{ block.settings.display_name | default: collection.title }}</span>
+                </a>
+              </li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <!-- Products Grid -->
+    <div>
+      <div class="page-container">
+        <div class="products-container">
+          {% for block in section.blocks %}
+            {% if block.type == 'collection_tab' %}
+              {% assign collection = collections[block.settings.collection] %}
+              {% if collection %}
+                <div
+                  class="collection-products{% if forloop.first %} active{% endif %}"
+                  id="collection-{{ collection.handle }}"
+                  {% unless forloop.first %}
+                    style="display: none;"
+                  {% endunless %}
+                >
+                  {% if collection.products.size > 0 %}
+                    <div class="products-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
+                      {% for product in collection.products limit: section.settings.products_per_page %}
+                        {% render 'product-card',
+                          product: product,
+                          show_secondary_image: section.settings.show_secondary_image,
+                          show_vendor: section.settings.show_vendor,
+                          show_rating: section.settings.show_rating,
+                          lazy_load: true
+                        %}
+                      {% endfor %}
+                    </div>
+                    {% if collection.products.size > section.settings.products_per_page %}
+                      <div class="load-more-container text-center mt-8">
+                        <a href="{{ collection.url }}" class="btn btn-outline">
+                          View All {{ collection.title }} Products
+                        </a>
+                      </div>
+                    {% endif %}
+                  {% else %}
+                    <div class="empty-collection text-center mt-8">
+                      <p class="text-gray-600">No products found in this collection.</p>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showCollection(handle) {
+    // Hide all collection products
+    const allCollections = document.querySelectorAll('.collection-products');
+    allCollections.forEach((collection) => {
+      collection.style.display = 'none';
+      collection.classList.remove('active');
+    });
+
+    // Show selected collection
+    const selectedCollection = document.getElementById('collection-' + handle);
+    if (selectedCollection) {
+      selectedCollection.style.display = 'block';
+      selectedCollection.classList.add('active');
+    }
+
+    // Update active tab
+    const allTabs = document.querySelectorAll('.section-link');
+    allTabs.forEach((tab) => {
+      tab.classList.remove('active');
+    });
+
+    const activeTab = document.querySelector('[data-collection-handle="' + handle + '"]');
+    if (activeTab) {
+      activeTab.classList.add('active');
+    }
+  }
+</script>
+
+<style>
+  .products-grid {
+    margin-top: 2rem;
+  }
+
+  .collection-products {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .collection-products.active {
+    opacity: 1;
+  }
+
+  .empty-collection {
+    padding: 3rem 0;
+  }
+
+  .load-more-container {
+    margin-top: 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline {
+    border: 2px solid #1b365d;
+    color: #1b365d;
+    background: transparent;
+  }
+
+  .btn-outline:hover {
+    background: #1b365d;
+    color: #fffdf1;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection Products",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Collection Navigation Settings"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show secondary image on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show product rating",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_tab",
+      "name": "Collection Tab",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "display_name",
+          "label": "Display Name",
+          "info": "Leave blank to use collection title"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection_image",
+          "label": "Collection Image",
+          "info": "Leave blank to use collection featured image"
+        },
+        {
+          "type": "text",
+          "id": "section_id",
+          "label": "Section ID",
+          "info": "Custom section ID, leave blank to use collection handle"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Products",
+      "settings": {
+        "products_per_page": 12,
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true
+      },
+      "blocks": [
+        {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "shop-all",
+            "display_name": "Shop"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "subscribe-and-save",
+            "display_name": "Subscribe and Save"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "best-selling-collection",
+            "display_name": "Best Sellers"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "tools",
+            "display_name": "Tools"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "skin-care-new",
+            "display_name": "Skincare"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "wellness",
+            "display_name": "Wellness"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

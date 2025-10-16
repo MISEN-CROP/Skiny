@@ -6,6 +6,6 @@ if (window.location.pathname === "/") {
     document.body.classList.add("template-index")
 }
 
-if (window.location.pathname.includes("/products/") || window.location.pathname.includes("/pages/")) {
+if (window.location.pathname.includes("/products/") || window.location.pathname.includes("/pages/") || window.location.pathname.includes("/collections/")) {
     document.querySelector("header").classList.add("header-bg-second");
 }

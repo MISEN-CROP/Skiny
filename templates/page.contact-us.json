@@ -1,9 +1,77 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "sections": {
-        "main": {
-            "type": "main-contact",
-            "settings": {}
-        }
+  "sections": {
+    "main": {
+      "type": "main-contact",
+      "settings": {}
     },
-    "order": ["main"]
+    "single_image_KBGeE7": {
+      "type": "single-image",
+      "custom_css": [
+        "p {font-family: var(--font-primary-light);}",
+        ".content-wrapper-unix {text-align: left; position: absolute; bottom: 10px; left: 0;}"
+      ],
+      "name": "Single Image",
+      "settings": {
+        "image": "shopify://shop_images/Rectangle_3098.webp",
+        "overlay_opacity": 0,
+        "title": "",
+        "subtitle": "CONTACT US",
+        "text_color": "#ffffff",
+        "button_text": "",
+        "button_url": "",
+        "button_bg_color": "#1b365d",
+        "button_text_color": "#fffdf1",
+        "show_scroll_indicator": false,
+        "section_height": "h-screen"
+      }
+    },
+    "richtext_gYUmVc": {
+      "type": "richtext",
+      "name": "Rich Text",
+      "settings": {
+        "text_alignment": "left",
+        "title": "",
+        "title_color": "#1B365D",
+        "title_font": "system-ui, -apple-system, sans-serif",
+        "content": "We are here to answer any questions you may have. For quick answers to common questions, visit our locations -FAQ Page. You can also reach out to us by email.\n\nEMAIL US:\n\nsupport@shopskinnyconfidential.com",
+        "text_color": "#4A5568",
+        "content_font": "system-ui, -apple-system, sans-serif",
+        "button_text": "",
+        "button_url": "",
+        "button_icon": true,
+        "button_bg_color": "#1B365D",
+        "button_text_color": "#FFFDF1"
+      }
+    },
+    "176059954695e83084": {
+      "type": "apps",
+      "blocks": {
+        "powerful_form_builder_app_block_jJM8bx": {
+          "type": "shopify://apps/powerful-form-builder/blocks/app-block/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
+          "settings": {
+            "shortcode": "<div class=\"globo-formbuilder\" data-id=\"MTE0MjMw\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "powerful_form_builder_app_block_jJM8bx"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "single_image_KBGeE7",
+    "richtext_gYUmVc",
+    "176059954695e83084"
+  ]
 }

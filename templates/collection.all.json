@@ -1,0 +1,149 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_text_media_rQRGJT": {
+      "type": "hero-text-media",
+      "custom_css": [
+        ".order-last {background: var(--bg-second); border-radius: 14px; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;}",
+        ".order-last div,h2 {padding: 0; margin: 0;}",
+        ".order-last h2 {color: var(--color-semibold-primary) !important; font-family: var(--font-primary) !important; font-size: 72px; text-transform: uppercase; line-height: normal;}",
+        ".order-last div{font-weight: 600;}"
+      ],
+      "name": "Hero Text & Media",
+      "settings": {
+        "reverse_layout": false,
+        "image": "shopify://shop_images/Photo_Aug_26_2024_4_37_47_PM.webp",
+        "title": "Shop",
+        "title_color": "#4a5568",
+        "description": "Elevate your routine.",
+        "primary_button_text": "",
+        "primary_button_url": "",
+        "primary_button_bg_color": "#4a5568",
+        "primary_button_text_color": "#ffffff",
+        "secondary_button_text": "",
+        "secondary_button_url": "",
+        "secondary_button_border_color": "#4a5568",
+        "secondary_button_text_color": "#4a5568"
+      }
+    },
+    "main": {
+      "type": "main-collection-products",
+      "blocks": {
+        "collection_tab_JWGhtU": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "automated-collection",
+            "display_name": "",
+            "section_id": ""
+          }
+        },
+        "collection_tab_eaCPQB": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "best-sellers",
+            "display_name": "",
+            "section_id": ""
+          }
+        },
+        "collection_tab_JLddg9": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "hydrogen",
+            "display_name": "",
+            "section_id": ""
+          }
+        },
+        "collection_tab_QeDgAP": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "frontpage",
+            "display_name": "",
+            "section_id": ""
+          }
+        },
+        "collection_tab_8tFbWy": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "wellness",
+            "display_name": "",
+            "section_id": ""
+          }
+        },
+        "collection_tab_idEfEx": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "skincare",
+            "display_name": "",
+            "section_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_JWGhtU",
+        "collection_tab_eaCPQB",
+        "collection_tab_JLddg9",
+        "collection_tab_QeDgAP",
+        "collection_tab_8tFbWy",
+        "collection_tab_idEfEx"
+      ],
+      "settings": {
+        "products_per_page": 24,
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true
+      }
+    },
+    "ritual_zNBbPW": {
+      "type": "ritual",
+      "blocks": {
+        "video_M8mJwi": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/aa14679bd79441e08454af271183b022.mp4",
+            "caption": "Formulated with caffeine to lift + tighten skin while protecting from the sun.",
+            "author": ""
+          }
+        },
+        "video_jeDLY8": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/bee9e92f4bc04c4d863abbdeaa6c222b.mov",
+            "caption": "Dewy, lifted, protected skin ✨",
+            "author": "@mallycha"
+          }
+        },
+        "video_UkmH3P": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/d8c5f65ddbce48da946b23e32a7553c9.mp4",
+            "caption": "Skin tightening + protecting that last all day long.",
+            "author": "@silkonne"
+          }
+        }
+      },
+      "block_order": [
+        "video_M8mJwi",
+        "video_jeDLY8",
+        "video_UkmH3P"
+      ],
+      "name": "The Ritual",
+      "settings": {
+        "title": "THE RITUAL",
+        "subtitle": "Lift, tighten, protect."
+      }
+    }
+  },
+  "order": [
+    "hero_text_media_rQRGJT",
+    "main",
+    "ritual_zNBbPW"
+  ]
+}

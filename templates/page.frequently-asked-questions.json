@@ -42,7 +42,8 @@
         "@media (min-width: 992px) {.richtext-section {margin: unset; padding: 11px 36px; margin: 0 36px; }}",
         "@media (min-width: 1441px) {.richtext-section {max-width: 1440px; margin: 0 auto; }}",
         ".richtext-section section {border-radius: 14px; overflow: hidden;}",
-        ".richtext-section .page-container > div {background: transparent;}"
+        ".richtext-section .page-container > div {background: transparent;}",
+        "@media (max-width: 575.98px) {.richtext-section section {margin-top: 10px; }}"
       ],
       "name": "Rich Text",
       "settings": {
@@ -97,7 +98,7 @@
         "tab_content_VLNAhc"
       ],
       "custom_css": [
-        ".tab-section{padding: 10px 0}"
+        ".tab-section {padding: 10px 0;}"
       ],
       "name": "Tab Section",
       "settings": {

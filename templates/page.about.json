@@ -12,7 +12,8 @@
     "single_image_ahG4Cc": {
       "type": "single-image",
       "custom_css": [
-        "p {text-transform: uppercase; white-space: nowrap; font-weight: 600;}"
+        "p {text-transform: uppercase; white-space: nowrap; font-weight: 600;}",
+        "@media (max-width: 575.98px) {p {white-space: normal; }}"
       ],
       "name": "Single Image",
       "settings": {
@@ -31,12 +32,15 @@
     },
     "main": {
       "type": "main-about",
+      "custom_css": [
+        "@media (max-width: 768px) {.page-container {aspect-ratio: unset; }}"
+      ],
       "settings": {}
     },
     "hero_text_media_JFdxew": {
       "type": "hero-text-media",
       "custom_css": [
-        ".content-wrapper {background: var(--bg-second); border-radius: 10px; font-weight: 600; height: 100%; display: flex; justify-content: center; align-items: center;}"
+        ".content-wrapper {background: var(--bg-second); border-radius: 10px; font-weight: 600; height: 100%; display: flex; justify-content: center; align-items: normal;}"
       ],
       "name": "Hero Text & Media",
       "settings": {
@@ -96,16 +100,16 @@
         "reverse_layout": true,
         "image": "shopify://shop_images/ICEROLLERUPDATESICEROLLERcopy2_a35a5434-6852-4728-a901-0d83398db873.webp",
         "title": "The #1 best selling cold-therapy beauty tool, over 250,000 Ice Rollers sold.",
-        "title_color": "#4A5568",
+        "title_color": "#4a5568",
         "description": "",
         "primary_button_text": "",
         "primary_button_url": "",
-        "primary_button_bg_color": "#4A5568",
-        "primary_button_text_color": "#FFFFFF",
+        "primary_button_bg_color": "#4a5568",
+        "primary_button_text_color": "#ffffff",
         "secondary_button_text": "",
         "secondary_button_url": "",
-        "secondary_button_border_color": "#4A5568",
-        "secondary_button_text_color": "#4A5568"
+        "secondary_button_border_color": "#4a5568",
+        "secondary_button_text_color": "#4a5568"
       }
     }
   },
