@@ -1,0 +1,423 @@
+<div class="search-page">
+  <div class="page-container">
+    <!-- Search Header -->
+    <div class="search-header py-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4">
+          {% if search.performed %}
+            {% if search.results_count > 0 %}
+              {{ search.results_count }}
+              {% if search.results_count == 1 %}
+                result found for
+              {% else %}
+                results found for
+              {% endif %}
+              <span class="text-primary">"{{ search.terms }}"</span>
+            {% else %}
+              No results found for <span class="text-primary">"{{ search.terms }}"</span>
+            {% endif %}
+          {% else %}
+            Search Products
+          {% endif %}
+        </h1>
+
+        <!-- Search Form -->
+        <form action="{{ routes.search_url }}" method="get" class="search-form">
+          <div class="relative max-w-2xl mx-auto">
+            <input
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="Search for products..."
+              class="w-full px-6 py-4 text-lg border-2 border-gray-300 rounded-full focus:border-primary focus:outline-none"
+              autocomplete="off"
+            >
+            <button
+              type="submit"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition-colors !w-auto"
+            >
+              Search
+            </button>
+          </div>
+          <input type="hidden" name="type" value="product">
+        </form>
+      </div>
+    </div>
+
+    {% paginate search.results by 24 %}
+      {% if search.performed %}
+        {% if search.results_count > 0 %}
+          <!-- Filter and Sort Options -->
+          <div class="search-filters mb-8">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <!-- Sort Options -->
+              <div class="sort-options">
+                <label for="sort-by" class="text-sm font-medium text-gray-700 mr-2">Sort by:</label>
+                <select
+                  id="sort-by"
+                  class="border border-gray-300 rounded px-3 py-2 text-sm"
+                  onchange="updateSort(this.value)"
+                >
+                  <option
+                    value="relevance"
+                    {% if search.sort_by == 'relevance' %}
+                      selected
+                    {% endif %}
+                  >
+                    Relevance
+                  </option>
+                  <option
+                    value="price-ascending"
+                    {% if search.sort_by == 'price-ascending' %}
+                      selected
+                    {% endif %}
+                  >
+                    Price: Low to High
+                  </option>
+                  <option
+                    value="price-descending"
+                    {% if search.sort_by == 'price-descending' %}
+                      selected
+                    {% endif %}
+                  >
+                    Price: High to Low
+                  </option>
+                  <option
+                    value="title-ascending"
+                    {% if search.sort_by == 'title-ascending' %}
+                      selected
+                    {% endif %}
+                  >
+                    A-Z
+                  </option>
+                  <option
+                    value="title-descending"
+                    {% if search.sort_by == 'title-descending' %}
+                      selected
+                    {% endif %}
+                  >
+                    Z-A
+                  </option>
+                  <option
+                    value="created-descending"
+                    {% if search.sort_by == 'created-descending' %}
+                      selected
+                    {% endif %}
+                  >
+                    Newest
+                  </option>
+                  <option
+                    value="created-ascending"
+                    {% if search.sort_by == 'created-ascending' %}
+                      selected
+                    {% endif %}
+                  >
+                    Oldest
+                  </option>
+                  <option
+                    value="best-selling"
+                    {% if search.sort_by == 'best-selling' %}
+                      selected
+                    {% endif %}
+                  >
+                    Best Selling
+                  </option>
+                </select>
+              </div>
+
+              <!-- Results Count -->
+              <div class="results-count text-sm text-gray-600">
+                Showing {{ search.results.size }} of {{ search.results_count }} products
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Results Grid -->
+          <div class="search-results">
+            <div class="products-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {% for item in search.results %}
+                {% if item.object_type == 'product' %}
+                  {% render 'product-card',
+                    product: item,
+                    show_secondary_image: section.settings.show_secondary_image,
+                    show_vendor: section.settings.show_vendor,
+                    show_rating: section.settings.show_rating,
+                    lazy_load: true
+                  %}
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if paginate.pages > 1 %}
+              <div class="pagination-wrapper mt-12">
+                {% render 'pagination', paginate: paginate %}
+              </div>
+            {% endif %}
+          </div>
+
+        {% else %}
+          <!-- No Results -->
+          <div class="no-results text-center py-16">
+            <div class="max-w-lg mx-auto">
+              <svg class="w-24 h-24 mx-auto text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              <h2 class="text-2xl font-bold text-gray-800 mb-4">No products found</h2>
+              <p class="text-gray-600 mb-6">
+                We couldn't find any products matching <strong>"{{ search.terms }}"</strong>
+              </p>
+
+              <!-- Search Suggestions -->
+              <div class="search-suggestions">
+                <h3 class="text-lg font-semibold mb-4">Try searching for:</h3>
+                <div class="flex flex-wrap gap-2 justify-center">
+                  {% assign suggestion_terms = section.settings.search_suggestions | split: ',' %}
+                  {% for term in suggestion_terms %}
+                    {% assign clean_term = term | strip %}
+                    {% if clean_term != blank %}
+                      <a
+                        href="{{ routes.search_url }}?q={{ clean_term | url_encode }}&type=product"
+                        class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full text-sm transition-colors"
+                      >
+                        {{ clean_term }}
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- Popular Products -->
+              {% if section.settings.show_popular_products
+                and collections[section.settings.popular_collection].products.size > 0
+              %}
+                <div class="popular-products mt-12">
+                  <h3 class="text-xl font-bold mb-6">Popular Products</h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {% for product in collections[section.settings.popular_collection].products limit: 4 %}
+                      {% render 'product-card',
+                        product: product,
+                        show_secondary_image: section.settings.show_secondary_image,
+                        show_vendor: section.settings.show_vendor,
+                        show_rating: section.settings.show_rating,
+                        lazy_load: true
+                      %}
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+      {% else %}
+        <!-- Search Landing Page -->
+        <div class="search-landing text-center py-16">
+          <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6">Discover Our Products</h2>
+
+            <!-- Popular Search Terms -->
+            {% if section.settings.search_suggestions != blank %}
+              <div class="popular-searches mb-12">
+                <h3 class="text-lg font-semibold mb-4">Popular Searches</h3>
+                <div class="flex flex-wrap gap-3 justify-center">
+                  {% assign suggestion_terms = section.settings.search_suggestions | split: ',' %}
+                  {% for term in suggestion_terms %}
+                    {% assign clean_term = term | strip %}
+                    {% if clean_term != blank %}
+                      <a
+                        href="{{ routes.search_url }}?q={{ clean_term | url_encode }}&type=product"
+                        class="bg-primary text-white hover:bg-primary-dark px-6 py-3 rounded-full transition-colors"
+                      >
+                        {{ clean_term }}
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+
+            <!-- Featured Products -->
+            {% if section.settings.show_featured_products
+              and collections[section.settings.featured_collection].products.size > 0
+            %}
+              <div class="featured-products">
+                <h3 class="text-xl font-bold mb-6">{{ collections[section.settings.featured_collection].title }}</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {% for product in collections[section.settings.featured_collection].products limit: 8 %}
+                    {% render 'product-card',
+                      product: product,
+                      show_secondary_image: section.settings.show_secondary_image,
+                      show_vendor: section.settings.show_vendor,
+                      show_rating: section.settings.show_rating,
+                      lazy_load: true
+                    %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</div>
+
+<script>
+  function updateSort(sortValue) {
+    const url = new URL(window.location.href);
+    if (sortValue === 'relevance') {
+      url.searchParams.delete('sort_by');
+    } else {
+      url.searchParams.set('sort_by', sortValue);
+    }
+    window.location.href = url.toString();
+  }
+
+  // Auto-focus search input
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.querySelector('input[name="q"]');
+    if (searchInput && !searchInput.value) {
+      searchInput.focus();
+    }
+  });
+</script>
+
+<style>
+  .search-page {
+    min-height: 60vh;
+  }
+
+  .text-primary {
+    color: #1b365d;
+  }
+
+  .bg-primary {
+    background-color: #1b365d;
+  }
+
+  .bg-primary-dark {
+    background-color: #0f1419;
+  }
+
+  .border-primary {
+    border-color: #1b365d;
+  }
+
+  .products-grid {
+    margin-bottom: 2rem;
+  }
+
+  .search-form input:focus {
+    box-shadow: 0 0 0 3px rgba(27, 54, 93, 0.1);
+  }
+
+  .sort-options select:focus {
+    outline: none;
+    border-color: #1b365d;
+    box-shadow: 0 0 0 3px rgba(27, 54, 93, 0.1);
+  }
+
+  .pagination-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .search-filters {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .sort-options {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Search",
+  "class": "section-search",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Search Results Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show secondary image on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show product rating",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Search Suggestions"
+    },
+    {
+      "type": "textarea",
+      "id": "search_suggestions",
+      "label": "Popular search terms",
+      "info": "Separate terms with commas. Example: skincare, tools, wellness, mouth tape",
+      "default": "skincare, tools, wellness, mouth tape, best sellers"
+    },
+    {
+      "type": "header",
+      "content": "No Results Page"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_popular_products",
+      "label": "Show popular products when no results",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "popular_collection",
+      "label": "Popular products collection",
+      "info": "Collection to show when no search results found"
+    },
+    {
+      "type": "header",
+      "content": "Search Landing Page"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_products",
+      "label": "Show featured products on landing",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Featured products collection",
+      "info": "Collection to show on search landing page"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search",
+      "settings": {
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "search_suggestions": "skincare, tools, wellness, mouth tape, best sellers",
+        "show_popular_products": true,
+        "show_featured_products": true
+      }
+    }
+  ]
+}
+{% endschema %}
