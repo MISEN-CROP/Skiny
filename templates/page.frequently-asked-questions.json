@@ -1,0 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "single_image_iamDBW": {
+      "type": "single-image",
+      "custom_css": [
+        "h1 {color: var(--color-semibold-primary) !important;}",
+        ".content-wrapper-unix {text-align: left; position: absolute; bottom: 10px; left: 0;}"
+      ],
+      "name": "Single Image",
+      "settings": {
+        "image": "shopify://shop_images/luke_aug_2024_model_2-1638.webp",
+        "overlay_opacity": 0,
+        "title": "FAQS",
+        "subtitle": "",
+        "text_color": "#ffffff",
+        "button_text": "",
+        "button_url": "",
+        "button_bg_color": "#1b365d",
+        "button_text_color": "#fffdf1",
+        "show_scroll_indicator": false,
+        "section_height": "h-screen"
+      }
+    },
+    "main": {
+      "type": "main-frequently-asked-questions",
+      "disabled": true,
+      "settings": {}
+    },
+    "richtext_xdiXAg": {
+      "type": "richtext",
+      "custom_css": [
+        ".richtext-section {margin: 0 10px; padding: 0 10px;}",
+        "@media (min-width: 992px) {.richtext-section {margin: unset; padding: 11px 36px; margin: 0 36px; }}",
+        "@media (min-width: 1441px) {.richtext-section {max-width: 1440px; margin: 0 auto; }}",
+        ".richtext-section section {border-radius: 14px; overflow: hidden;}",
+        ".richtext-section .page-container > div {background: transparent;}"
+      ],
+      "name": "Rich Text",
+      "settings": {
+        "text_alignment": "left",
+        "title": "",
+        "title_color": "#1b365d",
+        "title_font": "system-ui, -apple-system, sans-serif",
+        "content": "Got questions about The Skinny Confidential? We’ve got you covered. We update this page regularly so it is easy for you to find answers to common questions. If you can’t find what you’re looking for, please reach out to our contact -Customer Service team and we’ll do our best to provide the answers.",
+        "text_color": "#4a5568",
+        "content_font": "system-ui, -apple-system, sans-serif",
+        "button_text": "",
+        "button_url": "",
+        "button_icon": false,
+        "button_bg_color": "#1b365d",
+        "button_text_color": "#fffdf1"
+      }
+    },
+    "tab_94ntkD": {
+      "type": "tab",
+      "blocks": {
+        "tab_group_77KkaY": {
+          "type": "tab_group",
+          "settings": {
+            "group_title": "",
+            "tabs": "subscriptions|Subscriptions,products|Products,ordering|Ordering,about|About Us,shipping|Shipping and Returns"
+          }
+        },
+        "tab_content_R3n9Hy": {
+          "type": "tab_content",
+          "settings": {
+            "tab_id": "subscriptions",
+            "tab_title": "Subscription Questions",
+            "content_type": "faq",
+            "content": "",
+            "faq_content": "How does my subscription work?|It's simple: first, pick which product you'd like to purchase. Then, under \"Manage Subscriptions\" on your subscription page, choose how often you'd like recurring orders to be delivered to you.||If I sign up for a subscription, will it renew automatically?|Yes, your subscription will automatically renew based on your selected frequency unless you cancel it.||How do I access my subscription page?|You can access your subscription page by logging into your account and navigating to the \"Manage Subscriptions\" section."
+          }
+        },
+        "tab_content_VLNAhc": {
+          "type": "tab_content",
+          "settings": {
+            "tab_id": "products",
+            "tab_title": "Product Information",
+            "content_type": "faq",
+            "content": "",
+            "faq_content": "What products do you offer?|We offer a range of wellness products designed to improve your daily routine.||Are your products safe?|Yes, all our products undergo rigorous testing to ensure safety and quality."
+          }
+        }
+      },
+      "block_order": [
+        "tab_group_77KkaY",
+        "tab_content_R3n9Hy",
+        "tab_content_VLNAhc"
+      ],
+      "custom_css": [
+        ".tab-section{padding: 10px 0}"
+      ],
+      "name": "Tab Section",
+      "settings": {
+        "section_title": "Frequently Asked Questions"
+      }
+    }
+  },
+  "order": [
+    "single_image_iamDBW",
+    "main",
+    "richtext_xdiXAg",
+    "tab_94ntkD"
+  ]
+}

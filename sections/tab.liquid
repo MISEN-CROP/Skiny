@@ -1,0 +1,265 @@
+<div class="tab-section py-16" style="background-color: var(--bg-second);">
+  <div class="page-container">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Left Sidebar Navigation -->
+      <div class="lg:col-span-3">
+        <div class="tab-navigation sticky top-8">
+          {% for block in section.blocks %}
+            {% if block.type == 'tab_group' %}
+              <div class="tab-group mb-8">
+                <h3
+                  class="text-lg font-medium mb-4"
+                  style="color: var(--gig-primary); font-family: var(--font-primary);"
+                >
+                  {{ block.settings.group_title }}
+                </h3>
+                <div class="space-y-2">
+                  {% assign tab_list = block.settings.tabs | split: ',' %}
+                  {% for tab_item in tab_list %}
+                    {% assign tab_parts = tab_item | split: '|' %}
+                    {% if tab_parts.size >= 2 %}
+                      <button
+                        class="tab-button w-full text-left px-4 py-3 rounded-lg transition-all duration-300 hover:shadow-md"
+                        style="background-color: var(--gig-tertiary); color: var(--gig-primary); font-family: var(--font-sohne);"
+                        data-tab="{{ tab_parts[0] | strip }}"
+                        onclick="showTab('{{ tab_parts[0] | strip }}')"
+                      >
+                        {{ tab_parts[1] | strip }}
+                      </button>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Right Content Area -->
+      <div class="lg:col-span-9">
+        <div class="tab-content-wrapper">
+          {% for block in section.blocks %}
+            {% if block.type == 'tab_content' %}
+              <div
+                class="tab-content-item p-8 rounded-lg shadow-lg hidden"
+                style="background-color: var(--gig-white);"
+                id="tab-{{ block.settings.tab_id }}"
+              >
+                <!-- Active Tab Header -->
+                <div class="mb-6 pb-4 border-b-2" style="border-color: var(--gig-primary);">
+                  <h2 class="text-2xl font-medium" style="color: var(--gig-primary); font-family: var(--font-primary);">
+                    {{ block.settings.tab_title }}
+                  </h2>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content-body">
+                  {% if block.settings.content_type == 'faq' %}
+                    <!-- FAQ Accordion Style -->
+                    <div class="faq-accordion space-y-4">
+                      {% assign faq_items = block.settings.faq_content | split: '||' %}
+                      {% for item in faq_items %}
+                        {% assign faq_parts = item | split: '|' %}
+                        {% if faq_parts.size >= 2 %}
+                          <div class="faq-item border rounded-lg" style="border-color: var(--gig-tertiary);">
+                            <button
+                              class="faq-question w-full text-left px-6 py-4 flex justify-between items-center hover:bg-opacity-50 transition-colors"
+                              style="background-color: var(--bg-gis-second-primary); color: var(--gig-primary); font-family: var(--font-primary);"
+                              onclick="toggleFAQ(this)"
+                            >
+                              <span class="font-medium">{{ faq_parts[0] }}</span>
+                              <svg
+                                class="faq-icon w-6 h-6 transform transition-transform"
+                                style="color: var(--gig-primary);"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                              </svg>
+                            </button>
+                            <div
+                              class="faq-answer hidden px-6 py-4"
+                              style="background-color: var(--gig-white); color: var(--gig-black); font-family: var(--font-sohne);"
+                            >
+                              <p>{{ faq_parts[1] }}</p>
+                            </div>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    <!-- Regular Content -->
+                    <div class="content-text" style="color: var(--gig-black); font-family: var(--font-sohne);">
+                      {{ block.settings.content }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showTab(tabId) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content-item').forEach((item) => {
+      item.classList.add('hidden');
+    });
+
+    // Remove active state from all buttons
+    document.querySelectorAll('.tab-button').forEach((button) => {
+      button.style.backgroundColor = 'var(--gig-tertiary)';
+      button.style.color = 'var(--gig-primary)';
+    });
+
+    // Show selected tab content
+    const selectedTab = document.getElementById(`tab-${tabId}`);
+    if (selectedTab) {
+      selectedTab.classList.remove('hidden');
+    }
+
+    // Add active state to clicked button
+    const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
+    if (activeButton) {
+      activeButton.style.backgroundColor = 'var(--gig-primary)';
+      activeButton.style.color = 'var(--gig-white)';
+    }
+  }
+
+  function toggleFAQ(button) {
+    const answer = button.nextElementSibling;
+    const icon = button.querySelector('.faq-icon');
+
+    if (answer.classList.contains('hidden')) {
+      answer.classList.remove('hidden');
+      icon.style.transform = 'rotate(45deg)';
+    } else {
+      answer.classList.add('hidden');
+      icon.style.transform = 'rotate(0deg)';
+    }
+  }
+
+  // Initialize first tab as active
+  document.addEventListener('DOMContentLoaded', function () {
+    const firstTab = document.querySelector('.tab-button');
+    if (firstTab) {
+      const tabId = firstTab.getAttribute('data-tab');
+      showTab(tabId);
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Tab Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab_group",
+      "name": "Tab Group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "group_title",
+          "label": "Group Title",
+          "default": "Products"
+        },
+        {
+          "type": "textarea",
+          "id": "tabs",
+          "label": "Tabs",
+          "info": "Format: id|title,id|title (e.g., products|Products,ordering|Ordering,about|About Us)",
+          "default": "products|Products,ordering|Ordering,about|About Us,subscriptions|Subscriptions,shipping|Shipping and Returns"
+        }
+      ]
+    },
+    {
+      "type": "tab_content",
+      "name": "Tab Content",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_id",
+          "label": "Tab ID",
+          "info": "Must match the ID from tab group (e.g., products, ordering, etc.)"
+        },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "default": "How does my subscription work?"
+        },
+        {
+          "type": "select",
+          "id": "content_type",
+          "label": "Content Type",
+          "options": [
+            { "value": "text", "label": "Text Content" },
+            { "value": "faq", "label": "FAQ Accordion" }
+          ],
+          "default": "faq"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "info": "For regular text content"
+        },
+        {
+          "type": "textarea",
+          "id": "faq_content",
+          "label": "FAQ Content",
+          "info": "Format: Question|Answer||Question|Answer (use || to separate items, | to separate question and answer)",
+          "default": "How does my subscription work?|It's simple: first, pick which product you'd like to purchase. Then, under \"Manage Subscriptions\" on your subscription page, choose how often you'd like recurring orders to be delivered to you.||If I sign up for a subscription, will it renew automatically?|Yes, your subscription will automatically renew based on your selected frequency."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tab Section",
+      "blocks": [
+        {
+          "type": "tab_group",
+          "settings": {
+            "group_title": "Help Topics",
+            "tabs": "subscriptions|Subscriptions,products|Products,ordering|Ordering,about|About Us,shipping|Shipping and Returns"
+          }
+        },
+        {
+          "type": "tab_content",
+          "settings": {
+            "tab_id": "subscriptions",
+            "tab_title": "Subscription Questions",
+            "content_type": "faq",
+            "faq_content": "How does my subscription work?|It's simple: first, pick which product you'd like to purchase. Then, under \"Manage Subscriptions\" on your subscription page, choose how often you'd like recurring orders to be delivered to you.||If I sign up for a subscription, will it renew automatically?|Yes, your subscription will automatically renew based on your selected frequency unless you cancel it.||How do I access my subscription page?|You can access your subscription page by logging into your account and navigating to the \"Manage Subscriptions\" section."
+          }
+        },
+        {
+          "type": "tab_content",
+          "settings": {
+            "tab_id": "products",
+            "tab_title": "Product Information",
+            "content_type": "faq",
+            "faq_content": "What products do you offer?|We offer a range of wellness products designed to improve your daily routine.||Are your products safe?|Yes, all our products undergo rigorous testing to ensure safety and quality."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
