@@ -45,7 +45,6 @@
         "title": "",
         "title_color": "#4a5568",
         "description": "The Skinny Confidential is a clean beauty and wellness brand designed to upgrade your daily and wellness routine. We are committed to sourcing high-quality ingredients and developing effective, innovative products that are beautiful to look at. We believe the foundation of your life starts with a commitment to small habits that lead to big results.",
-        "text_color": "#4a5568",
         "primary_button_text": "",
         "primary_button_url": "",
         "primary_button_bg_color": "#4a5568",
@@ -76,19 +75,37 @@
       "type": "richtext",
       "name": "Rich Text",
       "settings": {
-        "background_color": "#f5f5dc",
         "text_alignment": "left",
         "title": "FOUNDER STORY",
-        "title_color": "#1B365D",
+        "title_color": "#1b365d",
         "title_font": "system-ui, -apple-system, sans-serif",
         "content": "The Skinny Confidential was founded by Lauryn Bosstick to romanticize your daily self-care routine. Whether it's an energizing morning ritual or a relaxing evening routine, we help you habit-stack wellness to elevate your day.\n\nLauryn first launched The Skinny Confidential as a blog in 2011, featuring unfiltered advice spanning from skincare to wellness to relationships to entrepreneurship. It led to the launch of TSC brand in 2021, with the first products being the award-winning Ice Roller and De-Puffing Face Oil.",
-        "text_color": "#4A5568",
+        "text_color": "#4a5568",
         "content_font": "system-ui, -apple-system, sans-serif",
         "button_text": "",
         "button_url": "",
         "button_icon": false,
-        "button_bg_color": "#1B365D",
-        "button_text_color": "#FFFDF1"
+        "button_bg_color": "#1b365d",
+        "button_text_color": "#fffdf1"
+      }
+    },
+    "hero_text_media_gGHxan": {
+      "type": "hero-text-media",
+      "name": "Hero Text & Media",
+      "settings": {
+        "reverse_layout": true,
+        "image": "shopify://shop_images/ICEROLLERUPDATESICEROLLERcopy2_a35a5434-6852-4728-a901-0d83398db873.webp",
+        "title": "The #1 best selling cold-therapy beauty tool, over 250,000 Ice Rollers sold.",
+        "title_color": "#4A5568",
+        "description": "",
+        "primary_button_text": "",
+        "primary_button_url": "",
+        "primary_button_bg_color": "#4A5568",
+        "primary_button_text_color": "#FFFFFF",
+        "secondary_button_text": "",
+        "secondary_button_url": "",
+        "secondary_button_border_color": "#4A5568",
+        "secondary_button_text_color": "#4A5568"
       }
     }
   },
@@ -97,6 +114,7 @@
     "main",
     "hero_text_media_JFdxew",
     "video_single_ERaai4",
-    "richtext_MXVzea"
+    "richtext_MXVzea",
+    "hero_text_media_gGHxan"
   ]
 }

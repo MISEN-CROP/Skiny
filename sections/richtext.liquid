@@ -1,93 +1,94 @@
 {% if section.settings.title != blank or section.settings.content != blank %}
   <section
-    class="richtext-section py-16 lg:py-24"
-    style="background-color: {{ section.settings.background_color | default: '#F5F5DC' }};"
+    class="richtext-section py-8 bg-[var(--bg-gis-second-primary)]"
   >
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      {% if section.settings.title != blank %}
-        <div class="text-center mb-12 lg:mb-16">
-          <h2
-            class="text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight"
-            style="
-              color: {{ section.settings.title_color | default: '#1B365D' }};
-              font-family: {{ section.settings.title_font | default: 'system-ui, -apple-system, sans-serif' }};
-            "
-          >
-            {{ section.settings.title }}
-          </h2>
-        </div>
-      {% endif %}
-
-      {% if section.settings.content != blank %}
-        <div class="prose prose-lg max-w-none">
-          <div
-            class="text-base lg:text-lg leading-relaxed space-y-6"
-            style="
-              color: {{ section.settings.text_color | default: '#4A5568' }};
-              font-family: {{ section.settings.content_font | default: 'system-ui, -apple-system, sans-serif' }};
-              text-align: {{ section.settings.text_alignment | default: 'left' }};
-            "
-          >
-            {{ section.settings.content }}
+    <div class="page-container md:!p-0">
+      <div class="bg-[var(--bg-second)] px-4 py-10 lg:px-12 lg:py-8 rounded-3xl">
+        {% if section.settings.title != blank %}
+          <div class="text-{{ section.settings.title_alignment | default: 'text-center' }} mb-6">
+            <h2
+              class="text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight"
+              style="
+                color: {{ section.settings.title_color | default: '#1B365D' }};
+                font-family: {{ section.settings.title_font | default: 'system-ui, -apple-system, sans-serif' }};
+              "
+            >
+              {{ section.settings.title }}
+            </h2>
           </div>
-        </div>
-      {% endif %}
+        {% endif %}
 
-      <!-- Call to Action Button -->
-      {% if section.settings.button_text != blank %}
-        <div class="text-{{ section.settings.text_alignment | default: 'left' }} mt-12">
-          <a
-            href="{{ section.settings.button_url | default: '#' }}"
-            class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            style="
-              background-color: {{ section.settings.button_bg_color | default: '#1B365D' }};
-              color: {{ section.settings.button_text_color | default: '#FFFDF1' }};
-            "
-          >
-            {{ section.settings.button_text }}
-            {% if section.settings.button_icon %}
-              <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-              </svg>
-            {% endif %}
-          </a>
-        </div>
-      {% endif %}
+        {% if section.settings.content != blank %}
+          <div class="prose prose-lg max-w-none">
+            <div
+              class="text-base lg:text-lg leading-relaxed space-y-6"
+              style="
+                color: {{ section.settings.text_color | default: '#4A5568' }};
+                font-family: {{ section.settings.content_font | default: 'system-ui, -apple-system, sans-serif' }};
+                text-align: {{ section.settings.text_alignment | default: 'left' }};
+              "
+            >
+              {{ section.settings.content }}
+            </div>
+          </div>
+        {% endif %}
 
-      <!-- Additional Content Blocks -->
-      {% if section.blocks.size > 0 %}
-        <div class="mt-16 space-y-12">
-          {% for block in section.blocks %}
-            {% if block.type == 'text_block' %}
-              <div class="prose prose-lg max-w-none">
-                {% if block.settings.heading != blank %}
-                  <h3
-                    class="text-2xl lg:text-3xl font-bold mb-6"
-                    style="
-                      color: {{ section.settings.title_color | default: '#1B365D' }};
-                      text-align: {{ section.settings.text_alignment | default: 'left' }};
-                    "
-                  >
-                    {{ block.settings.heading }}
-                  </h3>
-                {% endif %}
+        <!-- Call to Action Button -->
+        {% if section.settings.button_text != blank %}
+          <div class="text-{{ section.settings.text_alignment | default: 'left' }} mt-12">
+            <a
+              href="{{ section.settings.button_url | default: '#' }}"
+              class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              style="
+                background-color: {{ section.settings.button_bg_color | default: '#1B365D' }};
+                color: {{ section.settings.button_text_color | default: '#FFFDF1' }};
+              "
+            >
+              {{ section.settings.button_text }}
+              {% if section.settings.button_icon %}
+                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              {% endif %}
+            </a>
+          </div>
+        {% endif %}
 
-                {% if block.settings.text != blank %}
-                  <div
-                    class="text-base lg:text-lg leading-relaxed"
-                    style="
-                      color: {{ section.settings.text_color | default: '#4A5568' }};
-                      text-align: {{ section.settings.text_alignment | default: 'left' }};
-                    "
-                  >
-                    {{ block.settings.text }}
-                  </div>
-                {% endif %}
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-      {% endif %}
+        <!-- Additional Content Blocks -->
+        {% if section.blocks.size > 0 %}
+          <div class="mt-16 space-y-12">
+            {% for block in section.blocks %}
+              {% if block.type == 'text_block' %}
+                <div class="prose prose-lg max-w-none">
+                  {% if block.settings.heading != blank %}
+                    <h3
+                      class="text-2xl lg:text-3xl font-bold mb-6"
+                      style="
+                        color: {{ section.settings.title_color | default: '#1B365D' }};
+                        text-align: {{ section.settings.text_alignment | default: 'left' }};
+                      "
+                    >
+                      {{ block.settings.heading }}
+                    </h3>
+                  {% endif %}
+
+                  {% if block.settings.text != blank %}
+                    <div
+                      class="text-base lg:text-lg leading-relaxed"
+                      style="
+                        color: {{ section.settings.text_color | default: '#4A5568' }};
+                        text-align: {{ section.settings.text_alignment | default: 'left' }};
+                      "
+                    >
+                      {{ block.settings.text }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
     </div>
   </section>
 {% endif %}
@@ -101,12 +102,6 @@
     {
       "type": "header",
       "content": "Section Settings"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#F5F5DC"
     },
     {
       "type": "select",
@@ -273,7 +268,6 @@
       "settings": {
         "title": "FOUNDER STORY",
         "content": "The Skinny Confidential was founded by Lauryn Bosstick to romanticize your daily self-care routine. Whether it's an energizing morning ritual or a relaxing evening routine, we help you habit-stack wellness to elevate your day.\n\nLauryn first launched The Skinny Confidential as a blog in 2011, featuring unfiltered advice spanning from skincare to wellness to relationships to entrepreneurship. It led to the launch of TSC brand in 2021, with the first products being the award-winning Ice Roller and De-Puffing Face Oil.",
-        "background_color": "#F5F5DC",
         "text_alignment": "left"
       }
     }

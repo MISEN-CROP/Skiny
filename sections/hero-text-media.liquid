@@ -3,14 +3,14 @@
     class="hero-text-media-section py-6"
     style="background-color: var(--bg-gis-second-primary);"
   >
-    <div class="page-container">
+    <div class="page-container md:!p-0">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         <!-- Image Container -->
         {% if section.settings.image %}
           <div class="{% if section.settings.reverse_layout %}order-last lg:order-last{% else %}order-first lg:order-first{% endif %}">
             <div class="relative">
               <!-- Main image container with rounded corners -->
-              <div class="rounded-3xl overflow-hidden bg-gradient-to-br from-slate-200 to-slate-300 shadow-2xl aspect-[4/3]">
+              <div class="rounded-3xl overflow-hidden bg-gradient-to-br from-slate-200 to-slate-300 aspect-[4/3]">
                 <img
                   src="{{ section.settings.image | image_url: width: 800 }}"
                   srcset="

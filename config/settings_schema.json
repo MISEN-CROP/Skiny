@@ -92,24 +92,54 @@
                 "content": "Typography"
             },
             {
-                "type": "font_picker",
+                "type": "select",
                 "id": "font_primary",
                 "label": "Primary Font",
-                "default": "helvetica_n4",
+                "default": "F37Blanka-Medium",
+                "options": [
+                    {
+                        "value": "F37Blanka-Medium",
+                        "label": "F37 Blanka Medium"
+                    },
+                    { "value": "F37Blanka-Light", "label": "F37 Blanka Light" },
+                    { "value": "SohneMono", "label": "Sohne Mono" },
+                    { "value": "Arial", "label": "Arial" },
+                    { "value": "Helvetica", "label": "Helvetica" }
+                ],
                 "info": "Controls --font-primary"
             },
             {
-                "type": "font_picker",
+                "type": "select",
                 "id": "font_primary_light",
                 "label": "Primary Font Light",
-                "default": "helvetica_n3",
+                "default": "F37Blanka-Light",
+                "options": [
+                    { "value": "F37Blanka-Light", "label": "F37 Blanka Light" },
+                    {
+                        "value": "F37Blanka-Medium",
+                        "label": "F37 Blanka Medium"
+                    },
+                    { "value": "SohneMono", "label": "Sohne Mono" },
+                    { "value": "Arial", "label": "Arial" },
+                    { "value": "Helvetica", "label": "Helvetica" }
+                ],
                 "info": "Controls --font-primary-light"
             },
             {
-                "type": "font_picker",
+                "type": "select",
                 "id": "font_sohne",
                 "label": "Sohne Font",
-                "default": "monaco_n4",
+                "default": "SohneMono",
+                "options": [
+                    { "value": "SohneMono", "label": "Sohne Mono" },
+                    {
+                        "value": "F37Blanka-Medium",
+                        "label": "F37 Blanka Medium"
+                    },
+                    { "value": "F37Blanka-Light", "label": "F37 Blanka Light" },
+                    { "value": "Monaco", "label": "Monaco" },
+                    { "value": "Courier", "label": "Courier" }
+                ],
                 "info": "Controls --font-sohne"
             },
             {

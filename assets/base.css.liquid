@@ -4,8 +4,8 @@
     --bg-gis-second-primary         : {{ settings.bg_gis_second_primary | default: '#f1e8da' }};
     --bg-second                     : {{ settings.bg_second | default: '#fffdf1' }};
     --font-monospace                : monospace;
-    --font-primary                  : {{ settings.font_primary.family | default: 'F37Blanka-Medium' }}, {{ settings.font_primary.fallback_families }};
-    --font-primary-light            : {{ settings.font_primary_light.family | default: 'F37Blanka-Light' }}, {{ settings.font_primary_light.fallback_families }};
+    --font-primary                  : {{ settings.font_primary.family | default: 'F37Blanka-Medium' }};
+    --font-primary-light            : {{ settings.font_primary_light.family | default: 'F37Blanka-Light' }};
     --font-sohne                    : {{ settings.font_sohne.family | default: 'SohneMono' }}, {{ settings.font_sohne.fallback_families }};
     --gig-black                     : {{ settings.gig_black | default: '#000' }};
     --gig-white                     : {{ settings.gig_white | default: '#fff' }};
@@ -38,7 +38,7 @@ html {
     background-color: var(--bg-second) !important;
 }
 
-body {
+body{
     font-family: var(--font-primary);
     color      : var(--color-semibold-primary);
 }
