@@ -1,0 +1,102 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "single_image_ahG4Cc": {
+      "type": "single-image",
+      "custom_css": [
+        "p {text-transform: uppercase; white-space: nowrap; font-weight: 600;}"
+      ],
+      "name": "Single Image",
+      "settings": {
+        "image": "shopify://shop_images/desktop.webp",
+        "overlay_opacity": 0,
+        "title": "",
+        "subtitle": "Discover The Skinny Confidential with our founder Lauryn Bosstick",
+        "text_color": "#ffffff",
+        "button_text": "",
+        "button_url": "",
+        "button_bg_color": "#1b365d",
+        "button_text_color": "#fffdf1",
+        "show_scroll_indicator": true,
+        "section_height": "h-screen"
+      }
+    },
+    "main": {
+      "type": "main-about",
+      "settings": {}
+    },
+    "hero_text_media_JFdxew": {
+      "type": "hero-text-media",
+      "custom_css": [
+        ".content-wrapper {background: var(--bg-second); border-radius: 10px; font-weight: 600; height: 100%; display: flex; justify-content: center; align-items: center;}"
+      ],
+      "name": "Hero Text & Media",
+      "settings": {
+        "reverse_layout": false,
+        "image": "shopify://shop_images/TSK_PRODUCT_07242025_cydneycosetteholm_0006_1_1.webp",
+        "title": "",
+        "title_color": "#4a5568",
+        "description": "The Skinny Confidential is a clean beauty and wellness brand designed to upgrade your daily and wellness routine. We are committed to sourcing high-quality ingredients and developing effective, innovative products that are beautiful to look at. We believe the foundation of your life starts with a commitment to small habits that lead to big results.",
+        "text_color": "#4a5568",
+        "primary_button_text": "",
+        "primary_button_url": "",
+        "primary_button_bg_color": "#4a5568",
+        "primary_button_text_color": "#ffffff",
+        "secondary_button_text": "",
+        "secondary_button_url": "",
+        "secondary_button_border_color": "#4a5568",
+        "secondary_button_text_color": "#4a5568"
+      }
+    },
+    "video_single_ERaai4": {
+      "type": "video-single",
+      "name": "Video Single",
+      "settings": {
+        "section_title": "",
+        "title_color": "#1b365d",
+        "section_description": "",
+        "video_url": "https://cdn.shopify.com/videos/c/o/v/eabe5d8cbb2245bdb49b0ee4a3bec9eb.mp4",
+        "youtube_id": "",
+        "vimeo_id": "",
+        "video_autoplay": false,
+        "video_loop": true,
+        "video_muted": true,
+        "video_caption": ""
+      }
+    },
+    "richtext_MXVzea": {
+      "type": "richtext",
+      "name": "Rich Text",
+      "settings": {
+        "background_color": "#f5f5dc",
+        "text_alignment": "left",
+        "title": "FOUNDER STORY",
+        "title_color": "#1B365D",
+        "title_font": "system-ui, -apple-system, sans-serif",
+        "content": "The Skinny Confidential was founded by Lauryn Bosstick to romanticize your daily self-care routine. Whether it's an energizing morning ritual or a relaxing evening routine, we help you habit-stack wellness to elevate your day.\n\nLauryn first launched The Skinny Confidential as a blog in 2011, featuring unfiltered advice spanning from skincare to wellness to relationships to entrepreneurship. It led to the launch of TSC brand in 2021, with the first products being the award-winning Ice Roller and De-Puffing Face Oil.",
+        "text_color": "#4A5568",
+        "content_font": "system-ui, -apple-system, sans-serif",
+        "button_text": "",
+        "button_url": "",
+        "button_icon": false,
+        "button_bg_color": "#1B365D",
+        "button_text_color": "#FFFDF1"
+      }
+    }
+  },
+  "order": [
+    "single_image_ahG4Cc",
+    "main",
+    "hero_text_media_JFdxew",
+    "video_single_ERaai4",
+    "richtext_MXVzea"
+  ]
+}

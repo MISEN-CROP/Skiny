@@ -1,0 +1,202 @@
+{% if section.settings.image or section.settings.title != blank or section.settings.description != blank %}
+  <section
+    class="hero-text-media-section py-6"
+    style="background-color: var(--bg-gis-second-primary);"
+  >
+    <div class="page-container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <!-- Image Container -->
+        {% if section.settings.image %}
+          <div class="{% if section.settings.reverse_layout %}order-last lg:order-last{% else %}order-first lg:order-first{% endif %}">
+            <div class="relative">
+              <!-- Main image container with rounded corners -->
+              <div class="rounded-3xl overflow-hidden bg-gradient-to-br from-slate-200 to-slate-300 shadow-2xl aspect-[4/3]">
+                <img
+                  src="{{ section.settings.image | image_url: width: 800 }}"
+                  srcset="
+                    {{ section.settings.image | image_url: width: 600 }} 600w,
+                    {{ section.settings.image | image_url: width: 800 }} 800w,
+                    {{ section.settings.image | image_url: width: 1000 }} 1000w,
+                    {{ section.settings.image | image_url: width: 1200 }} 1200w
+                  "
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  alt="{{ section.settings.image.alt | default: section.settings.title | default: 'Hero Image' }}"
+                  class="w-full h-full object-cover media-image"
+                  loading="eager"
+                >
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Text Content -->
+        <div class="{% if section.settings.reverse_layout %}order-first lg:order-first{% else %}order-last lg:order-last{% endif %} space-y-6 lg:p-8 content-wrapper">
+          {% if section.settings.title != blank %}
+            <h2
+              class="text-2xl lg:text-3xl xl:text-4xl font-normal leading-relaxed"
+              style="color: {{ section.settings.title_color | default: '#4A5568' }}; font-family: 'Courier New', monospace;"
+            >
+              {{ section.settings.title }}
+            </h2>
+          {% endif %}
+
+          {% if section.settings.description != blank %}
+            <div
+              class="text-sm lg:text-base font-pr-light leading-relaxed space-y-4 w-full text-[var(--text-gis-second-primary)]"
+            >
+              {{ section.settings.description }}
+            </div>
+          {% endif %}
+
+          <!-- Buttons -->
+          {% if section.settings.primary_button_text != blank or section.settings.secondary_button_text != blank %}
+            <div class="flex flex-col sm:flex-row gap-4 pt-6">
+              {% if section.settings.primary_button_text != blank %}
+                <a
+                  href="{{ section.settings.primary_button_url | default: '#' }}"
+                  class="inline-flex items-center justify-center px-8 py-3 text-sm font-medium rounded-lg transition-all duration-300 hover:shadow-lg"
+                  style="
+                    background-color: {{ section.settings.primary_button_bg_color | default: '#4A5568' }};
+                    color: {{ section.settings.primary_button_text_color | default: '#FFFFFF' }};
+                    font-family: 'Courier New', monospace;
+                  "
+                >
+                  {{ section.settings.primary_button_text }}
+                </a>
+              {% endif %}
+
+              {% if section.settings.secondary_button_text != blank %}
+                <a
+                  href="{{ section.settings.secondary_button_url | default: '#' }}"
+                  class="inline-flex items-center justify-center px-8 py-3 text-sm font-medium rounded-lg border transition-all duration-300 hover:shadow-lg"
+                  style="
+                    border-color: {{ section.settings.secondary_button_border_color | default: '#4A5568' }};
+                    color: {{ section.settings.secondary_button_text_color | default: '#4A5568' }};
+                    background-color: transparent;
+                    font-family: 'Courier New', monospace;
+                  "
+                >
+                  {{ section.settings.secondary_button_text }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Hero Text & Media",
+  "tag": "section",
+  "class": "hero-text-media-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse_layout",
+      "label": "Reverse Layout",
+      "default": false,
+      "info": "Place text on left and image on right"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Image",
+      "info": "Recommended size: 1200x900px (4:3 aspect ratio)"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#4A5568"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Primary Button"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary Button Text",
+      "placeholder": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_url",
+      "label": "Primary Button URL"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_bg_color",
+      "label": "Primary Button Background Color",
+      "default": "#4A5568"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_text_color",
+      "label": "Primary Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary Button Text",
+      "placeholder": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_url",
+      "label": "Secondary Button URL"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_border_color",
+      "label": "Secondary Button Border Color",
+      "default": "#4A5568"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_text_color",
+      "label": "Secondary Button Text Color",
+      "default": "#4A5568"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Text & Media",
+      "settings": {
+        "title": "The Skinny Confidential is a clean beauty and wellness brand designed to upgrade your daily and wellness routine. We are committed to sourcing high-quality ingredients and developing effective, innovative products that are beautiful to look at. We believe the foundation of your life starts with a commitment to small habits that lead to big results.",
+        "reverse_layout": false
+      }
+    }
+  ]
+}
+{% endschema %}
