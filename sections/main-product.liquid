@@ -2,6 +2,12 @@
 {{ 'pdp-details.css' | asset_url | stylesheet_tag }}
 {{ 'pdp-media-gallery.js' | asset_url | script_tag }}
 
+<script>
+  if (window.location.pathname !== '/products/mouth-tape') {
+    window.location.href = '/products/mouth-tape';
+  }
+</script>
+
 <div class="bg-[var(--bg-gis-second-primary)]">
   <div class="pdp-details-media-gallery-container  py-10">
     <div>

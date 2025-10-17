@@ -140,4 +140,8 @@
 }
 .benefits-list-feature > div:last-child {
   border-color: transparent;
+}
+
+.text-video-custom {
+  font-size: 30px !important;
 }/*# sourceMappingURL=custom.css.map */

@@ -29,15 +29,22 @@
         "accordion_zAnjWM": {
           "type": "accordion",
           "settings": {
-            "title": "FEATURES",
-            "content": "<ul><li>30 Mouth Tapes in a compact tin to keep on your nightstand.</li><li>97% Rayon, 3% Spandex</li><li>tape made in the USA</li></ul>"
+            "title": "Benefits",
+            "content": "<ul><li>May help strengthen/define jawline</li><li>May create a stronger chin profile</li><li>Deep rest may help your eyes appear brighter</li><li>May help you wake up more energized</li><li>May help reduce snoring and bad breath</li></ul>"
           }
         },
         "accordion_kmWybd": {
           "type": "accordion",
           "settings": {
-            "title": "Accordion Title",
-            "content": "<ul><li>List item 1</li><li>List item 2</li></ul>"
+            "title": "How To Use",
+            "content": "<ul><li>When you’ve finished your nighttime routine apply mouth tape over the lips and prepare for a deep sleep. When removing the tape the next morning, pull skin taut and gently remove.</li><li>You’ll never go to sleep without your Mouth Tape again…especially with that new chiseled jawline.</li><li>For best results, use every night.</li></ul>"
+          }
+        },
+        "accordion_iQzBdx": {
+          "type": "accordion",
+          "settings": {
+            "title": "FEATURES",
+            "content": "<ul><li>30 Mouth Tapes in a compact tin to keep on your nightstand.</li><li>97% Rayon, 3% Spandex</li><li>tape made in the USA</li></ul>"
           }
         }
       },
@@ -46,7 +53,8 @@
         "ai_bundles_quantity_breaks_volume_discount_JAA6BY",
         "buy_it_now_gXRmAT",
         "accordion_zAnjWM",
-        "accordion_kmWybd"
+        "accordion_kmWybd",
+        "accordion_iQzBdx"
       ],
       "settings": {
         "title_color": "#1b365d",
@@ -87,7 +95,7 @@
       "name": "Feature Benefits",
       "settings": {
         "title": "THE BENEFITS",
-        "image": "shopify://shop_images/SPFSHOPALLArtboard2copy5.webp"
+        "image": "shopify://shop_images/MIMI_VERSION_CREAM_1_5c9772d1-9757-4836-be0f-2bf0baa48b6b.webp"
       }
     },
     "ritual_RYfAr8": {
@@ -139,6 +147,27 @@
             "answer": "<p>Mouth tape is for anyone who wants brighter eyes, a stronger jaw, and a more sculpted chin. Men and women can use mouth tape every single night. (We wouldn’t recommend these for children.)</p>"
           }
         },
+        "faq_item_kDAKfx": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does mouth tape work exactly?",
+            "answer": "<p>By taping your mouth shut you’re forced to breathe through your nose. When you’re awake you can consciously make an effort to breathe through your nose but it’s hard to do that when you’re sleeping. The Skinny Confidential mouth tape does that for you.</p>"
+          }
+        },
+        "faq_item_iTFT73": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are the beauty benefits?",
+            "answer": "<p>A stronger more defined jawline and chin, whiter eyes, better breath and way more energy in the mornings. What’s more beautiful than waking up chiseled, happy and rejuvenated?</p>"
+          }
+        },
+        "faq_item_wXYNgN": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I feel like I can’t breathe?",
+            "answer": "<p>Try to relax. Take long deep breaths, in and out through your nose. Your body was made for nasal breathing. In fact, nasal breathing promotes relaxation. But, if you’re ever too uncomfortable, remove the tape. Take baby steps. It takes some getting used to.</p>"
+          }
+        },
         "faq_item_6Xahid": {
           "type": "faq_item",
           "settings": {
@@ -149,6 +178,9 @@
       },
       "block_order": [
         "faq_item_EhXj3i",
+        "faq_item_kDAKfx",
+        "faq_item_iTFT73",
+        "faq_item_wXYNgN",
         "faq_item_6Xahid"
       ],
       "name": "FAQ Section",

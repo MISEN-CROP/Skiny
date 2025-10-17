@@ -14,13 +14,13 @@
             {% if block.type == 'benefit' %}
               <div class="space-y-3">
                 <!-- Benefit Title -->
-                <h3 class="text-base md:text-lg lg:text-xl font-semibold text-slate-800 uppercase tracking-wider flex items-start color-pimary">
+                <h3 class="text-base md:text-lg lg:text-xl font-semibold text-slate-800 uppercase tracking-wider flex items-start color-pimary !font-normal">
                   <span class="w-2 h-2 bg-slate-800 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                   {{ block.settings.title }}
                 </h3>
 
                 <!-- Benefit Description -->
-                <p class="text-base font-sohne text-slate-600 leading-relaxed ml-5 max-w-md">
+                <p class="text-base font-sohne text-slate-600 leading-relaxed ml-5 max-w-md !text-current">
                   {{ block.settings.description }}
                 </p>
               </div>

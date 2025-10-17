@@ -27,6 +27,35 @@
         "type": "shopify://apps/powerful-form-builder/blocks/app-embed/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
         "disabled": false,
         "settings": {}
+      },
+      "15093188558284415348": {
+        "type": "shopify://apps/spark/blocks/shoppable-pops/3eb8b961-42bd-4d42-a091-9b8e4c877d96",
+        "disabled": false,
+        "settings": {
+          "show_videos_dynamically": false,
+          "show_untagged_videos": false,
+          "auto_play_video": "always",
+          "pop_play_next_video": false,
+          "show_play_button": false,
+          "pop_position": "bottom_right",
+          "border_radius": 16,
+          "player_type": "full_screen_player",
+          "show_views_on_player": false,
+          "player_border_radius": 16,
+          "product_card_border_radius": 12,
+          "product_card_image_border_radius": 8,
+          "show_compare_at_price": true,
+          "product_card_btn_actn": "product_details",
+          "product_card_btn_text": "Shop",
+          "product_card_btn_background_color": "#000000",
+          "product_card_btn_text_color": "#FFFFFF",
+          "product_card_btn_border_radius": 24
+        }
+      },
+      "15404810374585504564": {
+        "type": "shopify://apps/videeo-mobile-commerce/blocks/app-embed-sdk/acf9f8eb-c211-4324-a19b-9f362f43b225",
+        "disabled": true,
+        "settings": {}
       }
     }
   }

@@ -6,7 +6,7 @@
     --font-monospace                : monospace;
     --font-primary                  : {{ settings.font_primary.family | default: 'F37Blanka-Medium' }};
     --font-primary-light            : {{ settings.font_primary_light.family | default: 'F37Blanka-Light' }};
-    --font-sohne                    : {{ settings.font_sohne.family | default: 'SohneMono' }}, {{ settings.font_sohne.fallback_families }};
+    --font-sohne                    : {{ settings.font_sohne.family | default: '"SohneMono", monospace' }} {{ settings.font_sohne.fallback_families }};
     --gig-black                     : {{ settings.gig_black | default: '#000' }};
     --gig-white                     : {{ settings.gig_white | default: '#fff' }};
     --gig-primary                   : {{ settings.gig_primary | default: '#004288' }};

@@ -1,26 +1,33 @@
 <div class="custom-code-text relative py-4">
-  <div class="page-container bg-[var(--bg-second)] mx-auto px-6 py-8 rounded-xl mb-4">
-    <div class="flex items-center gap-6">
-      <p class="custom-paragraph text-xl md:text-3xl max-w-full md:max-w-3xl">
-        {{ section.settings.text_part1 }}
-        {% if section.settings.show_images %}
-          <span class="inline-images">
-            {% for block in section.blocks %}
-              {% if block.type == 'image' %}
-                <img
-                  src="{{ block.settings.image | image_url }}"
-                  alt="{{ block.settings.image_alt | escape }}"
-                  style="zoom: 1.00552;"
-                  role="presentation"
-                >
-              {% endif %}
-            {% endfor %}
-          </span>
-        {% endif %}
-        {{ section.settings.text_part2 }}
-      </p>
+  {% if section.settings.is_wrapper_container %}
+    <div class="page-container mb-4">
+      <div class="bg-[var(--bg-second)] rounded-xl py-8">
+  {% else %}
+    <div class="mb-4">
+      <div class="page-container bg-[var(--bg-second)] rounded-xl py-8">
+  {% endif %}
+        <div class="flex items-center gap-6">
+          <p class="custom-paragraph text-xl md:text-3xl max-w-full md:max-w-3xl">
+            {{ section.settings.text_part1 }}
+            {% if section.settings.show_images %}
+              <span class="inline-images">
+                {% for block in section.blocks %}
+                  {% if block.type == 'image' %}
+                    <img
+                      src="{{ block.settings.image | image_url }}"
+                      alt="{{ block.settings.image_alt | escape }}"
+                      style="zoom: 1.00552;"
+                      role="presentation"
+                    >
+                  {% endif %}
+                {% endfor %}
+              </span>
+            {% endif %}
+            {{ section.settings.text_part2 }}
+          </p>
+        </div>
+      </div>
     </div>
-  </div>
 </div>
 
 {% schema %}
@@ -45,6 +52,12 @@
       "type": "checkbox",
       "id": "show_images",
       "label": "Show Images",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "is_wrapper_container",
+      "label": "Add wrapper container",
       "default": true
     }
   ],
