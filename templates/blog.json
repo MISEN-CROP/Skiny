@@ -1,0 +1,140 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "media_layout_wpfmzb": {
+      "type": "media-layout",
+      "custom_css": [
+        ".order-first {justify-content: center; background: var(--bg-second); padding: 20px; border-radius: 16px;}",
+        "> div {background: var(--bg-gis-second-primary); padding: 20px 0;}",
+        "img {background: transparent;}",
+        ".page-container > div {gap: 0rem;}",
+        "h2 {font-size: 72px; font-weight: bold;}",
+        "@media (max-width: 576px) {h2 {font-size: 30px; }}",
+        "p {font-family: var(--font-sohne);}"
+      ],
+      "name": "Media Layout",
+      "settings": {
+        "image_1_alt": "",
+        "image_2_alt": "",
+        "image_3_alt": "",
+        "heading": "THE LATEST",
+        "description": "Looking for the skinny on how to make the most of your daily beauty routine? You’ve come to the right place. You’ll find a treasure trove of self care tips and advice about how to use our on-the-pulse tools and effective, no-fluff skincare products.",
+        "button_text": "SHOP NOW",
+        "button_link": "shopify://collections/all",
+        "main_image": "shopify://shop_images/sunscreen-pdp_png_9544c343-c800-46c2-a46b-1ceb6d6e342d.webp",
+        "main_image_alt": ""
+      }
+    },
+    "marquee_logo_UnqJrk": {
+      "type": "marquee-logo",
+      "blocks": {
+        "logo_ME9F6m": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Vector.svg",
+            "link": "shopify://collections"
+          }
+        },
+        "logo_gJNHkK": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Page-1.svg",
+            "link": ""
+          }
+        },
+        "logo_GAjTPM": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Harper_s_Bazaar_Logo_svg.svg",
+            "link": ""
+          }
+        },
+        "logo_NrAmGn": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/g4174.svg",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_ME9F6m",
+        "logo_gJNHkK",
+        "logo_GAjTPM",
+        "logo_NrAmGn"
+      ],
+      "name": "Marquee Logo",
+      "settings": {
+        "featured_text": "Featured in"
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "heading": "",
+        "posts_limit": 24,
+        "columns_desktop": "3",
+        "show_blog_name": true,
+        "show_excerpt": true,
+        "show_date": true,
+        "show_author": true,
+        "button_text": "Read Article",
+        "show_view_all": false,
+        "view_all_text": "Explore All Articles",
+        "view_all_link": ""
+      }
+    },
+    "1760687849c59bbbef": {
+      "type": "apps",
+      "blocks": {
+        "spark_shoppable_video_DJEP89": {
+          "type": "shopify://apps/spark/blocks/shoppable-video/3eb8b961-42bd-4d42-a091-9b8e4c877d96",
+          "settings": {
+            "show_videos_dynamically": false,
+            "auto_play_video": "always",
+            "feed_title": "JOINTHE TSC COMMUNITY",
+            "title_alignment": "center",
+            "item_alignment": false,
+            "show_play_button": false,
+            "show_views": false,
+            "show_arrow_buttons": false,
+            "product_card_status": "hidden",
+            "show_video_title": false,
+            "border_radius": 16,
+            "padding_top": 20,
+            "padding_bottom": 20,
+            "player_type": "full_screen_player",
+            "show_views_on_player": false,
+            "player_border_radius": 16,
+            "product_card_border_radius": 12,
+            "product_card_image_border_radius": 8,
+            "show_compare_at_price": true,
+            "product_card_btn_actn": "product_details",
+            "product_card_btn_text": "Shop",
+            "product_card_btn_background_color": "#000000",
+            "product_card_btn_text_color": "#ffffff",
+            "product_card_btn_border_radius": 24
+          }
+        }
+      },
+      "block_order": [
+        "spark_shoppable_video_DJEP89"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "media_layout_wpfmzb",
+    "marquee_logo_UnqJrk",
+    "main",
+    "1760687849c59bbbef"
+  ]
+}

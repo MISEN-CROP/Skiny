@@ -6,7 +6,7 @@ if (window.location.pathname === "/" || window.location.pathname === "/cart") {
     document.body.classList.add("template-index")
 }
 
-if (window.location.pathname.includes("/products/") || window.location.pathname.includes("/pages/") || window.location.pathname.includes("/collections/") || window.location.pathname.includes("/search")) {
+if (window.location.pathname.includes("/products/") || window.location.pathname.includes("/pages/") || window.location.pathname.includes("/collections/") || window.location.pathname.includes("/search") || window.location.pathname.includes("/blogs/")) {
     document.querySelector("header").classList.add("header-bg-second");
 }
 
