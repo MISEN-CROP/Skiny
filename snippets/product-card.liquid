@@ -169,15 +169,14 @@
           </div>
 
           <div class="product-grid-bottom-section mobile">
-            <product-form>
-              <div class="atc-icon">
-                {%- if product.available -%}
-                  <button class="add-to-cart-button-line text-sm md:text-base">Add to cart</button>
-                {%- else -%}
-                  <button class="add-to-cart-button-line text-sm md:text-base" disabled>Sold out</button>
-                {%- endif -%}
-              </div>
-            </product-form>
+            <form data-id="{{ product.variants.first.id }}">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              {%- if product.available -%}
+                <button class="add-to-cart-button-line text-sm md:text-base" type="submit">Add to cart</button>
+              {%- else -%}
+                <button class="add-to-cart-button-line text-sm md:text-base" disabled>Sold out</button>
+              {%- endif -%}
+            </form>
           </div>
         </div>
       </div>
