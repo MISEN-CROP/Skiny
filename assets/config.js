@@ -38,7 +38,7 @@ setTimeout(() => {
         reviewWidgetScript.prepend(h2Title);
     }
     addContainerApp();
-}, 2000)
+}, 1000)
 
 const cartCountBadge = document.querySelector('.cart-badge');
 const handleUpdateCartBadge = () => {
