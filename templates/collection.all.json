@@ -15,7 +15,7 @@
         ".order-last {background: var(--bg-second); border-radius: 14px; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;}",
         ".order-last div,h2 {padding: 0; margin: 0;}",
         ".order-last h2 {color: var(--color-semibold-primary) !important; font-family: var(--font-primary) !important; font-size: 72px; text-transform: uppercase; line-height: normal;}",
-        ".order-last div{font-weight: 600;}"
+        ".order-last div {font-weight: 600;}"
       ],
       "name": "Hero Text & Media",
       "settings": {
@@ -139,11 +139,50 @@
         "title": "THE RITUAL",
         "subtitle": "Lift, tighten, protect."
       }
+    },
+    "176068244332a544a5": {
+      "type": "apps",
+      "blocks": {
+        "spark_shoppable_video_GkLGwp": {
+          "type": "shopify://apps/spark/blocks/shoppable-video/3eb8b961-42bd-4d42-a091-9b8e4c877d96",
+          "settings": {
+            "show_videos_dynamically": false,
+            "auto_play_video": "always",
+            "feed_title": "JOIN THE COMMUNITY",
+            "title_alignment": "center",
+            "item_alignment": false,
+            "show_play_button": false,
+            "show_views": false,
+            "show_arrow_buttons": false,
+            "product_card_status": "hidden",
+            "show_video_title": false,
+            "border_radius": 16,
+            "padding_top": 20,
+            "padding_bottom": 20,
+            "player_type": "full_screen_player",
+            "show_views_on_player": false,
+            "player_border_radius": 16,
+            "product_card_border_radius": 12,
+            "product_card_image_border_radius": 8,
+            "show_compare_at_price": true,
+            "product_card_btn_actn": "product_details",
+            "product_card_btn_text": "Shop",
+            "product_card_btn_background_color": "#000000",
+            "product_card_btn_text_color": "#FFFFFF",
+            "product_card_btn_border_radius": 24
+          }
+        }
+      },
+      "block_order": [
+        "spark_shoppable_video_GkLGwp"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "hero_text_media_rQRGJT",
     "main",
-    "ritual_zNBbPW"
+    "ritual_zNBbPW",
+    "176068244332a544a5"
   ]
 }
