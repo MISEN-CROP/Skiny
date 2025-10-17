@@ -1,6 +1,6 @@
 <div class="tab-section py-16" style="background-color: var(--bg-second);">
   <div class="page-container">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-8">
       <!-- Left Sidebar Navigation -->
       <div class="lg:col-span-3">
         <div class="tab-navigation sticky top-8">
@@ -20,7 +20,7 @@
                     {% if tab_parts.size >= 2 %}
                       <button
                         class="tab-button w-full text-left px-4 py-3 rounded-lg transition-all duration-300 hover:shadow-md"
-                        style="background-color: var(--gig-tertiary); color: var(--gig-primary); font-family: var(--font-sohne);"
+                        style="background-color: var(--gig-tertiary); color: var(--gig-primary); font-family: var(--font-primary);"
                         data-tab="{{ tab_parts[0] | strip }}"
                         onclick="showTab('{{ tab_parts[0] | strip }}')"
                       >
@@ -42,7 +42,6 @@
             {% if block.type == 'tab_content' %}
               <div
                 class="tab-content-item p-8 rounded-lg shadow-lg hidden"
-                style="background-color: var(--gig-white);"
                 id="tab-{{ block.settings.tab_id }}"
               >
                 <!-- Active Tab Header -->
@@ -80,7 +79,7 @@
                             </button>
                             <div
                               class="faq-answer hidden px-6 py-4"
-                              style="background-color: var(--gig-white); color: var(--gig-black); font-family: var(--font-sohne);"
+                              style="color: var(--gig-black); font-family: var(--font-sohne);"
                             >
                               <p>{{ faq_parts[1] }}</p>
                             </div>
