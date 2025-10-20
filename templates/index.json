@@ -249,20 +249,20 @@
         "main_image_alt": ""
       }
     },
-    "blog_list_W8wKE3": {
+    "blog_list_yHQwbz": {
       "type": "blog-list",
       "name": "Blog List",
       "settings": {
-        "heading": "SHOP LAURYN'S ROUTINE",
-        "posts_limit": 4,
-        "columns_desktop": "2",
+        "heading": "LATEST NEWS & UPDATES",
+        "posts_limit": 3,
+        "columns_desktop": "3",
         "show_blog_name": true,
-        "show_excerpt": false,
-        "show_date": false,
+        "show_excerpt": true,
+        "show_date": true,
         "show_author": false,
-        "button_text": "Read More",
+        "button_text": "Read Article",
         "show_view_all": false,
-        "view_all_text": "View All Posts",
+        "view_all_text": "Explore All Articles",
         "view_all_link": ""
       }
     },
@@ -318,7 +318,7 @@
     "blog_single_iXkMKm",
     "custom_code_text_FJC8rx",
     "media_layout_BLqgqV",
-    "blog_list_W8wKE3",
+    "blog_list_yHQwbz",
     "1760671725da4010d8"
   ]
 }

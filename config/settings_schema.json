@@ -4,42 +4,260 @@
         "settings": [
             {
                 "type": "header",
+                "content": "Typography Settings"
+            },
+            {
+                "type": "select",
+                "id": "font_primary",
+                "label": "Primary Font",
+                "default": "Inter",
+                "options": [
+                    { "value": "Inter", "label": "Inter" },
+                    {
+                        "value": "Plus Jakarta Sans",
+                        "label": "Plus Jakarta Sans"
+                    },
+                    { "value": "Source Serif 4", "label": "Source Serif 4" },
+                    { "value": "Literata", "label": "Literata" },
+                    { "value": "Besley", "label": "Besley" },
+                    { "value": "Inria Serif", "label": "Inria Serif" },
+                    { "value": "Athiti", "label": "Athiti" },
+                    { "value": "Tinos", "label": "Tinos" },
+                    { "value": "Anonymous Pro", "label": "Anonymous Pro" },
+                    { "value": "Nanum Gothic", "label": "Nanum Gothic" },
+                    { "value": "Nanum Myeongjo", "label": "Nanum Myeongjo" },
+                    {
+                        "value": "Scheherazade New",
+                        "label": "Scheherazade New"
+                    },
+                    { "value": "Zen Old Mincho", "label": "Zen Old Mincho" },
+                    {
+                        "value": "F37Blanka-Medium",
+                        "label": "F37 Blanka Medium (Custom)"
+                    },
+                    {
+                        "value": "F37Blanka-Light",
+                        "label": "F37 Blanka Light (Custom)"
+                    },
+                    { "value": "SohneMono", "label": "Sohne Mono (Custom)" },
+                    { "value": "Arial", "label": "Arial (System)" },
+                    { "value": "Helvetica", "label": "Helvetica (System)" }
+                ],
+                "info": "Main font used for primary elements and buttons"
+            },
+            {
+                "type": "select",
+                "id": "font_primary_light",
+                "label": "Primary Font Light",
+                "default": "Inter",
+                "options": [
+                    { "value": "Inter", "label": "Inter" },
+                    {
+                        "value": "Plus Jakarta Sans",
+                        "label": "Plus Jakarta Sans"
+                    },
+                    { "value": "Source Serif 4", "label": "Source Serif 4" },
+                    { "value": "Literata", "label": "Literata" },
+                    { "value": "Besley", "label": "Besley" },
+                    { "value": "Inria Serif", "label": "Inria Serif" },
+                    { "value": "Athiti", "label": "Athiti" },
+                    { "value": "Tinos", "label": "Tinos" },
+                    { "value": "Anonymous Pro", "label": "Anonymous Pro" },
+                    { "value": "Nanum Gothic", "label": "Nanum Gothic" },
+                    { "value": "Nanum Myeongjo", "label": "Nanum Myeongjo" },
+                    {
+                        "value": "Scheherazade New",
+                        "label": "Scheherazade New"
+                    },
+                    { "value": "Zen Old Mincho", "label": "Zen Old Mincho" },
+                    {
+                        "value": "F37Blanka-Light",
+                        "label": "F37 Blanka Light (Custom)"
+                    },
+                    {
+                        "value": "F37Blanka-Medium",
+                        "label": "F37 Blanka Medium (Custom)"
+                    },
+                    { "value": "SohneMono", "label": "Sohne Mono (Custom)" },
+                    { "value": "Arial", "label": "Arial (System)" },
+                    { "value": "Helvetica", "label": "Helvetica (System)" }
+                ],
+                "info": "Lighter weight variant of primary font for subtle text"
+            },
+            {
+                "type": "select",
+                "id": "font_sohne",
+                "label": "Monospace Font (Sohne)",
+                "default": "Anonymous Pro",
+                "options": [
+                    { "value": "Anonymous Pro", "label": "Anonymous Pro" },
+                    { "value": "SohneMono", "label": "Sohne Mono (Custom)" },
+                    { "value": "Inter", "label": "Inter" },
+                    {
+                        "value": "Plus Jakarta Sans",
+                        "label": "Plus Jakarta Sans"
+                    },
+                    { "value": "Source Serif 4", "label": "Source Serif 4" },
+                    { "value": "Literata", "label": "Literata" },
+                    { "value": "Tinos", "label": "Tinos" },
+                    { "value": "Monaco", "label": "Monaco (System)" },
+                    { "value": "Courier", "label": "Courier (System)" },
+                    { "value": "Courier New", "label": "Courier New (System)" }
+                ],
+                "info": "Font for monospace elements, code, and special text"
+            },
+            {
+                "type": "select",
+                "id": "font_body",
+                "label": "Body Font",
+                "default": "Inter",
+                "options": [
+                    { "value": "Inter", "label": "Inter" },
+                    {
+                        "value": "Plus Jakarta Sans",
+                        "label": "Plus Jakarta Sans"
+                    },
+                    { "value": "Source Serif 4", "label": "Source Serif 4" },
+                    { "value": "Literata", "label": "Literata" },
+                    { "value": "Besley", "label": "Besley" },
+                    { "value": "Inria Serif", "label": "Inria Serif" },
+                    { "value": "Athiti", "label": "Athiti" },
+                    { "value": "Tinos", "label": "Tinos" },
+                    { "value": "Anonymous Pro", "label": "Anonymous Pro" },
+                    { "value": "Nanum Gothic", "label": "Nanum Gothic" },
+                    { "value": "Nanum Myeongjo", "label": "Nanum Myeongjo" },
+                    {
+                        "value": "Scheherazade New",
+                        "label": "Scheherazade New"
+                    },
+                    { "value": "Zen Old Mincho", "label": "Zen Old Mincho" },
+                    {
+                        "value": "F37Blanka-Medium",
+                        "label": "F37 Blanka Medium (Custom)"
+                    },
+                    {
+                        "value": "F37Blanka-Light",
+                        "label": "F37 Blanka Light (Custom)"
+                    },
+                    { "value": "Arial", "label": "Arial (System)" },
+                    { "value": "Helvetica", "label": "Helvetica (System)" }
+                ],
+                "info": "Main font for body text, paragraphs, and content"
+            },
+            {
+                "type": "select",
+                "id": "font_heading",
+                "label": "Heading Font",
+                "default": "Plus Jakarta Sans",
+                "options": [
+                    {
+                        "value": "Plus Jakarta Sans",
+                        "label": "Plus Jakarta Sans"
+                    },
+                    { "value": "Inter", "label": "Inter" },
+                    { "value": "Source Serif 4", "label": "Source Serif 4" },
+                    { "value": "Literata", "label": "Literata" },
+                    { "value": "Besley", "label": "Besley" },
+                    { "value": "Inria Serif", "label": "Inria Serif" },
+                    { "value": "Athiti", "label": "Athiti" },
+                    { "value": "Tinos", "label": "Tinos" },
+                    { "value": "Anonymous Pro", "label": "Anonymous Pro" },
+                    { "value": "Nanum Gothic", "label": "Nanum Gothic" },
+                    { "value": "Nanum Myeongjo", "label": "Nanum Myeongjo" },
+                    {
+                        "value": "Scheherazade New",
+                        "label": "Scheherazade New"
+                    },
+                    { "value": "Zen Old Mincho", "label": "Zen Old Mincho" },
+                    {
+                        "value": "F37Blanka-Medium",
+                        "label": "F37 Blanka Medium (Custom)"
+                    },
+                    {
+                        "value": "F37Blanka-Light",
+                        "label": "F37 Blanka Light (Custom)"
+                    },
+                    { "value": "Arial", "label": "Arial (System)" },
+                    { "value": "Helvetica", "label": "Helvetica (System)" }
+                ],
+                "info": "Font for headings (h1, h2, h3, h4, h5, h6)"
+            },
+            {
+                "type": "header",
+                "content": "Font Weight Settings"
+            },
+            {
+                "type": "select",
+                "id": "font_primary_weight",
+                "label": "Primary Font Weight",
+                "default": "500",
+                "options": [
+                    { "value": "300", "label": "Light (300)" },
+                    { "value": "400", "label": "Regular (400)" },
+                    { "value": "500", "label": "Medium (500)" },
+                    { "value": "600", "label": "Semi Bold (600)" },
+                    { "value": "700", "label": "Bold (700)" }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "font_body_weight",
+                "label": "Body Font Weight",
+                "default": "400",
+                "options": [
+                    { "value": "300", "label": "Light (300)" },
+                    { "value": "400", "label": "Regular (400)" },
+                    { "value": "500", "label": "Medium (500)" },
+                    { "value": "600", "label": "Semi Bold (600)" }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "font_heading_weight",
+                "label": "Heading Font Weight",
+                "default": "600",
+                "options": [
+                    { "value": "400", "label": "Regular (400)" },
+                    { "value": "500", "label": "Medium (500)" },
+                    { "value": "600", "label": "Semi Bold (600)" },
+                    { "value": "700", "label": "Bold (700)" },
+                    { "value": "800", "label": "Extra Bold (800)" },
+                    { "value": "900", "label": "Black (900)" }
+                ]
+            },
+            {
+                "type": "header",
                 "content": "Background Colors"
             },
             {
                 "type": "color",
                 "id": "body_background_semibold_color",
                 "label": "Body Background Semibold",
-                "default": "#dac0a7",
-                "info": "Controls --body-background-semibold-color"
+                "default": "#dac0a7"
             },
             {
                 "type": "color",
                 "id": "bg_gis_second_primary",
                 "label": "Background GIS Second Primary",
-                "default": "#f1e8da",
-                "info": "Controls --bg-gis-second-primary"
+                "default": "#f1e8da"
             },
             {
                 "type": "color",
                 "id": "bg_second",
                 "label": "Background Second",
-                "default": "#fffdf1",
-                "info": "Controls --bg-second"
+                "default": "#fffdf1"
             },
             {
                 "type": "color",
                 "id": "gig_bg_1",
                 "label": "GIG Background 1",
-                "default": "#f0e8da",
-                "info": "Controls --gig-bg-1"
+                "default": "#f0e8da"
             },
             {
                 "type": "color",
                 "id": "footer_bg",
                 "label": "Footer Background",
-                "default": "#f8bed6",
-                "info": "Controls --footer-bg"
+                "default": "#f8bed6"
             },
             {
                 "type": "header",
@@ -49,98 +267,37 @@
                 "type": "color",
                 "id": "color_semibold_primary",
                 "label": "Color Semibold Primary",
-                "default": "#004288",
-                "info": "Controls --color-semibold-primary"
+                "default": "#004288"
             },
             {
                 "type": "color",
                 "id": "gig_primary",
                 "label": "GIG Primary",
-                "default": "#004288",
-                "info": "Controls --gig-primary"
+                "default": "#004288"
             },
             {
                 "type": "color",
                 "id": "gig_secondary",
                 "label": "GIG Secondary",
-                "default": "#FFFDF1",
-                "info": "Controls --gig-secondary"
+                "default": "#FFFDF1"
             },
             {
                 "type": "color",
                 "id": "gig_tertiary",
                 "label": "GIG Tertiary",
-                "default": "#f2e9db",
-                "info": "Controls --gig-tertiary"
+                "default": "#f2e9db"
             },
             {
                 "type": "color",
                 "id": "gig_black",
                 "label": "GIG Black",
-                "default": "#000000",
-                "info": "Controls --gig-black"
+                "default": "#000000"
             },
             {
                 "type": "color",
                 "id": "gig_white",
                 "label": "GIG White",
-                "default": "#ffffff",
-                "info": "Controls --gig-white"
-            },
-            {
-                "type": "header",
-                "content": "Typography"
-            },
-            {
-                "type": "select",
-                "id": "font_primary",
-                "label": "Primary Font",
-                "default": "F37Blanka-Medium",
-                "options": [
-                    {
-                        "value": "F37Blanka-Medium",
-                        "label": "F37 Blanka Medium"
-                    },
-                    { "value": "F37Blanka-Light", "label": "F37 Blanka Light" },
-                    { "value": "SohneMono", "label": "Sohne Mono" },
-                    { "value": "Arial", "label": "Arial" },
-                    { "value": "Helvetica", "label": "Helvetica" }
-                ],
-                "info": "Controls --font-primary"
-            },
-            {
-                "type": "select",
-                "id": "font_primary_light",
-                "label": "Primary Font Light",
-                "default": "F37Blanka-Light",
-                "options": [
-                    { "value": "F37Blanka-Light", "label": "F37 Blanka Light" },
-                    {
-                        "value": "F37Blanka-Medium",
-                        "label": "F37 Blanka Medium"
-                    },
-                    { "value": "SohneMono", "label": "Sohne Mono" },
-                    { "value": "Arial", "label": "Arial" },
-                    { "value": "Helvetica", "label": "Helvetica" }
-                ],
-                "info": "Controls --font-primary-light"
-            },
-            {
-                "type": "select",
-                "id": "font_sohne",
-                "label": "Sohne Font",
-                "default": "SohneMono",
-                "options": [
-                    { "value": "SohneMono", "label": "Sohne Mono" },
-                    {
-                        "value": "F37Blanka-Medium",
-                        "label": "F37 Blanka Medium"
-                    },
-                    { "value": "F37Blanka-Light", "label": "F37 Blanka Light" },
-                    { "value": "Monaco", "label": "Monaco" },
-                    { "value": "Courier", "label": "Courier" }
-                ],
-                "info": "Controls --font-sohne"
+                "default": "#ffffff"
             },
             {
                 "type": "header",
@@ -154,8 +311,7 @@
                 "max": 50,
                 "step": 1,
                 "unit": "px",
-                "default": 30,
-                "info": "Controls --button-border-radius"
+                "default": 30
             },
             {
                 "type": "header",
@@ -165,29 +321,25 @@
                 "type": "color",
                 "id": "gig_pop",
                 "label": "GIG Pop Color",
-                "default": "#ff6b9d",
-                "info": "Controls --gig-pop (currently empty)"
+                "default": "#ff6b9d"
             },
             {
                 "type": "color",
                 "id": "gig_accent",
                 "label": "GIG Accent Color",
-                "default": "#00d4aa",
-                "info": "Controls --gig-accent (currently empty)"
+                "default": "#00d4aa"
             },
             {
                 "type": "color",
                 "id": "gig_bg_2",
                 "label": "GIG Background 2",
-                "default": "#e8f4f8",
-                "info": "Controls --gig-bg-2 (currently empty)"
+                "default": "#e8f4f8"
             },
             {
                 "type": "color",
                 "id": "gig_bg_3",
                 "label": "GIG Background 3",
-                "default": "#f0f8ff",
-                "info": "Controls --gig-bg-3 (currently empty)"
+                "default": "#f0f8ff"
             }
         ]
     }

@@ -1,24 +1,19 @@
-<div class="blog-list-section py-16 lg:py-24 bg-[var(--bg-second)]">
+<div class="blog-list-section py-8 bg-[var(--bg-second)]">
   <div class="page-container">
     {% if section.settings.heading %}
       <div class="text-center mb-12 lg:mb-16">
         <h1 class="text-3xl lg:text-5xl font-bold mb-4 font-pr animate-fade-in" style="color: var(--gig-primary);">
           {{ section.settings.heading }}
         </h1>
-        <div
-          class="w-20 h-1 mx-auto rounded-full"
-          style="background: linear-gradient(45deg, var(--gig-primary), var(--gig-accent, #f59e0b));"
-        ></div>
       </div>
     {% endif %}
-
     {% assign posts_limit = section.settings.posts_limit | default: 4 %}
-    {% assign news_blog = blogs.news %}
+    {% assign news_blog = blogs.blog %}
 
     {% if news_blog and news_blog.articles.size > 0 %}
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-{{ section.settings.columns_desktop }} gap-8 lg:gap-10">
         {% for article in news_blog.articles limit: posts_limit %}
-          <article class="blog-card group bg-[var(--bg-second)] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+          <article class="blog-card group bg-[var(--bg-gis-second-primary)] rounded-2xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2">
             <div class="blog-image-wrapper relative overflow-hidden">
               {% if article.image %}
                 <div class="aspect-[4/3] overflow-hidden">
@@ -58,17 +53,6 @@
             </div>
 
             <div class="blog-content p-6 lg:p-8">
-              {% if section.settings.show_blog_name %}
-                <div class="inline-block mb-3">
-                  <span
-                    class="text-xs uppercase tracking-wider px-3 py-1 rounded-full font-semibold"
-                    style="background: var(--gig-primary); color: white;"
-                  >
-                    {{ article.blog.title }}
-                  </span>
-                </div>
-              {% endif %}
-
               <h3
                 class="blog-title text-xl lg:text-2xl font-bold mb-4 font-pr leading-tight group-hover:text-opacity-80 transition-all duration-300"
                 style="color: var(--gig-primary);"
@@ -284,7 +268,7 @@
       "type": "text",
       "id": "heading",
       "label": "Section Heading",
-      "default": "LATEST NEWS & UPDATES"
+      "default": "LATEST NEWSTHE LATEST"
     },
     {
       "type": "range",
@@ -379,7 +363,7 @@
   ],
   "presets": [
     {
-      "name": "Blog List"
+      "name": "Blog List Page"
     }
   ]
 }
